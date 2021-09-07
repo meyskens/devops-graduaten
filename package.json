@@ -1,0 +1,19 @@
+{
+  "name": "devops-graduaten",
+  "version": "0.0.1",
+  "description": "DevOps",
+  "main": "index.js",
+  "authors": {
+    "name": "Maartje Eyskens",
+    "email": "maartje.eyskens@thomasmore.be"
+  },
+  "repository": "https://github.com/meyskens/devops-graduaten/devops-graduaten",
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.5.3"
+  }
+}
