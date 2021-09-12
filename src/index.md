@@ -1,9 +1,9 @@
 ---
 home: true
-heroImage: https://v1.vuepress.vuejs.org/hero.png
-tagline: DevOps
+heroImage: /assets/img/devops.0836d6e9.png
+tagline: Cursus DevOps - Graduaat Netwerkbeheer Thomas More
 actionText: Open Cursus →
 actionLink: /intro/
 features: []
-footer: &copy; Copyright 2021 Maartje Eyskens, Bart Thonissen @ Thomas More
+footer: &copy; Copyright 2021 Maartje Eyskens @ Thomas More Kempen
 ---
