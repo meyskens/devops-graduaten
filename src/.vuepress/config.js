@@ -36,12 +36,12 @@ module.exports = {
                 link: "/intro/"
             },
             {
-                text: "Config",
-                link: "/config/"
+                text: "Agile",
+                link: "/agile/"
             },
             {
-                text: "VuePress",
-                link: "https://v1.vuepress.vuejs.org"
+                text: "Canvas LMS",
+                link: "https://thomasmore.instructure.com/courses/18975"
             }
         ],
         sidebar: "auto"
@@ -50,5 +50,15 @@ module.exports = {
     /**
      * Apply plugins，ref：https://v1.vuepress.vuejs.org/zh/plugin/
      */
-    plugins: ["@vuepress/plugin-back-to-top", "@vuepress/plugin-medium-zoom"]
+    plugins: [
+        "@vuepress/plugin-back-to-top",
+        "@vuepress/plugin-medium-zoom",
+        [
+            "md-enhance",
+            {
+                // Enable Footnote
+                footnote: true
+            }
+        ]
+    ]
 };
