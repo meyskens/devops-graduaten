@@ -5,5 +5,5 @@ tagline: Cursus DevOps - Graduaat Netwerkbeheer Thomas More
 actionText: Open Cursus →
 actionLink: /intro/
 features: []
-footer: &copy; Copyright 2021 Maartje Eyskens @ Thomas More Kempen
+footer: CC-BY-SA Maartje Eyskens @ Thomas More Kempen
 ---
