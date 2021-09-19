@@ -36,8 +36,15 @@ module.exports = {
                 link: "/intro/"
             },
             {
-                text: "Agile",
-                link: "/agile/"
+                text: "Culture",
+                items: [{ text: "Agile", link: "/agile/" }]
+            },
+            {
+                text: "Tools",
+                items: [
+                    { text: "Kanban op GitHub", link: "/agile/kanban/" }
+                    //{ text: "Git", link: "/git" },
+                ]
             },
             {
                 text: "Canvas LMS",
