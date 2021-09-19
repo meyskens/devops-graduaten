@@ -75,6 +75,8 @@ van teams combineren. Sommige zien het als de kennis van developers en operation
 Sommige maken er modellen rond zoals CALMS (Culture, Automation, Lean, Measurement, Sharing). Sommigen zien DevOps dan weer als de enige manier om in de
 cloud te kunnen werken.
 
+![DevOps Diagram](devops.png)
+
 In deze cursus ga ik kort in op 3 modellen die DevOps verklaren.
 
 ### "The Three Ways"
@@ -178,7 +180,15 @@ Niet enkel op team niveau moet een organisatie efficient werken, maar ook op man
 
 ### "CALMS"
 
-![CALMS Diagram](devops.png)
+Dit principe komt van Jez Humble, co-auteur van The DevOps Handbook en Accelerate. Het CALMS raamwerk gebruikt als een middel om te beoordelen of een organisatie klaar is om DevOps processen te adopteren, of hoe een organisatie vordert in hun DevOps transformatie.
+Het vat de bovenstaande ideeen samen in een een aantal pijlers en een continue verbetering.
+Het is gebaseerd op de volgende vijf pijlers:
+
+-   **Culture** Voordat we de silos van verschillende teams neer kunnen halen moet er een cultuur zijn van gedeelde verantwoordelijkheid zijn, of op zijn minst een groep mensen die zich toelegt op het vestigen van die cultuur, met goedkeuring en steun van het management
+-   **Automation** Door gebruik te maken van CD (zie hierboven) moeten ops teams inzetten op op het automatiseren van alle manuele handelingen.
+-   **Lean** Ontwikkelingsteams maken gebruik van LEAN principes om verspilling te elimineren en de waardestroom te optimaliseren, zoals het minimaliseren van WIP, het zichtbaar maken van werk, en het verminderen van hand-off complexiteit en wachttijden.
+-   **Measurement** De organisatie moet willen inzetten op het verzamelen van informatie over prosecssen en deplooyments om hun huidige mogelijkheden te kennen en probleempunten te identificeren.
+-   **Sharing** Er moet een cultuur wijn van openheid en delen van informatie en kennis tussen teams, om samen naar een gezamelijk doel te kunnen werken.
 
 ## Belang
 
