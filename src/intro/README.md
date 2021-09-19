@@ -79,7 +79,102 @@ In deze cursus ga ik kort in op 3 modellen die DevOps verklaren.
 
 ### "The Three Ways"
 
+Dit concept over DevOps komt uit "The Phoenix Project" of "The DevOps Handbook" zij zien DevOps in 3 manieren te benaderen.
+
+-   The First Way: Principles of Flow
+-   The Second Way: Principles of Feedback
+-   The Third Way: Principles of Continuous Learning
+
+We bekijken even kort de waarden dan deze 3 "ways"
+
+#### Principles of Flow
+
+-   Werk **"zichtbaar"** maken. In tegenstelling tot productieprocessen als in fabrieken is de flow van software door zijn ontwikkelingslevenscyclus niet gemakkelijk te zien. Het gebruik van methoden zoals kanban borden moet dit oplossen hierdoor kan het werkt zichtbaar gemaakt worden voor het team en manaagement. Iedereen kan zien hoe ver we staan in een project op alle tijden.
+
+-   Beperken van work-in-progress (WIP). Je zal zien dat er vele taken te gebeuren staan, zeker na het zichtbaar maken door een kanban bord. We moeten ervoor zorgen dat een bepaalde persoon best maar tegelijk is aangesteld voor 1 taak, multitasken veroorzaakt een trager proces door zogenaamd "context switchen".
+
+-   Verkleinen van batchgroottes. Het "opdelen" van werk in kleinere stukken, zoals in sprints volgens het SCRUM principe. Ook moeten taken zo "hapklaar" gemaakt worden waardoor ze makkelijk in enkele dagen uitgevoerd, gereviewd en gedeployed kan worden. Er moet ook duidelijkheid zijn voor de uitvoerder van de taken. Vage taken moeten eerst verder beschreven worden.
+
+-   Identificeren en verwijderen van beperkingen en tijdsverspillingen. We moeten pijnpunten vinden en beperken. Dit kan gebeuren door het gebruik maken van testomgevingen voor experimenten, vermijden van handmatig werk door tools en het gebruik van systeem architectuur.
+
+#### Principles of Feedback
+
+The Second Way: Principles of Feedback staat voor een snelle en constante feedback cycli mogelijk te maken in alle stadia van een ontwikkeling.
+
+-   Problemen oplossen om nieuwe kennis op te bouwen. Dit principe past in de "fail fast" mentaliteit. Het ontwikkelen van een Minimum Viable Product om deze snel uit te kunnen testen. Zo kunnen we snel problemen met een implementatie zo snel mogelijk kunnen vinden en ze vroeg op te lossen.
+
+-   Quality Control en testing dichter bij de bron brengen. Dit principe is zeer popilaur DevSecOps-beweging, die zich bezighoudt met het aanpakken van beveiligingsproblemen tijdens de ontwikkelcyclus. We moeten onze software testen tijdens de ontwikkeling en niet enkel op het einde zodat we snel fundamentele problemen kunnen vinden.
+
+-   Geen "gooi het over de muur" mentaliteit. Zowel developers als operations werken samen aan het oplossen van problemen met de applicaties, we werken aan een gezamelijk doel en niet ieders op een eigen taak.
+
+#### Principles of Continuous Learning
+
+The Third Way: Principles of Continuous Learning staat voor een cultuur van voortdurend leren en experimenteren binnen de organisatie.
+Het leren voor een ITer houd niet op bij het verlaten van de school. Organisaties moeten hiervoor open staan dat het altijd beter kan worden.
+
+-   Het mogelijk maken van organisatorisch leren en "safety culture". Leiders moeten helpen "de toon te zetten" voor de organisatie, door het goed te maken om te leren, **fouten te maken**, en het opnieuw te proberen. We mogen het geen taboe maken een fout te maken.
+
+-   Het institutionaliseren van verbetering in dagelijks werk. We moeten durven nadenken over onze dagelijkse taken en hoe deze verbetered kunnen worden. We mogen "omdat het altijd al zo was" niet als excuus gebruiken.
+
+-   Lokale ontdekkingen omzetten in globale verbeteringen. Verbeteringen binnen een deel van een organisatie moeten gedeeld worden zodat iedereen vooruit gaat. Het is geen sprint naar de finish maar een estafette.
+    Het injecteren van veerkrachtpatronen in het dagelijkse werk. Sommige voorbeelden zouden het repeteren van mislukkingen kunnen omvatten, en het werken aan het verbeteren van belangrijke metriek voor implementatie.
+
 ### "Mature capabilities in technical and management practices"
+
+Dit principe komt uit "Accelerate: The Science of Lean Software and Devops"[^accelerate] presenteren de auterus op basis van hun onderzoek de belangrijkste technische en management praktijken die goed presterende DevOps teams hebben aangenomen en blijven verfijnen.
+
+#### Technische Praktijken
+
+Volgens Acceletate zijn dit de belangrijksye methodes die gebruikt worden gebruikt door goed presterende DevOps-teams:
+
+-   Continuous Delivery
+-   Architecture
+-   Product and Process
+
+##### Continuous Delivery
+
+De Accelerate auteurs kozen ervoor om verschillende methodes te combineren onder de paraplu van continue levering (CD). Hoewel CD zelf zijn eigen principe is onder CI/CD, stellenze vast dat dit deel essentieel is voor een goed presterende DevOps team.
+Ze spreken over:
+
+-   Version Control: op dit vlak gaan we Git bekijken.
+-   Deployment automation: in de vorm van pipelines. Als ook het automatiseren van server setups.
+-   Continuous integration (CI): autmatisch testen van software.
+-   Trunk-based development: version control met hierop verschillende versies die individueel nog gepatched kunnen worden.
+-   Test automation: automatisch testen van software door Unit Tests, End to end tests en Integration Tests.
+-   Test data management: beheren van test data in test omgevingen om analoog te blijven aan de echte omgeving.
+-   Shift left on security (DevSecOps): Security mee opnenem in het ontwikkelproces
+-   Continuous delivery (CD): constant deployen van software.
+
+##### Architecture
+
+De architectuur van onze setup is belangrijk niet enkel voor het draaien van de servers maar ook de flexibiliteit.
+
+-   Het is belngrijk om testen te kunnen uitvoeren in een geisoeede omgeving die onze productie omgeving niet beinvloedt.
+-   We moeren verschillende applicaties en services onafhankelijk van elkaar kunnen uitrollen en updaten
+
+In feite worden de hierboven beschreven kenmerken - testbaarheid en inzetbaarheid - bereikt door het implementeren van de volgende twee architecturale technische principes:
+
+-   **Loosely coupled architecture.** Het doel is dat verschillende componenten van de applicatie onafhankelijk zijn van elkaar. Zo is er weinig coordinatie nodig tussen de verschillende teams wanneer iets moet aangepast worden.
+-   **Empowered teams** Wanneer teams individueel kunnen kiezen welke tools gebrikt kunnen worden resulteert dit in snellere doorlooptijd.
+
+##### Product and Process
+
+DevOps teams moeten niet enkel kijken daar het technische aspect maar ook bedrijsprocessen volgen om hun werk te verbeteren.
+
+-   **Customer feedback** Teams moeten met de klant kunnen comminuceren om feedback te krijgen, en dit al zo vroeg mogelijk.
+-   **Value stream** Teams moeten verstaan dat continue verbetering ook waarde oplevert voor de klan
+-   **Working in small batches** Kleinere batches zorgen voor snellere oplevering aan klanten, en zetten de feedback loop in actie.
+-   **Team experimentation** Teams werken beter als ze individueel mogen experimenteren met ideeen en theorien zonder toestemming van bovenaf.
+
+#### Management Praktijken
+
+Niet enkel op team niveau moet een organisatie efficient werken, maar ook op management niveau. Een organisatie moet op alle niveaus flexiebel kunnen werken. Een kracht die we tegenwoordig vooral veel in startups zien terugkomen, in grotere organisaties proberen ze dit te verbeteren.
+
+-   **Lightweight change approval processes.** Teams die geen goedkeuringsproces hadden of peer review gebruikten, behaalden een snellere ontwikkelingscyclus en prestaties.
+-   **Monitoring** Gebruik gegevens van monitoring tools van de infrastructuur moeten gebruikt worden om dagelijkse besluitvorming te informeren.
+-   WIP limiteren en werk visualiseren ook voor en naar management toe.
+-   Een cultuure van leren en ondersteunen op alle niveaus.
+-   Je teams voorzien van de juiste tools om hun werk te kunnen doen.
 
 ### "CALMS"
 
