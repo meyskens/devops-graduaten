@@ -153,6 +153,8 @@ Buiten rollen gaan we ook altijd een aantal "dingen" terug vinden bij SCRUM:
         -   "As a…" wie is onze gebruiker?
         -   "I want to…" wat wil ik dat ik kan?
         -   "so that…" waarom wil ik dat?
+    -   Heeft een prioriteitslabel, geeft aan hoe belangrijk de feature is. Meestal is dit een nummer.
+    -   Heeft een grootte, geeft aan hoe groot de feature is. Hier zijn verschillende systemen voor, vaak worden T-shirt sizes (xs-xl) gebruikt.
 
 
     ![joke user story](./shitstory.jpg)
@@ -242,7 +244,12 @@ Hiermee simuleren we een heel SCRUM process op een korte tijd met behulp van Leg
 Doe verschillende sprints, 1 sprint is ~10 minuten bouwn. Houd de tijd bij!
 
 -   Stap 0: bekijk de user stories
--   Stap 1: sprint planning overleg wat je gaat doen, verdeel taken. Maak een Definition of Done
+-   Stap 1: sprint planning
+    -   Overleg wat je gaat doen
+    -   GVerdeel taken.
+    -   Maak een Definition of Done
+    -   Geef een prioriteit aan de user stories van 1 (super belangrijk) tot 4 (nice to have)
+    -   Geef een groote van de taak Small - XLarge
 -   Stap 2: Bouwen! (geen daily scrum)
 -   Stap 3: bekijk het wekt + mini retrospective (wat gaat goed? wat kon beter?)
 -   Stap 4: zie stap 1
