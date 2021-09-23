@@ -1,8 +1,8 @@
-## Een inleiding tot Git(Hub)
+# Een inleiding tot Git(Hub)
 
 ![GitHub](./images/media/image1.png)
 
-# Inleiding
+## Inleiding
 
 Versiebeheer met Git is vandaag de dag een stukje onontbeerlijke kennis in DevOps.
 We schrijven meer en meer zelf stukjes confguratie, scripten en hele stukken code om onze servers te configureren en automatiseren.
@@ -48,9 +48,9 @@ Veel lees- en Git-plezier!
 
 Dank aan Ann Hannes, Jan Janssen en Patrick Verhaert voor hun grote bijdrage aan dit deel van de cursus!
 
-# Versiebeheer: wat, waarom en hoe?
+## Versiebeheer: wat, waarom en hoe?
 
-## Versiebeheer: wat?
+### Versiebeheer: wat?
 
 Met versiebeheer bedoelen we elk systeem dat alle wijzigingen aan een
 verzameling van computerbestanden bewaart, zodat:
@@ -61,7 +61,7 @@ verzameling van computerbestanden bewaart, zodat:
 Versiebeheer wordt het vaakst gebruikt in het kader van
 softwareontwikkeling in teamverband.
 
-## Versiebeheer: waarom?
+### Versiebeheer: waarom?
 
 Veronderstel dat je met een aantal programmeurs samen aan een project
 wil werken. Je kan zelf een soort versiebeheersysteem opzetten door de
@@ -96,9 +96,9 @@ softwareprojecten) op een rij:
 
 -   soort automatische back-up (bij gebruik van een cloud dienst als GitHub of GitLab)
 
-# Git versus GitHub
+## Git versus GitHub
 
-## Git
+### Git
 
 ![Git Logo](./images/media/image8.png)
 
@@ -129,7 +129,7 @@ sudo apt-get install git
 
 En je bent klaar!
 
-##### Windows
+#### Windows
 
 ![](./images/media/image9.png)
 Git kan je downloaden via
@@ -148,7 +148,7 @@ Installeer met de standaard instellingen.
 
 ![](./images/media/image15.png) Git bash geeft je een bash shell op je windows systeem, deze shell is vaak voor onze DevOps tools makkelijker dan CMD of PowerShell!
 
-## GitHub
+### GitHub
 
 ![](./images/media/image14.png)
 
@@ -171,13 +171,13 @@ gebruik te kunnen maken van alle mogelijkheden!
 Gebruik je Thomas More mailadres en vraag
 een upgrade van je account via <https://education.github.com/>. Naast een Pro GitHub account krijg je ook nog vele voordelen op andere websites.
 
-# Git: basic workflow
+## Git: basic workflow
 
 De basis van Git (terminologie, commando's, het concept branches) is
 eigenlijk niet zo moeilijk om te doorgronden, als je je de moeite
 getroost om deze sectie[^5] in detail door te nemen.
 
-## Basisterminologie en commando's
+### Basisterminologie en commando's
 
 Alles begint met een **remote repository** (meestal afgekort tot
 **repo**). Dit kan je vergelijken met een folder met daarin
@@ -239,7 +239,7 @@ lokale repo) downloaden. Dit kan hij doen met het Git-commando **pull**.
 Nu zijn de lokale repo van Bob en de remote repo opnieuw aan elkaar
 gelijk en kan Bob zijn wijzigingen aan _index.html_ pushen.
 
-## De basiscommando's in meer detail
+### De basiscommando's in meer detail
 
 In deze sectie baseren we ons in grote mate op het hierboven uitgewerkte scenario om de basiscommando's van Git in detail te
 illustreren.
@@ -605,9 +605,10 @@ betekenisvol commentaar, geschreven in een gebiedende wijs.
 Als je online op zoek gaat naar informatie
 over Git, zal je wellicht ook het commando\
 
-````bash
+```bash
 git commit -a -m "comment"
 ```
+
 tegen komen. Dit commando slaat de
 staging area over en voegt de gewijzigde bestanden vanuit je working
 tree rechtstreeks toe aan de lokale repo. Nieuwe bestanden worden echter
@@ -637,7 +638,6 @@ repo weergeven.
 
 ![](./images/media/image45.png)
 
-
 #### Pushen van lokale repo naar remote repo (Alice)
 
 We merken dat de lokale repo van Alice 1 commit voor ligt op de remote
@@ -647,87 +647,20 @@ branch is ahead of 'origin/main' by 1 commit_.) of `git log`
 
 ![](./images/media/image46.png)
 
-
 Alice kan nu haar wijzigingen pushen naar de remote repo d.m.v. het
 commando `git push`.
 
 ![](./images/media/image47.png)
 
-
 Op dit moment zijn de lokale repo van Alice en de remote repo opnieuw
-synchroon, wat bevestigd wordt door de uitvoer van de commando\'s `git
-status` en `git log`.
+synchroon, wat bevestigd wordt door de uitvoer van de commando\'s `git status` en `git log`.
 
 ![](./images/media/image48.png)
 
-
 ![](./images/media/image49.png)
 
+## Appendix: Cheat sheet voor basic workflow
 
-# Wat als er iets mis gaat?
-
-## Conflicten oplossen
-
-In het voorbeeldscenario kwamen er geen
-conflicten aan het licht.
-Kit kan echter wel gebeuren als meerdere programmeurs (op dezelfde plaats) in hetzelfde
-bestand wijzigingen aanbrengen.
-
-
-TODO
-
-
-### Wijzigen van lokale (nog niet-gepushte) commits
-
-#### Laatste lokale commit aanpassen
-
-Alice wenst vervolgens de inhoud van de pagina\'s in een gecentreerde
-'container' weer te geven en past zowel het stijl-bestand
-_css/stijl.css_ als _index.html_ aan. Ze vergat echter om het gewijzigde
-bestand _index.html_ toe te voegen aan de staging area, en ze committe
-op die manier enkel de wijziging aan _css/stijl.css._ Dit wordt
-bevestigd door onderstaande Git Bash uitvoer:
-
-![](./images/media/image76.png)
-
-Figuur 4.13: \[Git Bash Alice\] git log \--pretty=oneline en git status
-
-![](./images/media/image19.png)
-Er bestaan verschillende opties die je kan
-meegeven aan het commando **git log**. Enkele interessante op een
-rijtje:
-
--   **git log \--pretty=oneline** of **git log \--oneline** toont elke
-    commit op 1 lijn
-
--   **git log \--since=2.weeks** toont enkel de commits van de laatste 2
-    weken
-
--   **git log -2** toont enkel de 2 laatste commits
-
--   **git log \--graph** toont commits in 'grafisch' formaat
-
-Alice kan deze laatste commit nog aanpassen via **git commit \--amend -m
-\"comment\"**. Dit commando voegt de inhoud van de staging area toe aan
-de laatst commit. Vanzelfsprekend moet Alice eerst het (vergeten)
-bestand _index.html_ nog toevoegen aan de staging area.
-
-![](./images/media/image77.png)
-
-Figuur 4.14: \[Git Bash Alice\] git commit \--amend -m \"comment\"
-
-![](./images/media/image19.png)
-Merk op dat de commit historiek
-'herschreven' is: de commit met SHA-1 _1fa39f3_ uit Figuur 4.13 is nu
-vervangen door een nieuwe, andere commit (met SHA-1 _154367a_)
-
-![](./images/media/image78.png)
-
-Figuur 4.15: \[Git Bash Alice\] git log na git commit \--amend -m
-\"comment\"
-
-
-# Appendix: Cheat sheet voor basic workflow
 ```bash
 # Aanmaken van lokale start repo
 
@@ -779,35 +712,41 @@ git diff --staged <file>
 git status
 ```
 
-# Git: teamwork workflow
+## Git: teamwork workflow
 
 Je hebt nu al geleerd hoe je GitHub en Git kunt gebruiken om versiebeheer op je projecten te doen.
 In deze tutorial gaan we een stap verder en gebruiken we Git om in teamverband aan dezelfde codebase te werken.
 
-## Werken met "branches"
+### Werken met "branches"
+
 Nadat je het project hebt gecloned op je computer kunnen we beginnen te werken aan code veranderingen. We doen dit in branches.
 Branches, ook wel feature branches genoemd, maken een kopie van de hoofdcode die zich op de "main" branch bevindt.
 Het is een slechte gewoonte om direct naar de "main" branch te pushen als je in teams werkt. Een uitzondering op deze regel is de eerste commit.
 
 In een branch kun je zoals gebruikelijk één of meer commits maken, deze geven de wijzigingen weer om een bepaald deel van de code toe te voegen.
 Om een nieuwe branch te maken kun je het volgende doen met Git
+
 ```console
 $ git branch <branch naam>
 ```
+
 De branchnaam moet het deel bevatten dat je van plan bent toe te voegen, en ook meestal je naam, zodat je geen conflicten met je teamgenoten hebt.
 Een naam zou bijvoorbeeld `maartje-add-contact-page` kunnen zijn, merk op dat branchnamen geen spaties mogen bevatten!
 
 Takken maken doe je met `git branch`. Na het aanmaken van de branch moet je overschakelen naar het gebruik van die branch.
 Dit kan gedaan worden met `git checkout`.
+
 ```console
 $ git checkout [branch naam]
 ```
+
 **Dit commando zal de bestanden op je harde schijf aanpassen aan de bestanden in de branch.** Het is dus normaal dat je nieuwere bestanden nog niet ziet. Het maakt een eigen kopie zodat je tijdens je werk niet "gestoord" wordt door wijzwgingen op de main branch.
 
 Je kunt nu zoals gewoonlijk werken en `git add` en `git commit` gebruiken om je wijzigingen vast te leggen.
 Je kunt `git push` gebruiken als je op een branch zit om de branch naar GitHub te pushen
 
 Een volledige workflow zou bijvoorbeeld zijn
+
 ```bash
 git branch maartje-add-contact-page
 git checkout maartje-add-contact-page
@@ -819,7 +758,7 @@ git commit -m "Een contactpagina gemaakt"
 git push --set-upstream origin maartje-add-contact-page # eerste keer nodig, gebruik gewoon `git push` voor latere wijzigingen in de branch
 ```
 
-## Pull Requests
+### Pull Requests
 
 Pull requests, ook wel Merge Requests genoemd in andere Git oplossingen, zijn verzoeken die gedaan worden om code van een bepaalde branch samen te voegen in de "main" branch van het repository. Je kunt dit doen nadat je voor de eerste keer "git push" gedaan hebt, door naar de repository op Github te gaan en naar "Pull Requests" te gaan, hier kun je klikken op "New Pull Request".
 
@@ -830,20 +769,22 @@ Soms zal GitHub je ook automatisch de nieuwe branch voorstellen.
 ![PR suggestie dialoog](./images/prsuggestion.png)
 
 Bij het maken van een Pull Request kun je 2 branches vergelijken, de "basis" branch is degene waar we de code naar toe willen verplaatsen. In ons geval zal dit altijd de main branch zijn. De "vergelijk" branch zal de branch zijn waar we onze wijzigingen in hebben aangebracht.
-Merk op dat je een branch *kunt* pushen zonder dat er wijzigingen zijn gemaakt, maar je kunt hier geen pull-request voor aanmaken.
+Merk op dat je een branch _kunt_ pushen zonder dat er wijzigingen zijn gemaakt, maar je kunt hier geen pull-request voor aanmaken.
 PR-scherm](./images/prscreen.png)
 Nadat deze juist zijn ingesteld zal GitHub je de wijzigingen laten zien en kun je op "Create Pull Request" klikken.
 
 Je wordt nu naar een scherm gestuurd waar je een titel en een beschrijving kunt toevoegen, als je in Git werkt zul je vaak pull requests maken voor andermans projecten. Daarom is het altijd een goed gebruik om een bruikbare titel en beschrijving toe te voegen van wat je wilt veranderen en waarom. Als dit gedaan is, vergeet dan niet om weer op "Create" te klikken.
 
-## Code Review
+### Code Review
+
 Code review is een proces dat je overal ziet, van kleine startups tot grote ondernemingen. Hoe je dit goed doet is ook een veel besproken onderwerp. Toen we op [Twitter](https://twitter.com/MaartjeME/status/1208048751631327237) vroegen naar code review tips hadden veel programmeurs hier verschillende meningen over.
 Code review in een notendop is het proces tussen het voorstellen van een codewijziging (in een PR) en het moment dat deze wordt samengevoegd in de master branch, en wordt uitgerold naar productie.
 Dit proces zorgt ervoor dat de code verbetert omdat meer mensen er naar kunnen kijken en wijzigingen kunnen voorstellen. Bugs worden sneller opgemerkt, de code zal er beter en samenhangender uitzien en het kan je inzicht geven in hoe je code nog verder verbeterd kan worden.
 
 Code reviews zijn een kans om te leren voor de indiener van het PR maar ook een kans om je werk te prijzen voor de reviewer. Belangrijk om in gedachten te houden is om vriendelijk te zijn voor elkaar, om reviews niet persoonlijk op te vatten en om te beginnen met uit te leggen waarom. Een code review is inherent teamwerk, waarbij verschillende ideeën en suggesties aan bod komen. Soms kan het de moeite waard zijn om een discussie offline te voeren (d.w.z. face to face) om enkele opmerkingen te bespreken. Het doel is hier niet om gelijk te krijgen over iets maar om te verbeteren als een team.
 
-### The 10 Commandments of Navigating Code Reviews
+#### The 10 Commandments of Navigating Code Reviews
+
 [The 10 Commandments of Navigating Code Reviews](https://techbeacon.com/app-dev-testing/10-commandments-navigating-code-reviews) is een werk van [Angie Jones](https://angiejones.tech).
 Hierin bespreekt ze 10 regels om te volgen bij het doen van code review.
 
@@ -860,7 +801,8 @@ IX. Thou Shalt Not Repeat the Same Mistakes
 X. Thou Shalt Embrace the Nits
 ```
 
-### Code Review in de praktijk
+#### Code Review in de praktijk
+
 Bij het openen van een Pull Request in GitHub kun je naar "Files Changed" gaan, hier kun je alle wijzigingen in een PR zien. Als je met de muis over een regelnummer gaat zie je een plus icoontje, als je daar op klikt opent zich een box om een commentaar toe te voegen.
 
 [Het vakje met een commentaar gemaakt](./images/coderev1.png)
@@ -878,21 +820,25 @@ Na het plaatsen van een beoordeling ziet u de status in het PR. Onder "Reviewers
 
 ![suggestion edit view](./images/coderev4.png)
 
-### Het leven na code review
+#### Het leven na code review
+
 Als je veranderingen in je code moet maken na een code review, dan kun je dit gewoon op je Git branch doen! Maak gewoon nog een commit en je zult de wijzigingen in het PR zien verschijnen, je zult ook merken dat GitHub opmerkingen markeert op gewijzigde regels, zodat je beter kunt zien welke opmerkingen aangepakt zijn.
 **Voordat je het PR in master samenvoegt, moet ten minste één persoon je code gereviewd (en goedgekeurd) hebben.** De enige uitzondering hierop is als je team uit één persoon bestaat.
 
+### De volgende branch!
 
-## De volgende branch!
 Wanneer een PR wordt gemerged (gefeliciteerd!) of je wilt gewoon verder gaan met het volgende ding, moet je met een paar dingen rekening houden.
 Ten eerste, als je terug gaat naar de main branch is er een kans dat er dingen veranderd zijn door werk van andere teamleden. Git werkt niet automatisch bij van wat er op GitHub staat, maar je kunt dit doen:
+
 ```console
 $ git checkout main # terug gaan naar de master
 $ git pull # haal nieuwe veranderingen binnen en plaats ze op je schijf
 ```
+
 Als je op een nieuwe branch wilt beginnen, is het altijd aan te raden om vanaf de "main" branch te beginnen, anders zul je het moeilijk krijgen om pull requests goed te doen.
 
 Dus een volledige samenvatting van branchen, wijzigingen maken en dan teruggaan naar master voor de volgende wijziging:
+
 ```console
 $ git branch maartje-add-contact-page
 $ git checkout maartje-add-contact-page
@@ -908,7 +854,7 @@ $ git checkout maartje-fix-home
 
 **TIP:** `git pull` werkt ook als je in een branch zit. Dit is nodig als iemand anders daar wijzigingen pusht of als je de GitHub suggestie functie hebt gebruikt.
 
-# Merge Conflicts
+### Merge Conflicts
 
 Merge conflicts gebeuren als Git er niet uit komt hoe 2 wijzigingen samen te voegen die in hetzelfde bestand gemaakt zijn.
 Als dit gebeurt zal GitHub een fout aangeven op de PR pagina.
@@ -917,13 +863,15 @@ Als dit gebeurt zal GitHub een fout aangeven op de PR pagina.
 
 Er zijn twee manieren om deze op te lossen, de eerste is een webinterface die GitHub aanbiedt, dit is de makkelijkste manier maar werkt misschien niet op andere Git platforms of als een samenvoeg conflict complex is. De andere manier om samenvoegconflicten op te lossen is via de commandoregel. Hier zijn een paar commando\'s voor nodig.
 
-## Web interface
+#### Web interface
+
 In de PR view op GitHub druk je op "Resolve Conflicts" dit zal je naar een pagina sturen waar je een of meer bestanden hebt met een of meer conflicten.
 Ga in elk bestand dat je ziet en zoek naar een rood aangegeven deel van het bestand.
 
 ![samenvoeg conflict in markdown bestand](./images/merge2.png)
 
 Je zult de standaard Git opmaak voor samenvoeg conflicten zien:
+
 ```
 <<<<<<<<<< [branch naam]
     code toegevoegd in de branch
@@ -937,24 +885,32 @@ Nu moet je ervoor zorgen dat je alle toegevoegde regels verwijdert en dat je uit
 
 Je wordt nu teruggestuurd naar het PR scherm waar je nu zonder problemen kunt samenvoegen.
 
-## Command Line
+#### Command Line
+
 Je kunt hetzelfde proces voor samenvoeg verzoeken doen met de Git commandoregel interface. Als je hier hulp bij nodig hebt, kun je op "command line instructions" klikken op een PR en GitHub zal je helpen!
 ![merge conflict CLI instructies in GitHub](./images/merge3.png)
 
 Eerst zorg je ervoor dat je alle wijzigingen van GitHub hebt:
+
 ```console
 $ git fetch # download de laatste GitHub data maar overschrijf geen bestanden
 ```
+
 Zorg er vervolgens voor dat je op de branch zit waar je in werkt
+
 ```console
 $ git checkout -b name-branch origin/name-branch
 ```
+
 Dan voeg je de wijzigingen van de master samen in de branch
+
 ```
 $ git merge master
 ```
+
 Nu zul je een foutmelding zien met een conflict en een bestandsnaam.
 Ga in dat bestand en je zult de standaard Git opmaak zien voor samenvoeg conflicten:
+
 ```
 <<<<<<<<<< [Branch Naam]
     code toegevoegd in de branch
@@ -967,16 +923,18 @@ Ga in dat bestand en je zult de standaard Git opmaak zien voor samenvoeg conflic
 Nu moet je ervoor zorgen dat je alle toegevoegde regels verwijdert en eindigt met het bestand dat je uiteindelijk wilt verkrijgen. Sla het bestand dan op de schijf op
 
 Dan moeten we de veranderingen vastleggen
+
 ```console
 $ git add .
 $ git commit # merk op dat er geen -m is omdat we de standaard boodschap willen behouden
 ```
+
 Je zult een tekst editor zien openen, verander hier niets en sluit de editor. Dit zal de standaard samenvoeg commit boodschap behouden.
 
 Je kunt nu de wijzigingen naar GitHub pushen met `git push`.
 (De laatste instructies die GitHub je geeft is om een handmatige pull request samenvoeging te doen).
 
-# Referenties
+## Referenties
 
 Er is heel veel te vinden over Git op het internet. Hieronder een
 (kleine) greep uit een aantal links die ik regelmatig consulteer(de).
@@ -1009,7 +967,6 @@ _**Cheat sheets & best practices**_
 -   [Interactive Git Cheatsheet](http://ndpsoftware.com/git-cheatsheet.html)
 
 -   [Version Control Best Practices](https://www.git-tower.com/blog/version-control-best-practices)
-
 
 [^1]: <https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners>
 [^2]: <https://buddy.works/blog/5-types-of-git-workflows>
@@ -1072,4 +1029,3 @@ _**Cheat sheets & best practices**_
     vermijden.
 
 [^21]: <https://git-scm.com/docs/git-revert>
-````
