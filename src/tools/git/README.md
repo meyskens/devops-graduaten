@@ -960,6 +960,16 @@ _**Naslagwerken**_
 
 -   [GitHub help](https://help.github.com)
 
+-   [Git Handbook](https://guides.github.com/introduction/git-handbook/)
+-   [Understanding the GitHub flow](https://guides.github.com/introduction/flow/)
+-   [Mastering Issues](https://guides.github.com/features/issues/)
+-   [Forking](https://guides.github.com/activities/forking/)
+
+-   [The 10 Commandments of Navigating Code Reviews](https://angiejones.tech/ten-commandments-code-reviews/)
+-   [Code reviews by Dr. Michaela Greiler](https://www.michaelagreiler.com/category/code-reviews/)
+-   [Code Review Best Practices by Trisha Gee (Jetbrains) (video)](https://www.youtube.com/watch?v=a9_0UUUNt-Y)
+-   [Patterns of Effective Teams by Dan North (video)](https://www.youtube.com/watch?v=lvs7VEsQzKY)
+
 _**Cheat sheets & best practices**_
 
 -   [GitHub Cheat Sheet](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf)
