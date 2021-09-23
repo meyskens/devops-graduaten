@@ -323,7 +323,7 @@ nog toevoegen/veranderen, maar je moet dan wel enkele bijkomende
 commando's uitvoeren om bestanden die reeds in de repository zijn
 opgenomen (en die je vanaf dan wenst uit te sluiten) te verwijderen[^9].
 Het is dus ideaal als je op voorhand weet/goed nadenkt over welke
-bestanden je niet wenst op te nemen in de repo[^10].
+bestanden je niet wenst op te nemen in de repo.
 
 Naast een _.gitignore_-bestand kan je ook best een
 _**README.md**_-bestand aanmaken in de root van je
@@ -994,18 +994,10 @@ _**Cheat sheets & best practices**_
 [^7]:
 
     Omwille van de focus (op het Git-verhaal) en de eenvoud kiezen we
-    in deze cursustekst voor een project zonder Sass.
+    in deze cursustekst voor een project zonder gegenereerde code.
 
 [^8]: <https://git-scm.com/docs/gitignore>
 [^9]: <https://www.git-tower.com/learn/git/faq/ignore-tracked-files-in-git>
-[^10]:
-
-    Voor _Uitdaging 3_ vertrek je van de startbestanden op
-    <https://github.com/pverhaert/1ITF_Sass_BS4_project>. Het bijhorende
-    _.gitignore_-bestand is klaar voor gebruik en sluit verschillende
-    folders _(.idea_, _node_modules_, _public_html/css_,
-    _public_html/js_) uit voor versiebeheer.
-
 [^11]:
 
     In Webstorm kies je bij het aanmaken van het _README.md_-bestand
