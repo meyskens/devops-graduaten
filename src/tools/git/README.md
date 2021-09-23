@@ -779,6 +779,203 @@ git diff --staged <file>
 git status
 ```
 
+# Git: teamwork workflow
+
+Je hebt nu al geleerd hoe je GitHub en Git kunt gebruiken om versiebeheer op je projecten te doen.
+In deze tutorial gaan we een stap verder en gebruiken we Git om in teamverband aan dezelfde codebase te werken.
+
+## Werken met "branches"
+Nadat je het project hebt gecloned op je computer kunnen we beginnen te werken aan code veranderingen. We doen dit in branches.
+Branches, ook wel feature branches genoemd, maken een kopie van de hoofdcode die zich op de "main" branch bevindt.
+Het is een slechte gewoonte om direct naar de "main" branch te pushen als je in teams werkt. Een uitzondering op deze regel is de eerste commit.
+
+In een branch kun je zoals gebruikelijk één of meer commits maken, deze geven de wijzigingen weer om een bepaald deel van de code toe te voegen.
+Om een nieuwe branch te maken kun je het volgende doen met Git
+```console
+$ git branch <branch naam>
+```
+De branchnaam moet het deel bevatten dat je van plan bent toe te voegen, en ook meestal je naam, zodat je geen conflicten met je teamgenoten hebt.
+Een naam zou bijvoorbeeld `maartje-add-contact-page` kunnen zijn, merk op dat branchnamen geen spaties mogen bevatten!
+
+Takken maken doe je met `git branch`. Na het aanmaken van de branch moet je overschakelen naar het gebruik van die branch.
+Dit kan gedaan worden met `git checkout`.
+```console
+$ git checkout [branch naam]
+```
+**Dit commando zal de bestanden op je harde schijf aanpassen aan de bestanden in de branch.** Het is dus normaal dat je nieuwere bestanden nog niet ziet. Het maakt een eigen kopie zodat je tijdens je werk niet "gestoord" wordt door wijzwgingen op de main branch.
+
+Je kunt nu zoals gewoonlijk werken en `git add` en `git commit` gebruiken om je wijzigingen vast te leggen.
+Je kunt `git push` gebruiken als je op een branch zit om de branch naar GitHub te pushen
+
+Een volledige workflow zou bijvoorbeeld zijn
+```bash
+git branch maartje-add-contact-page
+git checkout maartje-add-contact-page
+
+touch contact.html # voorbeeld verandering!!! geen onderdeel van de workflow
+
+git add .
+git commit -m "Een contactpagina gemaakt"
+git push --set-upstream origin maartje-add-contact-page # eerste keer nodig, gebruik gewoon `git push` voor latere wijzigingen in de branch
+```
+
+## Pull Requests
+
+Pull requests, ook wel Merge Requests genoemd in andere Git oplossingen, zijn verzoeken die gedaan worden om code van een bepaalde branch samen te voegen in de "main" branch van het repository. Je kunt dit doen nadat je voor de eerste keer "git push" gedaan hebt, door naar de repository op Github te gaan en naar "Pull Requests" te gaan, hier kun je klikken op "New Pull Request".
+
+![Pull Requests op een GitHub repo](./images/prs.png)
+
+Soms zal GitHub je ook automatisch de nieuwe branch voorstellen.
+
+![PR suggestie dialoog](./images/prsuggestion.png)
+
+Bij het maken van een Pull Request kun je 2 branches vergelijken, de "basis" branch is degene waar we de code naar toe willen verplaatsen. In ons geval zal dit altijd de main branch zijn. De "vergelijk" branch zal de branch zijn waar we onze wijzigingen in hebben aangebracht.
+Merk op dat je een branch *kunt* pushen zonder dat er wijzigingen zijn gemaakt, maar je kunt hier geen pull-request voor aanmaken.
+PR-scherm](./images/prscreen.png)
+Nadat deze juist zijn ingesteld zal GitHub je de wijzigingen laten zien en kun je op "Create Pull Request" klikken.
+
+Je wordt nu naar een scherm gestuurd waar je een titel en een beschrijving kunt toevoegen, als je in Git werkt zul je vaak pull requests maken voor andermans projecten. Daarom is het altijd een goed gebruik om een bruikbare titel en beschrijving toe te voegen van wat je wilt veranderen en waarom. Als dit gedaan is, vergeet dan niet om weer op "Create" te klikken.
+
+## Code Review
+Code review is een proces dat je overal ziet, van kleine startups tot grote ondernemingen. Hoe je dit goed doet is ook een veel besproken onderwerp. Toen we op [Twitter](https://twitter.com/MaartjeME/status/1208048751631327237) vroegen naar code review tips hadden veel programmeurs hier verschillende meningen over.
+Code review in een notendop is het proces tussen het voorstellen van een codewijziging (in een PR) en het moment dat deze wordt samengevoegd in de master branch, en wordt uitgerold naar productie.
+Dit proces zorgt ervoor dat de code verbetert omdat meer mensen er naar kunnen kijken en wijzigingen kunnen voorstellen. Bugs worden sneller opgemerkt, de code zal er beter en samenhangender uitzien en het kan je inzicht geven in hoe je code nog verder verbeterd kan worden.
+
+Code reviews zijn een kans om te leren voor de indiener van het PR maar ook een kans om je werk te prijzen voor de reviewer. Belangrijk om in gedachten te houden is om vriendelijk te zijn voor elkaar, om reviews niet persoonlijk op te vatten en om te beginnen met uit te leggen waarom. Een code review is inherent teamwerk, waarbij verschillende ideeën en suggesties aan bod komen. Soms kan het de moeite waard zijn om een discussie offline te voeren (d.w.z. face to face) om enkele opmerkingen te bespreken. Het doel is hier niet om gelijk te krijgen over iets maar om te verbeteren als een team.
+
+### The 10 Commandments of Navigating Code Reviews
+[The 10 Commandments of Navigating Code Reviews](https://techbeacon.com/app-dev-testing/10-commandments-navigating-code-reviews) is een werk van [Angie Jones](https://angiejones.tech).
+Hierin bespreekt ze 10 regels om te volgen bij het doen van code review.
+
+```
+I. Thou Shalt Not Take It Personally
+II. Thou Shalt Not Marry the Code
+III. Thou Shalt Consider All Feedback
+IV. Thou Shalt Articulate Your Rationale
+V. Thou Shalt Be Willing to Compromise
+VI. Thou Shalt Contribute to Others’ Code Reviews
+VII. Thou Shalt Treat Submitters How Thou Wants to Be Treated
+VIII. Thou Shalt Not Be Intimidated by the Number of Comments
+IX. Thou Shalt Not Repeat the Same Mistakes
+X. Thou Shalt Embrace the Nits
+```
+
+### Code Review in de praktijk
+Bij het openen van een Pull Request in GitHub kun je naar "Files Changed" gaan, hier kun je alle wijzigingen in een PR zien. Als je met de muis over een regelnummer gaat zie je een plus icoontje, als je daar op klikt opent zich een box om een commentaar toe te voegen.
+
+[Het vakje met een commentaar gemaakt](./images/coderev1.png)
+
+Hier kunt u kiezen voor "Add single comment" of "Start Review" in de meeste gevallen wilt u de tweede. Dit start een nieuwe review en bewaart de commentaren, maar zal ze pas publiceren als je alle bestanden hebt gereviewd. Zo kan je ze allemaal in één keer publiceren en degene die je niet nodig hebt verwijderen (bijvoorbeeld als je snapt waarom een bepaald ding er staat na het lezen van een ander bestand).
+Bovenaan zie je nu een knop "Finish Review". Hiermee kun je een laatste commentaar toevoegen, je zou hier kunnen denken aan het "wees aardig" gedeelte. Dan "approve" of "request changes", als alles in orde is keur je het PR goed, anders vraag je om enkele wijzigingen aan te brengen, nadat deze zijn uitgevoerd kan de indiener van het PR je beoordeling opnieuw aanvragen. Merk op dat je je eigen PR\'s niet kunt goedkeuren.
+
+[review box](./images/coderev2.png)
+
+Na het plaatsen van een beoordeling ziet u de status in het PR. Onder "Reviewers" aan de rechterkant kunt u ook een verzoek indienen voor een re-review van een eerdere reviewer of een nieuw persoon om je code te reviewen.
+
+[code review in PR](./images/coderev3.png)
+
+**TIP:** Wanneer u een commentaar schrijft kunt u op de "Suggestie" knop in de werkbalk drukken. Hiermee kun je een snelle codewijziging van één regel suggereren die met één klik kan worden toegepast.
+
+![suggestion edit view](./images/coderev4.png)
+
+### Het leven na code review
+Als je veranderingen in je code moet maken na een code review, dan kun je dit gewoon op je Git branch doen! Maak gewoon nog een commit en je zult de wijzigingen in het PR zien verschijnen, je zult ook merken dat GitHub opmerkingen markeert op gewijzigde regels, zodat je beter kunt zien welke opmerkingen aangepakt zijn.
+**Voordat je het PR in master samenvoegt, moet ten minste één persoon je code gereviewd (en goedgekeurd) hebben.** De enige uitzondering hierop is als je team uit één persoon bestaat.
+
+
+## De volgende branch!
+Wanneer een PR wordt gemerged (gefeliciteerd!) of je wilt gewoon verder gaan met het volgende ding, moet je met een paar dingen rekening houden.
+Ten eerste, als je terug gaat naar de main branch is er een kans dat er dingen veranderd zijn door werk van andere teamleden. Git werkt niet automatisch bij van wat er op GitHub staat, maar je kunt dit doen:
+```console
+$ git checkout main # terug gaan naar de master
+$ git pull # haal nieuwe veranderingen binnen en plaats ze op je schijf
+```
+Als je op een nieuwe branch wilt beginnen, is het altijd aan te raden om vanaf de "main" branch te beginnen, anders zul je het moeilijk krijgen om pull requests goed te doen.
+
+Dus een volledige samenvatting van branchen, wijzigingen maken en dan teruggaan naar master voor de volgende wijziging:
+```console
+$ git branch maartje-add-contact-page
+$ git checkout maartje-add-contact-page
+$ touch contact.html # voorbeeld verandering!!! geen deel van de workflow
+$ git add .
+$ git commit -m "Een contactpagina gemaakt"
+$ git push
+$ git checkout main
+$ git pull
+$ git branch maartje-fix-home
+$ git checkout maartje-fix-home
+```
+
+**TIP:** `git pull` werkt ook als je in een branch zit. Dit is nodig als iemand anders daar wijzigingen pusht of als je de GitHub suggestie functie hebt gebruikt.
+
+# Merge Conflicts
+
+Merge conflicts gebeuren als Git er niet uit komt hoe 2 wijzigingen samen te voegen die in hetzelfde bestand gemaakt zijn.
+Als dit gebeurt zal GitHub een fout aangeven op de PR pagina.
+
+[Fout samenvoegconflict](./images/merge1.png)
+
+Er zijn twee manieren om deze op te lossen, de eerste is een webinterface die GitHub aanbiedt, dit is de makkelijkste manier maar werkt misschien niet op andere Git platforms of als een samenvoeg conflict complex is. De andere manier om samenvoegconflicten op te lossen is via de commandoregel. Hier zijn een paar commando\'s voor nodig.
+
+## Web interface
+In de PR view op GitHub druk je op "Resolve Conflicts" dit zal je naar een pagina sturen waar je een of meer bestanden hebt met een of meer conflicten.
+Ga in elk bestand dat je ziet en zoek naar een rood aangegeven deel van het bestand.
+
+![samenvoeg conflict in markdown bestand](./images/merge2.png)
+
+Je zult de standaard Git opmaak voor samenvoeg conflicten zien:
+```
+<<<<<<<<<< [branch naam]
+    code toegevoegd in de branch
+
+==========
+    code op de main
+>>>>>>>>>> main
+```
+
+Nu moet je ervoor zorgen dat je alle toegevoegde regels verwijdert en dat je uiteindelijk het bestand krijgt dat je wilt hebben. Als je dit allemaal hebt opgelost klik je op "Mark as resolved" op het bestand, als alle bestanden een groen vinkje hebben kun je het opslaan.
+
+Je wordt nu teruggestuurd naar het PR scherm waar je nu zonder problemen kunt samenvoegen.
+
+## Command Line
+Je kunt hetzelfde proces voor samenvoeg verzoeken doen met de Git commandoregel interface. Als je hier hulp bij nodig hebt, kun je op "command line instructions" klikken op een PR en GitHub zal je helpen!
+![merge conflict CLI instructies in GitHub](./images/merge3.png)
+
+Eerst zorg je ervoor dat je alle wijzigingen van GitHub hebt:
+```console
+$ git fetch # download de laatste GitHub data maar overschrijf geen bestanden
+```
+Zorg er vervolgens voor dat je op de branch zit waar je in werkt
+```console
+$ git checkout -b name-branch origin/name-branch
+```
+Dan voeg je de wijzigingen van de master samen in de branch
+```
+$ git merge master
+```
+Nu zul je een foutmelding zien met een conflict en een bestandsnaam.
+Ga in dat bestand en je zult de standaard Git opmaak zien voor samenvoeg conflicten:
+```
+<<<<<<<<<< [Branch Naam]
+    code toegevoegd in de branch
+
+==========
+    code op de main
+>>>>>>>>>> main
+```
+
+Nu moet je ervoor zorgen dat je alle toegevoegde regels verwijdert en eindigt met het bestand dat je uiteindelijk wilt verkrijgen. Sla het bestand dan op de schijf op
+
+Dan moeten we de veranderingen vastleggen
+```console
+$ git add .
+$ git commit # merk op dat er geen -m is omdat we de standaard boodschap willen behouden
+```
+Je zult een tekst editor zien openen, verander hier niets en sluit de editor. Dit zal de standaard samenvoeg commit boodschap behouden.
+
+Je kunt nu de wijzigingen naar GitHub pushen met `git push`.
+(De laatste instructies die GitHub je geeft is om een handmatige pull request samenvoeging te doen).
+
 # Referenties
 
 Er is heel veel te vinden over Git op het internet. Hieronder een
