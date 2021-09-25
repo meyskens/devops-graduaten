@@ -42,8 +42,8 @@ module.exports = {
             {
                 text: "Tools",
                 items: [
-                    { text: "Kanban op GitHub", link: "/agile/kanban/" }
-                    //{ text: "Git", link: "/git" },
+                    { text: "Kanban op GitHub", link: "/agile/kanban/" },
+                    { text: "Git", link: "/tools/git/" }
                 ]
             },
             {
