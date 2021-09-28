@@ -30,6 +30,8 @@ sudo apt install ansible
 
 ## Concepten
 
+![architecture](./architecture.png)
+
 Deze concepten komen voor in Ansible. Hiermee bouw je een Ansible setup op:
 
 ### Control node
@@ -76,3 +78,60 @@ ssh localhost
 ```
 
 Zie je een shell? Dan zijn we klaar om Ansible te gebruiken.
+
+### Project opzetten
+
+We maken een map aan waar we ons Ansible project in kunnen zetten. We openen de map hierna in een editor als Visual Studio Code.
+
+Alseerst maken we een file met naam `hosts` (verander de username wel)
+
+```
+[servers]
+127.0.0.1 ansible_user=maartje
+```
+
+Nu maken we een file met naam `ansible.cfg`
+
+```
+[defaults]
+inventory = hosts
+host_key_checking = False
+```
+
+Je kan nu zien of Ansible de hosts herkent:
+
+```bash
+$ ansible all --list-hosts
+  hosts (1):
+    127.0.0.1
+```
+
+We pingen (SSH test in dit geval) nu de servers:
+
+```
+$ ansible all -m ping
+```
+
+Nu maken we een file met naam `main.yml`
+
+```
+- hosts: servers # installer dit op all hosts onder "servers:
+    tasks:
+        - name: Create a directory if it does not exist
+            file:
+            path: /etc/http_files
+            state: directory
+        - name: Install Apache
+            apt:
+                name: apache2
+                state: present
+                update_cache: yes
+                upgrade: yes
+            become: yes
+```
+
+We voeren nu de file uit:
+
+```
+$ ansible-playbook main.yml
+```
