@@ -934,6 +934,17 @@ Je zult een tekst editor zien openen, verander hier niets en sluit de editor. Di
 Je kunt nu de wijzigingen naar GitHub pushen met `git push`.
 (De laatste instructies die GitHub je geeft is om een handmatige pull request samenvoeging te doen).
 
+## Opdracht
+
+GitHub is niet enkel een plek voor bedrijven om hun code te beheren of waar de open source wereld hun werk kan doen.
+Vaak is een mooi gevuld GitHub profiel ook een mooi aanzicht voor je eigen portfolio. Vele bedrijven bekijken je profiel voor een solicitatie en voor recruiters is het een paradijs om mensen te vinden. Voor jullie het ideale moment om je DevOps kennis te promoten aan de wereld!
+
+1. Maak een [GitHub](https://github.com) account aan (neem een naam die niet je r-nummer is! Deze is voor je leven!)
+1. Vraag op [GitHub Education](https://education.github.com/) je studenten account aan.
+1. Maak een nieuwe repository aan op GitHub genaamd `devops-portfolio`. Private of public is jou keuze, je kan het later altijd veranderen.
+1. Zorg dat je op je laptop aan deze repo kunt werken, we werken hier nog niet met branches. Elk hoofdstuk gaan we dit portfolio gebruiken voor onze demo code an opdrachten
+1. Maak een `README.md` en schrijf een korte intro, tip: gebruik Markdown!
+
 ## Referenties
 
 Er is heel veel te vinden over Git op het internet. Hieronder een

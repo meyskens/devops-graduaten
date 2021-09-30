@@ -37,13 +37,17 @@ module.exports = {
             },
             {
                 text: "Culture",
-                items: [{ text: "Agile", link: "/agile/" }]
+                items: [
+                    { text: "Agile", link: "/agile/" },
+                    { text: "Environments", link: "/concepts/environments/" }
+                ]
             },
             {
                 text: "Tools",
                 items: [
-                    { text: "Kanban op GitHub", link: "/agile/kanban/" },
+                    //{ text: "Kanban op GitHub", link: "/agile/kanban/" },
                     { text: "Git", link: "/tools/git/" },
+                    { text: "YAML", link: "/tools/yaml/" },
                     { text: "Ansible", link: "/tools/ansible/" }
                 ]
             },
