@@ -2,6 +2,8 @@
 
 ![GitHub](./images/media/image1.png)
 
+> Sinds Augustus 2020 ondersteund GitHub geen wachtwoorden voor `git`. Zie https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token voor hoe je je op Linux kan aanmelden. Git op Windows ondersteund dit via GUI dialoog normaal.
+
 ## Inleiding
 
 Versiebeheer met Git is vandaag de dag een stukje onontbeerlijke kennis in DevOps.
