@@ -67,6 +67,13 @@ Playbooks worden geschreven in YAML.
 We hebben al Ansible geinstalleerd op onze Ubuntu desktop. We gaan enkele acties uitvoeren als demo van Ansible.
 Om tijd te besparen in de les gaan we deze uitvoeren op dezelfde machine als waar we Ansible opdraaien.
 
+Eerst zetten we het passwoord voor `sudo` uit zodat Ansible root kan worden.
+
+```bash
+# passwordless sudo
+sudo /bin/bash -c "echo 'ALL            ALL = (ALL) NOPASSWD: ALL' >>/etc/sudoers"
+```
+
 We zorgen ervoor dat we naar onze eigen VM kunnen SSHen:
 
 ```bash
@@ -116,18 +123,19 @@ Nu maken we een file met naam `main.yml`
 
 ```
 - hosts: servers # installer dit op all hosts onder "servers:
-    tasks:
-        - name: Create a directory if it does not exist
-            file:
-            path: /etc/http_files
-            state: directory
-        - name: Install Apache
-            apt:
-                name: apache2
-                state: present
-                update_cache: yes
-                upgrade: yes
-            become: yes
+  tasks:
+    - name: Create a directory if it does not exist
+      become: yes # become is kort voor become_user root
+      file:
+        path: /ansible_was_here
+        state: directory
+
+    - name: Install SL
+      become: yes
+      apt:
+        name: sl
+        state: present
+        update_cache: yes
 ```
 
 We voeren nu de file uit:
@@ -135,3 +143,175 @@ We voeren nu de file uit:
 ```
 $ ansible-playbook main.yml
 ```
+
+We zien nu dat Ansible de map `/ansible_was_here` heeft aangemaakt alsook dat de SL is geïnstalleerd. Als we dit opnieuw draaien bevestigt Ansible dat de map al bestaat en dat de SL al geïnstalleerd is. We kunnen deze verwijderen Ansible terug draaien en onze servers zijn weer inorde!
+
+### Roles
+
+In dit voorbeeld hebben we op al onze servers hetzelfde gezet, nu dit is meestal niet het geval. We spreken vaak van server roles. Dit zijn rollen die een bepaalde server kan aannemen.
+We zien hieronder een typische structuur voor zo een rollen:
+
+```
+ansible/
+├── roles
+│   ├── common
+│   │   └── tasks
+│   ├── web_server
+│   │   ├── handlers
+│   │   ├── tasks
+│   │   │   ├── main.yml
+│   │   │   ├── setup_db.yml
+│   │   │   └── setup_nginx.yml
+│   │   └── templates
+│   │       └── nginx_site_config.j2
+├── hosts_production
+├── hosts_staging
+├── mail.yml
+```
+
+Onze `main.yaml` zegt dan welke server tags welke roles krijgen
+
+```yaml
+- hosts: web_hosts
+  roles:
+      - common
+      - web_server
+```
+
+Elke role heeft een structuur:
+
+-   `tasks` zijn onze taken, we starten altijd met de `main.yml`
+-   `templates` zijn templates voor files, hierdoor kan je variables gebruiken in configuratie files
+-   `handlers` zijn handlers voor de acties, bijvoorbeeld als een configuratie file wordt aangepast de service te herstarten
+
+### Plugins
+
+Absible heeft een groot ecosysteem van plugins, je hebt vele externe maar ook ingebouwde plugins.
+De volledige lijst van ingebouwde [kan je op de Ansible site vinden](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/index.html#plugins-in-ansible-builtin).
+
+#### Top Modules
+
+##### APT
+
+```yaml
+- name: Install MariaDB
+  become: yes
+  apt:
+      name: mariadb-server
+      state: present
+      update_cache: yes
+```
+
+##### Services
+
+```yaml
+- name: Restart apache2
+  service:
+      name: apache2
+      state: restarted
+```
+
+##### Copy
+
+```yaml
+- name: Write some content in a file /tmp/hello.txt
+  copy:
+      dest: /tmp/hello.txt
+      content: |
+          Good Morning!
+          Awesome sunshine today.
+```
+
+```yaml
+- name: Copy a new "ntp.conf file into place, backing up the original if it differs from the copied version
+  copy:
+      src: /mine/ntp.conf
+      dest: /etc/ntp.conf
+      owner: root
+      group: root
+      mode: "0644"
+      backup: yes
+```
+
+##### File
+
+```yaml
+- name: Change file ownership, group and permissions
+  file:
+      path: /etc/foo.conf
+      owner: foo
+      group: foo
+      mode: "0644"
+```
+
+```yaml
+- name: Create a directory if it does not exist
+  file:
+      path: /etc/some_directory
+      state: directory
+      mode: "0755"
+```
+
+##### Lineinfile
+
+```yaml
+- name: Add a line to a file
+  lineinfile:
+      path: /etc/hosts
+      line: 192.168.1.99 foo.lab.net foo
+```
+
+##### Git
+
+```yaml
+- name: Clone a Git repo
+  git:
+      repo: https://github.com/ansible/ansible-examples.git
+      dest: /src/ansible-examples
+```
+
+##### Archive
+
+```yaml
+- name: Compress directory /path/to/foo/ into /path/to/foo.tgz
+  archive:
+      path: /path/to/foo
+      dest: /path/to/foo.tgz
+```
+
+##### Command
+
+```yaml
+- name: Change the working directory to somedir/ and run the command as db_owner if /path/to/database does not exist.
+  command: /usr/bin/make_database.sh db_user db_name
+  become: yes
+  become_user: db_owner
+  args:
+      chdir: somedir/
+      creates: /path/to/database
+```
+
+## Opdracht
+
+We hebben onze eerste stappen gezet in Ansible, nu is het aan jouw om je eeste Ansible playbooks te schrijven!
+
+We willen een playbook voor het opzetten van een webserver:
+
+-   Installeer apache
+-   Installeer PHP
+-   Maak een index.php pagina met de inhoud van onderaan
+
+```php
+<?php
+echo '<h1>Hello Ansible</h1>';
+phpinfo();
+```
+
+## Resources
+
+Ga je in je project Ansible gebruiken? Lees dan zeker deze resources!
+
+-   [Ansible Documentation](https://docs.ansible.com/ansible/latest/index.html)
+-   [Ansible "registers"](https://www.educba.com/ansible-register/) - laat acties alleen toe als iets veranderd is (bv server herstart)
+-   [More complex structures](https://jozo.io/blog/structure-of-ansible-project/)
+-   [Example project](https://github.com/meyskens/ansible-example)
