@@ -37,7 +37,10 @@ module.exports = {
             },
             {
                 text: "Culture",
-                items: [{ text: "Agile", link: "/agile/" }]
+                items: [
+                    { text: "Agile", link: "/agile/" },
+                    { text: "Environments", link: "/concepts/environments/" }
+                ]
             },
             {
                 text: "Tools",
