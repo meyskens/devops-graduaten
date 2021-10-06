@@ -6,11 +6,15 @@ Dit is wat gebeurd als je een introductie van Wikipedia wil kopiëren. Laten we 
 
 ![Docker logo](./docker.png)
 
+> NOTE: Sindskort limiteert Docker Hub het aantal downloads per IP addres. Als voorbeelden niet werken
+> kan je er `docker.stuvm.be/f/docker/` voorzetten. Dit download een kopie via het StuVM netwerk.
+
 Docker is vaak omschreven als een PaaS tool. Het gaat voor ons een platform bieden waar we onze apps kunnnen op draaien. Dat is een ruw idee van wat Docker is.
 Docker draait processen in een geisoleerde container op ons Linux systeem. Het maakt gebruik van Linux "cgroups" en "namespaces". Hierdoor kunnen we een hele Linux omgeving (of een deel ervan) gebruiken per applicatie.+
 
 ![Architecture](./architecture.png)
-Dit diagram van Aqua Security geeft het goed weer waar Docker zich bevind door het te vergelijken met een VM. Docker wordt vaak **foutief** een lightweight VM genoemd. Dit is echter een correcte term aangezien er geen hardware gevirtualiseerd wordt.
+
+Dit diagram van Aqua Security geeft het goed weer waar Docker zich bevind door het te vergelijken met een VM. Docker wordt vaak **foutief** een lightweight VM genoemd. Dit is echter geen correcte term aangezien er geen hardware gevirtualiseerd wordt.
 
 Docker deelt de Linux kernel onder de verschillende containers waar een VM enkel hardware deelt. De isolatie tussen 2 containers is dus minder dan tussen 2 VMs.
 Dit heeft een aantal voordelen:
@@ -111,7 +115,7 @@ docker run hello-world
 Waar komt Hello World nu vandaan?
 ![Hello World image](./hello-world-image.png)
 
-Dit is een official Docker image, dat betekend dat Docker het goed heeft gekeurd. Voor vele images als MySQL, Apache of Nginx en Linux distros als Ububntu, Fedora en Alpine Linux betekend het dat de originele developers instaan voor het onderhoud van deze images.
+Dit is een official Docker image, dat betekend dat Docker het goed heeft gekeurd. Voor vele images als MySQL, Apache of Nginx en Linux distros als Ubuntu, Fedora en Alpine Linux betekend het dat de originele developers instaan voor het onderhoud van deze images.
 
 Wat is er gebeurd?
 
@@ -321,15 +325,177 @@ Dit geeft een lijst met alle configuratie opties die gebruikt zijn, ook een hele
 
 ## Images
 
+We hebben nu al gezoen hoe we een container kunnen gebruiken. We hebben wat standaard images gebruikt die op Docker Hub te vinden zijn.
+We gaan nu dieper kijken hoe deze bouwstenen gemaakt zijn. We bekijken waarom we er zouden gebruiken of eigen gaan maken. Alsook hoe dit efficiënt te doen.
+
 ### Eigen vs van een ander
+
+Op [Docker Hub](https://hub.docker.com) zijn miljoenen verschillende images beschikbaar. Waarom dan nog onze eigen maken?
+Allereerst niet elke image heeft exact wat we nodig hebbben. De eigen code van je bedrijf bijvoorbeeld... Of soms hebben we een kleine configuratie aanpassing nodig!
+
+Let ook op met niet officiele images, zij soms vaak verouderd. Kies bij voorkeur voor een officiele image!
+
+Je kan images bouwen vanaf een andere image! Je kan ook kiezen om 100% op jezelf te beginnen, daar gaan we echter niet verder op in in deze cursus.
+
+### De Dockerfile
+
+Docker images zijn... ja ook weeral code! We bouwen images door middel van een `Dockerfile`.
+We kijken er eventjes naar eentje:
+
+```Dockerfile
+FROM ubuntu:20.04
+
+RUN apt update && apt install -y nginx
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+COPY index.html /var/www/html
+
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+Dit is een simpel `Dockerfile` voor een nginx container waar we eigen configuratie hebben toegevoegd hebben.
+
+Als we dit opslaan als `Dockerfile` en dan builden met `docker build -t <image naam> ./` dan begint Docker alle commandos uit te voeren om de image te bouwen.
+
+Deze image kunnen we naarna met `docker push <image naam>` pushen naar Docker Hub (of een andere registry). Of lokaal draaien met `docker run`.
+
+Hieronder bekijken we in detail hoe we een image kunnen bouwen:
 
 ### Kies de juiste basis
 
+ELKE Dockerfile start met een `FROM` commando. Dit zegt wat we nemen als basis.
+
+Meestal starten we vanaf een Linux Distributie
+
+```Dockerfile
+FROM ubuntu:20.04
+```
+
+Of liever Fedora?
+
+```Dockerfile
+FROM fedora:32
+```
+
+We kunnen ook een andere image nemen als basis, al een van onze standaard images:
+
+```Dockerfile
+FROM wordpress:5.3
+```
+
+We kunnen op elke Docker Image verder bouwen!
+
+#### Think Light, Think Alpine
+
+We zien een heel populaire basis image van meeste Docker images. Namelijk [Alpine Linux](https://alpinelinux.org/). Voor Docker een vrij onpopulaire kleine Linux distributie. Maar ze heeft een een aantal goede voordelen:
+
+-   `apk` is een makkelijke, snelle en lichte package manager
+-   Sneller release cadence geeft snel nieuwe packages
+
+oh... bijna vergeten... de image is slechts 3 MEGABYTES groot! (vergeleken dat Ubuntu/Debian 300MB is)
+
+```Dockerfile
+FROM alpine:3.13
+
+RUN apk add --no-cache nginx
+[...]
+```
+
+Geeft ons een lichtere image dan als we Ubuntu zouden gebruiken.
+
+> Alpine bereikt dit door niet GNU libC te gebruiken, vaak geeft dit compatibiliteitsproblemen met software. Daarom is het niet altijd de holy grail van Linux distributies.
+
 ### Layers
+
+We hebben nu onze bouwplaat voor de image (om terug op Lego te vallen).
+
+![Image layers](./image-layers.png)
+
+Elke stap in onze `Dockerfile` is een layer. We bekijken de opties hier:
 
 #### RUN
 
+`RUN` voert een commando uit **tijdens het bouwproces**.
+
+```Dockerfile
+FROM alpine:3.13
+
+RUN mkdir /hallo
+```
+
+```Dockerfile
+FROM ubnuntu:20.04
+
+RUN apt-get update && apt-get install -y nginx
+```
+
+Wat is belangrijk hier:
+
+-   input is niet mogelijk, werk dus altijd met `-y` in bijvoorbeeld apt-get
+-   het is enkel tijdens `docker build` dus niet tijdens het draaien. Werk dus niet tijd of omgevings sensitieve data
+-   gebruik **nooit** `service` of `systemctl`, dit werkt in Docker nooit* (* tenzij je heel rare containers gaat maken)
+-   definieer altijd een versie van de image, zo breekt je build niet met een nieuwe release
+
+##### Layer overload
+
+Elke RUN, COPY, etc. in een Dockerfile maakt een layer aan in de image. Onderliggend houd Docker via deltas je bestandsysteem bij. We houden dit best minimaal voor effieciëntie (groote en snelheid).
+
+Doe daarom **NOOIT**
+
+```Dockerfile
+FROM ubuntu:20.04
+
+RUN apt-get update
+RUN apt-get install -y nginx
+RUN apt-get install -y php7.2
+RUN apt-get install -y php7.2-fpm
+RUN apt-get install -y php7.2-mysql
+RUN apt-get install -y php7.2-curl
+RUN apt-get install -y php7.2-gd
+RUN apt-get install -y php7.2-mbstring
+```
+
+Maar gebruik `&&` voor meerdere commando's in 1 RUN. En `\` voor een nieuwe lijn binnenin een RUN.
+
+```Dockerfile
+FROM ubuntu:20.04
+
+RUN apt-get update &&\
+    apt-get install -y
+    nginx \
+    php7.2 \
+    php7.2-fpm \
+    php7.2-mysql \
+    php7.2-curl \
+    php7.2-gd \
+    php7.2-mbstring
+```
+
+Dit geeft 1 laag extra in plaats van 7!
+
 #### COPY & ADD
+
+`COPY` en `ADD` dienen om bestanden en mappen van je lokale werkomgeving naar de container te kopieren. Zo kan je bestanden uit je lokale omgeving megeven, bijvoorbeeld configuratie bestanden of je applicatie.
+
+```Dockerfile
+FROM alpine:3.13
+
+RUN apk add --no-cache apache
+
+COPY apache.conf /etc/apache2/
+```
+
+```Dockerfile
+FROM alpine:3.13
+
+COPY wordpress/ /var/www
+```
+
+`ADD` doet hetzelfde als `COPY` alleen het kan:
+
+-   `ADD https://example.com/file.txt /var/www/html/file.txt` URLs binnenhalen
+-   `ADD src.tar.gz /usr/local/src` bestanden uit een tarball uitpakken
 
 #### CMD && ENTRYPOINT
 
@@ -344,3 +510,17 @@ Dit geeft een lijst met alle configuratie opties die gebruikt zijn, ook een hele
 ```
 
 ```
+
+## Opdrachten
+
+### Oefening 1:
+
+Maak een Dockerfile aan op basis van `ubuntu` later een op basis van `alpine`. Noem ze respectievelijk `mijn-site-ubuntu` en `mijn-site-alpine`.
+
+-   Installeer Apache
+-   Kopieer een HTML pagina naar de web folder van de container
+-   Laat Apache starten
+    -   op Alpine is dat `httpd -D FOREGROUND`
+    -   op Ubuntu is dat `apache2ctl -D FOREGROUND`
+
+Bekijk het verschil in bouwtijd en groote (via `docker images`).
