@@ -497,19 +497,128 @@ COPY wordpress/ /var/www
 -   `ADD https://example.com/file.txt /var/www/html/file.txt` URLs binnenhalen
 -   `ADD src.tar.gz /usr/local/src` bestanden uit een tarball uitpakken
 
+#### ENV
+
+ENV laat je toe een environment variabele te definiëren. Zo zet je een standaard waarde die de user daarna weer kan overschrijven.
+
+```Dockerfile
+FROM mariadb:10.3
+
+ENV MYSQL_ROOT_PASSWORD=super-secure-root-pass
+ENV MYSQL_DATABASE=wordpress
+```
+
 #### CMD && ENTRYPOINT
 
-#### ENV
+CMD en ENTRYPOINT vinden we meestal op het einde van onze Dockerfile. Deze twee defenieeren wat moet gedraait worden als je applicatie start.
+Meestal gebruiken we hiervoor `CMD`, dit geeft het commando weer dat moet gestart worden.
+
+```Dockerfile
+FROM alpine:3.13
+RUN apk add --no-cache nginx
+
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+Elk deel van het commando moet tussen quotes staan. Het geheel staat in een array (`[]`).
+Dit is de beste manier om een CMD te definieren.
+
+```Dockerfile
+FROM alpine:3.13
+RUN apk add --no-cache nginx
+
+CMD nginx -g daemon off;
+```
+
+Je kan ook gewoon het commando schrijven, dit heeft echter het side effect dat Docker eerst een interne shell opent en het daarna uitvoert, dus minder effectief en soms de oorzaak van bugs.
+
+ENTRYPOINT dient ervoor om de applicatie binary en commando argumenten te scheiden.
+
+```Dockerfile
+FROM alpine:3.13
+RUN apk add --no-cache nginx
+
+ENTRYPOINT ["nginx"]
+CMD ["-g", "daemon off;"]
+```
+
+Dit laat toe om bij Docker run enkel de argumenten te laten opgeven en niet de binary. Bijvoorveeld `docker run my-nginx -g deamon off;server 8080;`.
 
 ### Pushing images
 
+We hebbe nu een image kunnen maken. Om deze te delen en vooral ook om ze binnen te halen op de server moeten we ze pushen naar een zogeheten [registry](https://docs.docker.com/registry/).
+
+Een Registry gaat voor ons onze images hosten. We kunnen ze zowel private als public maken.
+Er zijn een aantal oplossingen
+
+-   [Docker Hub](https://hub.docker.com/) was de eerste van Docker zelf, is gratis voor publieke images. Een image voor docker hub heeft het formaat `username/image:tag`
+-   [Quay.io](https://quay.io) is een grote concurrent gehost door Red Hat (voorheen CoreOS). Het is voor publieke images en private images. Het formaat is `quay.io/username/image:tag`
+-   [GitHub Container Registry](https://ghcr.io) is een recente toevoeging van GitHub zelf, is voor publieke images en private images mee geintegreerd in je GitHub repository. Het formaat is `ghcr.io/username/image:tag`
+
+#### Push
+
+Een image naar een registry doen we via
+
+```bash
+docker login
+docker push username/image:tag
+```
+
+Voor quay.io en GHCR moeten we een apparte login doen:
+
+````bash
+docker login quay.io
+docker push quay.io/username/image:tag
+
+
+docker login ghcr.io
+docker push ghcr.io/username/image:tag
+```
+
 ## Docker Compose
+
+We hebben nu heel wat commando\'s gedaan om een setup te maken met onze containers.
+Om dit te vereenvoudigen bestaat Docker Compose, we bekijken dit verder in een appart hoofdstuk.
 
 ## Commando's cheat sheet
 
-```
+```bash
 
-```
+# Bekijken van containers
+docker ps # Toon alle draaiende containers
+docker ps -a # Toon alle containers, ook die die niet draaien
+
+
+# Images
+docker images # Toon alle images
+
+# Starten van containers
+docker run <image>
+
+dockr run <name -it # start de container in de interactive modus
+dockr run <name -d # start de container in de achtergrond
+dockr run <name -p src:dest # maakt een port mapping tussen je container en je host. Zo kan je poorten openzetten.
+dockr run <name -v src:dest # maakt een volume mapping tussen je container en je host. Zo kan je een map delen tussen host en container.
+dockr run <name -e # maakt een environment variabele aan.
+dockr run <name --name # stelt een naam in voor de container.
+dockr run <name --rm # verwijderd de container na het stoppen.
+
+# Beheren van bestaande containers
+docker start <name>
+docker stop <name>
+docker restart <name>
+docker rm <name> # verwijderen container
+
+# Beheren van images
+docker rmi <image> # verwijderen image
+
+# Bouwen van images
+docker build -t <name> . # bouw een image
+
+# Beheren van netwerken
+docker network create <name> # creëer een netwerk
+docker network ls # toon alle netwerken
+````
 
 ## Opdrachten
 
