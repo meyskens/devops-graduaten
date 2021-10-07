@@ -566,7 +566,11 @@ docker push username/image:tag
 
 Voor quay.io en GHCR moeten we een apparte login doen:
 
+<<<<<<< HEAD
 ```bash
+=======
+````bash
+>>>>>>> 4af0f32851fa6e89d3ec7dd128933ee5c137f7dc
 docker login quay.io
 docker push quay.io/username/image:tag
 
@@ -618,7 +622,11 @@ docker build -t <name> . # bouw een image
 # Beheren van netwerken
 docker network create <name> # creëer een netwerk
 docker network ls # toon alle netwerken
+<<<<<<< HEAD
 ```
+=======
+````
+>>>>>>> 4af0f32851fa6e89d3ec7dd128933ee5c137f7dc
 
 ## Opdrachten
 

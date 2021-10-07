@@ -9,8 +9,5 @@ RUN npm run build
 
 FROM nginx:1.21-alpine
 
-RUN mkdir -p /var/www/SAT
-WORKDIR /var/www/SAT
-
 COPY --from=frontend  /go/src/github.com/meyskens/devops-graduaten/src/.vuepress/dist /var/www/
 COPY nginx.conf /etc/nginx/conf.d/default.conf
