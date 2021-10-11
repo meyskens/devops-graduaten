@@ -49,7 +49,8 @@ module.exports = {
                     { text: "Git", link: "/tools/git/" },
                     { text: "YAML", link: "/tools/yaml/" },
                     { text: "Ansible", link: "/tools/ansible/" },
-                    { text: "Docker", link: "/tools/docker/" }
+                    { text: "Docker", link: "/tools/docker/" },
+                    { text: "Grafana + Prometheus", link: "/tools/grafana-prometheus/" }
                 ]
             },
             {
