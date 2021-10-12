@@ -207,6 +207,34 @@ Volgens het boek "Accelerate"[^accelerate] zagen bedrijven die DevOps implemente
 
 Bovendien is deze cursus ontwikkeld volgens DevOps best practices.
 
+## Relevantie van deze cursus
+
+Uit onderzoek bij bevraging bij SREs[^sre] van [Catchpoint, VMWare en DevOps Institute](https://www.catchpoint.com/blog/site-reliability-engineering-top-sre-tools-as-voted-on-by-sres#Hero) zijn dit de top tools om te kennen:
+
+Operational Tools:
+
+1. Grafana (zie cursus)
+2. Prometheus (zie cursus)
+3. APM (aangehaald in cursus)
+4. ELK Stack (kort aangehaald in cursus)
+5. Terraform (kort aangehaald in cursus)
+
+Developer Tools:
+
+1. Python
+2. Git (zie cursus)
+3. Bash
+4. Docker (zie cursus)
+5. Scripting
+
+DevOps Lifecycle Tools:
+
+1. Kubernetes (kort aangehaald in cursus)
+2. Jenkins (in cursus met andere tool)
+3. Ansible (zie cursus)
+4. CI/CD (zie cursus)
+5. Automation
+
 ## Nuttige bronnen
 
 Deze bronnen zijn nuttig als je je verder wil verdiepen maar zijn _geen leerstof_:
@@ -215,3 +243,4 @@ Deze bronnen zijn nuttig als je je verder wil verdiepen maar zijn _geen leerstof
 -   [Sonatype (code analysis) over DevSecOps](https://guides.sonatype.com/foundations/devops/what-is-devops/)
 
 [^accelerate]: Accelerate: The Science of Lean Software and Devops: Building and Scaling High Performing Technology Organizations Paperback - Nicole Forsgren Phd, Jez Humble, Gene Kim - ISBN 978-1942788331
+[^sre]: According to the Site Reliability Engineering book, “SRE is what happens when you ask a software engineer to design an operations team.”
