@@ -131,10 +131,10 @@ receivers:
 
 ### Starten
 
-Nu we alles juist hebben ingesteld starten we alles op met `docker-compose`
+Nu we alles juist hebben ingesteld starten we alles op met `docker compose`
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 ### Extra node_exporters
