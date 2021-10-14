@@ -51,6 +51,7 @@ module.exports = {
                     { text: "YAML", link: "/tools/yaml/" },
                     { text: "Ansible", link: "/tools/ansible/" },
                     { text: "Docker", link: "/tools/docker/" },
+                    { text: "Docker Compose", link: "/tools/docker-compose/" },
                     { text: "Grafana + Prometheus", link: "/tools/grafana-prometheus/" }
                 ]
             },
