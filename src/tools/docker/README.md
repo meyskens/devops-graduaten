@@ -73,6 +73,7 @@ Docker is standaard enkel door `root` aanroepbaar. We kunnen dit ook door je use
 
 ```bash
 sudo usermod -aG docker <your user here>
+newgrp docker # laad de nieuwe groep permissies in
 ```
 
 Herstart hierna je terminal of SSH sessie.
