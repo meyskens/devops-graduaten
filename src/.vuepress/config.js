@@ -52,7 +52,8 @@ module.exports = {
                     { text: "Ansible", link: "/tools/ansible/" },
                     { text: "Docker", link: "/tools/docker/" },
                     { text: "Docker Compose", link: "/tools/docker-compose/" },
-                    { text: "Grafana + Prometheus", link: "/tools/grafana-prometheus/" }
+                    { text: "Grafana + Prometheus", link: "/tools/grafana-prometheus/" },
+                    { text: "Loadbalancing", link: "/tools/loadbalancing/" }
                 ]
             },
             {
