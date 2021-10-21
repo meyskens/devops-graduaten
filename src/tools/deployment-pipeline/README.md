@@ -19,7 +19,6 @@ Continuous Integration (CI) is een techniek die gebruik maakt van een CI/CD tool
 Continous Deployment (CD) zorgt ervoor dat onze code naar de production kan gestuurd worden. Afhankelijk van de ongeving kan dit bij een push naar de "main" branch, of een apparte "production" branch en soms ook bij het taggen van een release versie. Wij gaan het in onze voorbeelden houden op het eerste.
 
 In het CD deel van onze pipeline gaan we de code bouwen en naar onze servers sturen. We kunnen dat bijvoorbeeld met Docker, we maken een container image en pushen die naar Docker Hub of een andere registry. Waarna we een commando naar onze server sturen om deze image binnen te halen.
-
 ![CD schema](./CD.png)
 
 ## Tools
@@ -136,8 +135,14 @@ We hebben een paar interessante:
 #### Secrets
 
 Heel vaak moeten we ergens kunnen inloggen, of een server aanspreken of misschien proprietery code downloaden. We willen niet dat onze wachtwoorden en access tokens zomaar voor het rapen liggen in de code of de logs van de workflow. Secrets bieden hiervoor een antwoord.
-Je kan secrets instellen op de settings pagina van je repository. Je kan ze daarna opvragen met `${{ secrets.<naam van secret> }}` in je workflow file.
-Moest je de value (per ongeluk) laten printen in je logs dan zal GitHub Actions deze vervangen door \*\*\*.
+Je kan secrets instellen op de settings pagina van je repository. Je kan ze daarna opvragen met
+
+```
+${{ secrets.<naam van secret> }}
+```
+
+in je workflow file.
+Moest je de value (per ongeluk) laten printen in je logs dan zal GitHub Actions deze vervangen door sterretjes.
 
 In dit voorbeeld gebruiken we een `GH_TOKEN` secret. We gebruiken deze secret om in te loggen op de GHCR registry.
 
