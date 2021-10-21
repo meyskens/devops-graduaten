@@ -53,7 +53,8 @@ module.exports = {
                     { text: "Docker", link: "/tools/docker/" },
                     { text: "Docker Compose", link: "/tools/docker-compose/" },
                     { text: "Grafana + Prometheus", link: "/tools/grafana-prometheus/" },
-                    { text: "Loadbalancing", link: "/tools/loadbalancing/" }
+                    { text: "Loadbalancing", link: "/tools/loadbalancing/" },
+                    { text: "Deployment Pipeline", link: "/tools/deployment-pipeline/" }
                 ]
             },
             {
