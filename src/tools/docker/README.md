@@ -509,6 +509,32 @@ ENV MYSQL_ROOT_PASSWORD=super-secure-root-pass
 ENV MYSQL_DATABASE=wordpress
 ```
 
+#### WORKDIR
+
+WORKDIR laat je toe om de directory waarin commando's draaien te veraneren zowel tijdens het bouwen van de container als tijdens het draaien.
+
+```Dockerfile
+FROM apache:2.4
+
+WORKDIR /var/www/html
+RUN touch index.html
+```
+
+Dit is het equivalent van `cd /var/www/html`, met het vershcil dat de container ook standaard `/var/www/html` gaat openen bij instructies.
+
+### VOLUME
+
+Hierboven hebben we `-v` gezien voor volumes bij `docker run`, bij Docker Compose zien we dit weer als `volumes:`.
+In Je Dockerfile kun je met `VOLUME` al een opdracht geven een volume aan te laten maken voor je container. Het verschil met `-v` is dat Docker zelf een interne locatie gaat kiezen in plaats van een directory die jij opgeeft.
+
+We zien dit minder terugkomen in praktijk omdat de eindgekruiker geen duidelijke indicatie heeft van het bestaan van dit volume.
+
+```Dockerfile
+FROM mariadb:10.3
+
+VOLUME /var/lib/mysql
+```
+
 #### CMD && ENTRYPOINT
 
 CMD en ENTRYPOINT vinden we meestal op het einde van onze Dockerfile. Deze twee defenieeren wat moet gedraait worden als je applicatie start.
