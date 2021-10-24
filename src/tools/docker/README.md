@@ -535,7 +535,7 @@ RUN touch index.html
 
 Dit is het equivalent van `cd /var/www/html`, met het vershcil dat de container ook standaard `/var/www/html` gaat openen bij instructies.
 
-### VOLUME
+#### VOLUME
 
 Hierboven hebben we `-v` gezien voor volumes bij `docker run`, bij Docker Compose zien we dit weer als `volumes:`.
 In Je Dockerfile kun je met `VOLUME` al een opdracht geven een volume aan te laten maken voor je container. Het verschil met `-v` is dat Docker zelf een interne locatie gaat kiezen in plaats van een directory die jij opgeeft.
