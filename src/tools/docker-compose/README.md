@@ -60,6 +60,7 @@ volumes:
 services:
     wordpress:
         image: wordpress:latest
+        restart: always
         ports:
             - "80:80"
         depends_on:
@@ -69,6 +70,7 @@ services:
 
     db:
         image: mariadb:latest
+        restart: always
         environment:
             MYSQL_ROOT_PASSWORD: test
             MYSQL_DATABASE: wordpress
@@ -105,6 +107,7 @@ Waar we vorige les vooral onze bestanden in een eigen map gaan plaatsen zeggen w
 services:
     wordpress:
         image: wordpress:latest
+        restart: always
         ports:
             - "80:80"
         depends_on:
@@ -113,12 +116,13 @@ services:
             - wordpress
 ```
 
-Al onze containers zijn Services. In Docker Compose spreken we meestal over meerdere containers. Deze hebben allemaal een naam en eigenschappen. Hier defineren we de containers dat onze container image `wordpress` nodig heeft, poort 80 moet exposen en netwerk `wordpress` gebruikt. `depends_on is nieuw, dit laat Docker Compose bepalen welke containers eerst moeten starten. Zo gaat de database eerst gemaakt worden omdat WordPress daarmee gaat verbinden.
+Al onze containers zijn Services. In Docker Compose spreken we meestal over meerdere containers. Deze hebben allemaal een naam en eigenschappen. Hier defineren we de containers dat onze container image `wordpress` nodig heeft, poort 80 moet exposen en netwerk `wordpress` gebruikt. `depends_on is nieuw, dit laat Docker Compose bepalen welke containers eerst moeten starten. Zo gaat de database eerst gemaakt worden omdat WordPress daarmee gaat verbinden. Met `restart: always` stellen we in dat deze container ook moet starten na een reboot.
 
 ```yaml
 services:
     db:
         image: mariadb:latest
+        restart: always
         environment:
             MYSQL_ROOT_PASSWORD: test
             MYSQL_DATABASE: wordpress
@@ -177,7 +181,7 @@ docker compose up
 
 Dit start onze Wordpress omgeving op en we kunnen deze gaan bekijken met de browser.
 
-Net als Docker zelf kunnen we ook `docker-compose up -d` gebruiken voor het opstarten in de achtergrond. Docker start deze containers ook terug als de server reboot!
+Net als Docker zelf kunnen we ook `docker-compose up -d` gebruiken voor het opstarten in de achtergrond. Docker start deze containers ook terug als de server reboot als `restart: always` in de file staat!
 
 ```bash
 $ docker ps
