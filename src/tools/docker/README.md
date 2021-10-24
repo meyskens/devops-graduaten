@@ -136,6 +136,8 @@ CONTAINER ID        IMAGE                             COMMAND                  C
 We zien dat onze container een ID en Naam kreeg, welk commando gebruikt was en wanneer het aangemaakt is en welke status het heeft.
 De naam is een automatisch gegenereerde naam, er zijn vele mogelijkheden behalve [boring_wozniak](https://github.com/moby/moby/blob/c90254c7464cac5c56e7ab9e6b1857c119d5d263/pkg/namesgenerator/names-generator.go#L844).
 
+Status geeft hier aan dat onze container is gestopt met status code 0 (in Unix betekend dat geen error).
+
 ### Docker run
 
 Docker run is een simpel commando om een container aan te maken en te starten.
@@ -508,6 +510,17 @@ FROM mariadb:10.3
 ENV MYSQL_ROOT_PASSWORD=super-secure-root-pass
 ENV MYSQL_DATABASE=wordpress
 ```
+
+Een handige om in te stellen op Debian-based images kan zijn:
+
+```Dockerfile
+FROM ubuntu:20.04
+
+ENV DEBIAN_FRONTEND noninteractive
+```
+
+Dit schakelt enige input van `apt-get` uit, bij somige packages krijg je problemen omdat deze bijvoorvbeeld een tijdzone willen installen.
+Met `noninteractive` in te stellen zet apt deze optie overal uit.
 
 #### WORKDIR
 
