@@ -40,7 +40,8 @@ module.exports = {
                 items: [
                     { text: "Agile", link: "/agile/" },
                     { text: "Environments", link: "/concepts/environments/" },
-                    { text: "Monitoring", link: "/concepts/monitoring/" }
+                    { text: "Monitoring", link: "/concepts/monitoring/" },
+                    { text: "Security", link: "/concepts/security/" }
                 ]
             },
             {
