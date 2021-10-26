@@ -254,7 +254,7 @@ Dit start de Nginx server met poort 80 en 443 open. Je kan poorten ook net als v
 docker run -d -p 8080:80 nginx
 ```
 
-Hier wordt poort 80 doorgestuurd naar poort 80 binnenin de container.
+Hier wordt poort 8080 doorgestuurd naar poort 80 binnenin de container.
 
 ### Networks
 
