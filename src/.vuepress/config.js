@@ -47,7 +47,6 @@ module.exports = {
             {
                 text: "Tools",
                 items: [
-                    //{ text: "Kanban op GitHub", link: "/agile/kanban/" },
                     { text: "Git", link: "/tools/git/" },
                     { text: "YAML", link: "/tools/yaml/" },
                     { text: "Ansible", link: "/tools/ansible/" },
@@ -55,7 +54,8 @@ module.exports = {
                     { text: "Docker Compose", link: "/tools/docker-compose/" },
                     { text: "Grafana + Prometheus", link: "/tools/grafana-prometheus/" },
                     { text: "Loadbalancing", link: "/tools/loadbalancing/" },
-                    { text: "Deployment Pipeline", link: "/tools/deployment-pipeline/" }
+                    { text: "Deployment Pipeline", link: "/tools/deployment-pipeline/" },
+                    { text: "GitHub Projects", link: "/tools/github-projects/" }
                 ]
             },
             {
