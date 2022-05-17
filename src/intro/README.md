@@ -14,18 +14,18 @@ hier ontwikkelen we een eigen hosting omgeving voor een applicatie.
 
 ## Geschiedenis
 
-Voor we beginnen met uit te leggen wat DevOps is moete we eerst weten waar het vandaan komt. DevOps is namelijk geen technologie of een verzamelmaam
+Voor we beginnen met uit te leggen wat DevOps is moeten we eerst weten waar het vandaan komt. DevOps is namelijk geen technologie of een verzamelmaam
 maar een beweging binnen de software en netwerk wereld.  
 We situeren ons rond het jaar 2008, om ons een idee te geven moeten we best de wereld van toen eens bekijken. We zaten in een pre-smartphone era.
-De iPhone was pas aan zijn 2de levensjaar toe maar de PC had al al onze huiskamers veroverd net als het breedband internet. Het bedrijfsleven was
-gelijkaardig. Web gecentreerde bedrijven als Facebook zagen pas het licht, grotere machten als Google waren al al langer bekend. We kwamen net uit een browser en zoekmachine oorlog (IE en Google).
+De iPhone was pas aan zijn 2de levensjaar toe maar de PC had al al onze huiskamers veroverd, net als het breedband internet. Het bedrijfsleven was
+gelijkaardig. Web gecentreerde bedrijven als Facebook zagen pas het licht maar grotere machten als Google waren al langer bekend. We kwamen net uit een browser en zoekmachine oorlog (IE en Google).
 
 Hoe werkte deze organisaties intern? We kijken daarvoor even naar onze collega's van de opleiding prgrammeren.
 Het Agile manifesto kwam al uit in 2000. Dit was wel niet de doorbraak door het publiceren van een boek (het is geen religie) maar
-het einde van het waterfall model om development van applicaties strict in fases uit te voeren (analyseren, ontwikkelen en publiceren) was wel al zeker.
-Als we over Agile spreken spreken we over continu opleveren van software, onze grote handleidingen werden post-it notas op een bord naast ons op kantoor.
-Onze klant kreeg elke 2 weken wel iets nieuws te zien wat was afgewerkt. Deze nieuwe werkmethode bewees zijn nut in een als maar snel veranderende maatschapij.  
-Op Agile werken gaan we verder op in in het verloop van de cursus.
+het einde van het waterfall model om development van applicaties strikt in fases uit te voeren (analyseren, ontwikkelen en publiceren) was wel al zeker.
+Als we over Agile spreken, spreken we over continu opleveren van software, onze grote handleidingen werden post-it briefjes op een bord naast ons op kantoor.
+Onze klant kreeg elke 2 weken wel iets nieuws te zien wat was afgewerkt. Deze nieuwe werkmethode bewees zijn nut in een als maar sneller veranderende maatschapij.  
+Op Agile werken gaan we verder in tijdens het verloop van deze cursus.
 
 Nu we toch al even naar onze opleidingen hebben gekeken zien we dat we een Graduaat Programeren en een Graduaat Netwerkbeheer hebben.
 Nu dit was exact hoe bedrijven werken (en vaak nog altijd, maar daar komen we op terug)! Binnenin meeste organisaties hebben we twee teams.
@@ -34,9 +34,9 @@ In vele gevallen werkte de twee "afdelingen" in andere verdiepen of gebouwen. Fo
 en comminucatie was minimaal. Kennisuitwisseling van vakexperten in beide domeinen bestond ook amper. Developers en Operations.
 
 Net als in de software wereld voor Agile werken merkten we een inefficiëntie, het kon niet veel beter, een server opszetten koste veel tijd en resources.
-Virtuele Machines loste al veel op voor ons maar was lauter een technisch hulpmiddel. Nieuwe versies van software kwamen alsmaar sneller. En het internet? Dat begon [de start van een exponentiele curve](https://en.wikipedia.org/wiki/Internet_traffic). Met de populariteit van smartphones, laptops,...
+Virtuele Machines loste al veel op voor ons maar was louter een technisch hulpmiddel. Nieuwe versies van software kwamen alsmaar sneller. En het internet? Dat begon [de start van een exponentiele curve](https://en.wikipedia.org/wiki/Internet_traffic) met de populariteit van smartphones, laptops,...
 
-Twee groepen die elkaar ontmoeten, en georganiseerd ontmoeten. Een paar trekkers in de community organiseerde Meetups en conferenties om de twee samen te brengen. Om ideeën uit te wisselen met elkaar. Online en offline starte enkelen de gebroken communicatie op te lossen.
+En dan waren er twee groepen die elkaar ontmoeten, en georganiseerd ontmoeten. Een paar trekkers in de community organiseerde meetups en conferenties om de twee samen te brengen, om ideeën uit te wisselen met elkaar. Online en offline begon een enkeling de gebroken communicatie op te lossen.
 Wat hier ontstond was een wisselwerking tussen de twee groepen. Developers leerden over hoe rekening te houden met waar hun code terecht komt, de operations mensen zagen inzicht van code, automatie en agile werkmethodes.
 
 Nu in 2008 was het nog niet opgelost door de invoer van een kanban bord in de kelder.
