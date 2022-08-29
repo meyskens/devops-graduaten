@@ -18,6 +18,10 @@ Voor Linux servers hebben we `node_exporter`, dit stelt statistieken over de CPU
 
 ## Setup met Docker Compose
 
+:::note
+We gebruiken in deze setup Docker en Docker Compose. Voor een herhaling van Docker verwijs ik graag naar de [cursus Linux Server](https://linux.maartje.dev/docker/docker/)
+:::
+
 Voor deze setup maken we gebruik van het project [vegasbrianc/prometheus](https://github.com/vegasbrianc/prometheus) op GitHub.
 Dit geeft ons een basis om mee te starten met Grafana, Prometheus.
 
@@ -272,3 +276,4 @@ We kunnen dashboard panelen bijmaken en bewerken naar eigen smaak. Er zijn versc
 
 Goed weergeven van data is een vak op zichzelf (cursus statistiek nodig?). We gaan er in deze cursus niet verder op in.
 Bij het project zul je waarschijnlijk de kans krijgen je uit te leven!
+
