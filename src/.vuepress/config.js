@@ -1,4 +1,6 @@
-module.exports = {
+const { config } = require("vuepress-theme-hope");
+
+module.exports = config({
     /**
      * Ref：https://v1.vuepress.vuejs.org/config/#title
      */
@@ -8,16 +10,25 @@ module.exports = {
      */
     description: "Cursus DevOps IT Graduaten Thomas More",
 
-    /**
-     * Extra tags to be injected to the page HTML `<head>`
-     *
-     * ref：https://v1.vuepress.vuejs.org/config/#head
-     */
+    dest: "./dist",
+
     head: [
-        ["meta", { name: "theme-color", content: "#3eaf7c" }],
-        ["meta", { name: "apple-mobile-web-app-capable", content: "yes" }],
-        ["meta", { name: "apple-mobile-web-app-status-bar-style", content: "black" }]
+        ["script", { src: "https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js" }],
+        [
+            "script",
+            {
+                src: "https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js"
+            }
+        ],
+        ["script", { src: "https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js" }],
+        ["script", { src: "https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js" }]
     ],
+
+    locales: {
+        "/": {
+            lang: "nl-BE"
+        }
+    },
 
     /**
      * Theme configuration, here is the default theme configuration for VuePress.
@@ -30,10 +41,14 @@ module.exports = {
         docsDir: "",
         editLinkText: "",
         lastUpdated: false,
+        copyright: "CC-BY-SA Maartje Eyskens @ Thomas More Kempen",
+        iconPrefix: "",
+        pageInfo: [],
         nav: [
             {
                 text: "Intro",
-                link: "/intro/"
+                link: "/intro/",
+                icon: "fas fa-home"
             },
             {
                 text: "Culture",
@@ -55,28 +70,38 @@ module.exports = {
                     { text: "Deployment Pipeline", link: "/tools/deployment-pipeline/" },
                     { text: "GitHub Projects", link: "/tools/github-projects/" }
                 ]
-            },
-            {
-                text: "Canvas LMS",
-                link: "https://thomasmore.instructure.com/courses/18975"
             }
         ],
-        sidebar: "auto"
+        sidebar: "auto",
+        anchorDisplay: false,
+        footer: {
+            display: false,
+            content: ""
+        },
+
+        mdEnhance: {
+            enableAll: true,
+            presentation: {
+                plugins: ["highlight", "math", "search", "notes", "zoom", "anything", "audio", "chalkboard"]
+            }
+        },
+
+        git: {
+            contributor: true,
+            timezone: "Europe/Brussels"
+        }
     },
 
-    /**
-     * Apply plugins，ref：https://v1.vuepress.vuejs.org/zh/plugin/
-     */
     plugins: [
-        "@vuepress/plugin-back-to-top",
-        "@vuepress/plugin-medium-zoom",
         [
             "md-enhance",
             {
-                // Enable Footnote
-                footnote: true
+                enableAll: true,
+                presentation: {
+                    plugins: ["highlight", "math", "search", "notes", "zoom", "anything", "audio", "chalkboard"]
+                }
             }
         ]
     ]
-};
+});
 
