@@ -120,7 +120,7 @@ Git-filosofie/technologie, waardoor het in principe eenvoudig zou moeten
 zijn om - indien gewenst - over te schakelen op een GUI-client naar
 voorkeur.
 
-#### Ubuntu
+#### Ubuntu + WSL
 
 Gebruikers van Linux hebben altijd een beetje geluk bij Git. Zij hebben namelijk al een bash shell op hun systeem.
 
@@ -131,7 +131,24 @@ sudo apt-get install git
 
 En je bent klaar!
 
+#### macOS
+
+macOS heeft via XCode een ingeboude Git client maar deze is echter verouderd.
+Je kan deze updaten via [brew](https://brew.sh/).
+
+In de Terminal app volg je de instructies van [brew.sh](https://brew.sh/) op. Als brew werkt doe je:
+
+```bash
+brew install git
+```
+
+En je bent klaar!
+
 #### Windows
+
+:::warning
+Dit staat hier ter referentie, aangezien we WSL gebruiken gaan we Git voor Windows voorlopig niet gebruiken om verwarring te voorkomen, maar weet wel dat dit een optie is!
+:::
 
 ![](./images/media/image9.png)
 Git kan je downloaden via
@@ -997,7 +1014,6 @@ _**Cheat sheets & best practices**_
 [^4]: <https://github.com/git/git/>
 [^5]: Gebaseerd op <https://www.youtube.com/watch?v=8KCQe9Pm1kg>
 [^6]:
-
     <https://en.wikipedia.org/wiki/Alice_and_Bob>\
     Je kan de Git Bash van Alice in het vervolg herkennen aan de groene
     rand (en aan de gebruikersnaam\@pc-naam _TM+u0019428\@8XKYF72_); de
@@ -1005,14 +1021,12 @@ _**Cheat sheets & best practices**_
     gebruikersnaam\@pc-naam _Jean\@JEAN-MED10_).
 
 [^7]:
-
     Omwille van de focus (op het Git-verhaal) en de eenvoud kiezen we
     in deze cursustekst voor een project zonder gegenereerde code.
 
 [^8]: <https://git-scm.com/docs/gitignore>
 [^9]: <https://www.git-tower.com/learn/git/faq/ignore-tracked-files-in-git>
 [^11]:
-
     In Webstorm kies je bij het aanmaken van het _README.md_-bestand
     voor _Markdown_ als _File Type Association_, en installeer/enable je
     eventueel ook de _Markdown support_-plugin.
@@ -1021,13 +1035,11 @@ _**Cheat sheets & best practices**_
 [^13]: <https://stackoverflow.com/questions/1967370/%20git-replacing-lf-with-crlf>
 [^14]: <https://chris.beams.io/posts/git-commit/>
 [^15]:
-
     Wat je niet op GitHub kan zien, is hoe de browseruitvoer van het
     project er uit ziet per/na elke commit. Hiervoor kan je terecht op
     <http://jkwadraat.sinners.be/git/>.
 
 [^16]:
-
     Het resultaat van deze actie is niet opgenomen in de (lokale repo
     van Bob en de) remote repo en wordt hier enkel beschreven ter
     illustratie.
@@ -1036,7 +1048,6 @@ _**Cheat sheets & best practices**_
 [^18]: <https://www.slant.co/topics/1324/~diff-tools-for-git>
 [^19]: <https://blog.github.com/2015-06-08-how-to-undo-almost-anything-with-git/>
 [^20]:
-
     Bij het aanmaken van een nieuwe pagina in Webstorm verschijnt er
     de vraag _Add File to Git_? Je antwoordt hier best _No_ op (en vinkt
     _Remember, don't ask again_ aan) om conflicten/verwarring tussen Git
@@ -1044,3 +1055,4 @@ _**Cheat sheets & best practices**_
     vermijden.
 
 [^21]: <https://git-scm.com/docs/git-revert>
+
