@@ -217,7 +217,7 @@ Operational Tools:
 2. Prometheus (zie cursus)
 3. APM (aangehaald in cursus)
 4. ELK Stack (kort aangehaald in cursus)
-5. Terraform (kort aangehaald in cursus)
+5. Terraform (in cursus sinds 2022)
 
 Developer Tools:
 
@@ -229,11 +229,11 @@ Developer Tools:
 
 DevOps Lifecycle Tools:
 
-1. Kubernetes (kort aangehaald in cursus)
+1. Kubernetes (kort aangehaald in cursus, uitgebreider in bachelor opleiding)
 2. Jenkins (in cursus met andere tool)
 3. Ansible (zie cursus)
 4. CI/CD (zie cursus)
-5. Automation
+5. Automation (dit is gewoon alles wat bovenstaande is)
 
 ## Nuttige bronnen
 
@@ -244,3 +244,4 @@ Deze bronnen zijn nuttig als je je verder wil verdiepen maar zijn _geen leerstof
 
 [^accelerate]: Accelerate: The Science of Lean Software and Devops: Building and Scaling High Performing Technology Organizations Paperback - Nicole Forsgren Phd, Jez Humble, Gene Kim - ISBN 978-1942788331
 [^sre]: According to the Site Reliability Engineering book, “SRE is what happens when you ask a software engineer to design an operations team.”
+
