@@ -17,17 +17,17 @@ module.exports = config({
         [
             "script",
             {
-                src: "https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js"
-            }
+                src: "https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js",
+            },
         ],
         ["script", { src: "https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js" }],
-        ["script", { src: "https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js" }]
+        ["script", { src: "https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js" }],
     ],
 
     locales: {
         "/": {
-            lang: "nl-BE"
-        }
+            lang: "nl-BE",
+        },
     },
 
     /**
@@ -48,48 +48,62 @@ module.exports = config({
             {
                 text: "Intro",
                 link: "/intro/",
-                icon: "fas fa-home"
+                icon: "fas fa-infinity",
             },
             {
                 text: "Culture",
+                icon: "fas fa-people-arrows",
                 items: [
                     { text: "Agile", link: "/agile/" },
                     { text: "Environments", link: "/concepts/environments/" },
                     { text: "Monitoring", link: "/concepts/monitoring/" },
-                    { text: "Security", link: "/concepts/security/" }
-                ]
+                    { text: "Incident Response", link: "/concepts/monitoring/" },
+                    { text: "Security", link: "/concepts/security/" },
+                ],
             },
             {
                 text: "Tools",
+                icon: "fas fa-toolbox",
                 items: [
+                    { text: "Laptop setup", link: "/tools/setup/" },
                     { text: "Git", link: "/tools/git/" },
+                    { text: "APIs", link: "/tools/apis/" },
                     { text: "YAML", link: "/tools/yaml/" },
                     { text: "Ansible", link: "/tools/ansible/" },
                     { text: "Grafana + Prometheus", link: "/tools/grafana-prometheus/" },
                     { text: "Loadbalancing", link: "/tools/loadbalancing/" },
                     { text: "Deployment Pipeline", link: "/tools/deployment-pipeline/" },
-                    { text: "GitHub Projects", link: "/tools/github-projects/" }
-                ]
-            }
+                    { text: "GitHub Projects", link: "/tools/github-projects/" },
+                ],
+            },
+            {
+                text: "Cloud",
+                icon: "fas fa-cloud",
+                items: [
+                    { text: "Concepten", link: "/cloud/TODO/" },
+                    { text: "Gebruik", link: "/cloud/TODO/" },
+                    { text: "Terraform", link: "/cloud/TODO/" },
+                ],
+            },
         ],
         sidebar: "auto",
         anchorDisplay: false,
         footer: {
             display: false,
-            content: ""
+            content: "",
         },
 
         mdEnhance: {
             enableAll: true,
             presentation: {
-                plugins: ["highlight", "math", "search", "notes", "zoom", "anything", "audio", "chalkboard"]
-            }
+                plugins: ["highlight", "math", "search", "notes", "zoom", "anything", "audio", "chalkboard"],
+            },
         },
 
         git: {
             contributor: true,
-            timezone: "Europe/Brussels"
-        }
+            timezone: "Europe/Brussels",
+        },
     },
 
     plugins: [
@@ -98,10 +112,10 @@ module.exports = config({
             {
                 enableAll: true,
                 presentation: {
-                    plugins: ["highlight", "math", "search", "notes", "zoom", "anything", "audio", "chalkboard"]
-                }
-            }
-        ]
-    ]
+                    plugins: ["highlight", "math", "search", "notes", "zoom", "anything", "audio", "chalkboard"],
+                },
+            },
+        ],
+    ],
 });
 
