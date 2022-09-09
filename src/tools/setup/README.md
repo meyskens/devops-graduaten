@@ -135,3 +135,27 @@ Deze plugin laat ons toe mappen te openen in WSL en ook de ingebouwde terminal t
 
 (Visual Studio heeft ook een Remote - SSH plugin die je toestaat om op remote Linux machines te ontwikkelen, enorm handig!)
 
+Nu we Visual Studio open hebben kunnen we een project map openen.
+Dit doen we zoals in elk programma, via `File > Open Folder...`. (fun fact: `...` geeft in een menu altijd aan dat er een dialog venster opent)
+
+![VSCode Open Folder](./open-folder.png)
+
+Als we een map open hebben hebben we deze open in onze Windows omgeving. We willen echter werken in WSL.
+
+Onderaan vinden we een "Remote" knop. Klik op deze.
+
+![Remote button](./remote-button.png)
+
+We krijgen nu een heel aantal opties. We kiezen voor "Open Folder in WSL". Dit gaat onze huidige map in WSL openen, je kan ook andersom werken als je de Windows<->Linux file mapping door hebt.
+
+![Open Folder in WSL](./remote-options.png)
+
+Visual Studio Code zal nu onze map openen in WSL. We kunnen nu onze code schrijven en deze ook uitvoeren in WSL.
+
+Als DevOps engineer zullen we ook veel werken met de terminal. We kunnen deze ook in VSCode openen. We drukken op `F1` en zeken naar `Terminal: Create New Integrated Terminal`. Er is ook een shortcut voor deze actie die wordt aangegeven.
+
+![Create New Integrated Terminal](./terminal-create.png)
+
+Je hebt nu een split screen met je code editor en je terminal. Je kan nu je code schrijven en deze ook uitvoeren in de terminal! Dit gaat in onze lessen ook de beste manier zijn om te werken.
+
+![VSCode Terminal](./vscode-terminal.png)
