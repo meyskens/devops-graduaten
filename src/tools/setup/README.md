@@ -76,9 +76,51 @@ Je mag daarna de file opslagen,
 
 ```bash
 sudo usermod -a -G docker $USER
+newgrp docker
 ```
 
-TODO - aanvullen vanaf dat je Win 11 werkend krijgt
+:::warning
+Als je Ubuntu 22.04 gebruikt moet je omschakelen naar legacy iptables, Docker werkt nog niet optimaal met nftables. Dit kan je doen met:
+
+```bash
+sudo update-alternatives --config iptables
+```
+
+Kies hier voor `iptables-legacy`.
+
+![iptables](./iptables.png)
+
+:::
+
+Nu moeten we zorgen dat Docker werkt bij het openen van een WSL terminal. Een WSL installatie heeft namelijk geen Systemd. We gaan dit oplossen met een kleine _hack_.
+
+We openen `.bashrc`
+
+```bash
+nano ~/.bashrc
+```
+
+en plaatsen onderaan de volgende regel:
+
+```bash
+# Start Docker daemon automatically when logging in if not running.
+RUNNING=$(ps aux | grep dockerd | grep -v grep)
+if [ -z "$RUNNING" ]; then
+    sudo conainerd > /dev/null 2>&1 &
+    sudo dockerd > /dev/null 2>&1 &
+    disown
+fi
+```
+
+Dit zal ervoor zorgen dat Docker automatisch gestart wordt bij het openen van een bash terminal.
+
+Sluit je terminal af en open deze opniew. Als alles goed is gegaan kan je nu Docker gebruiken!
+
+```bash
+docker run hello-world
+```
+
+![Docker Hello World](./docker-hello-world.png)
 
 ## Visual Studio Code
 
