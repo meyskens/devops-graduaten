@@ -6,7 +6,7 @@ Bij elk van deze niveaus komen ook tools bij kijken, we zien hier een kort overz
 ## The levels of cloud
 
 Cloud is een heel groot begrip. De mens in de straat verstaat het als een Google Drive of een Office 365. Wij denken dan misschien eerder aan een Amazon Web Services, of een paar VMs die we hosten. Cloud providers zelf hebben ook een kleine identiteits crisis, Azure gaat naar steeds meer nieuwe marktsegmenten en bij AWS [is het mogelijk een vals product te hypen](https://www.techradar.com/news/everyone-is-talking-about-aws-infinidash-but-it-doesnt-exist).
-Voor deze cursus ging ik opzoek naar hoeveel verschillende diensten AWS nu heeft, na vele studies is het antwoord "ergens rond de 200". Het beste antwoord komt misschien uit de onverwachte hoek van [de muziekwereld](https://www.youtube.com/watch?v=BtJAsvJOlhM).
+Voor deze cursus ging ik opzoek naar hoeveel verschillende diensten AWS nu heeft, na vele studies is het antwoord "ergens rond de 200" (EDIT: bevestigd door een AWS sales representative). Het beste antwoord komt misschien uit de onverwachte hoek van [de muziekwereld](https://www.youtube.com/watch?v=BtJAsvJOlhM).
 
 Een cloud provider op je CV zetten als kennis is misschien niet het beste idee, alle diensten kennen is bijna onmogelijk. Maar wij bekijken het op hoog niveau.
 
@@ -115,3 +115,4 @@ Een recentere trend is die van "chaos engineering". Doormiddel van een iedentiek
 Choas Engineering is de benaming van een aantal tools zoals [gremlin](https://www.gremlin.com/chaos-engineering/). Deze tool gaat automatisch verschillende scenarios simuleren als RAM tekort, servers laten uitvallen, netwerk vertraging veroorzaken en andere dingen uit je nachtmerries.
 
 Chaos engineering laat je hierdoor in je veilige staging omgeving je software en configuatie meer veerbaar maken tegen problemen.
+
