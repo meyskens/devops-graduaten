@@ -125,9 +125,26 @@ Hier een klein overzicht van enkele regions bij de grote spelers:
 
 ### What's in a name?
 
-| Beschrijving     | Amazon Web Services (AWS) | Google Cloud Platform (GCP) | Microsoft Azure  | Oracle Cloud Infrastructure (OCI) | OpenStack (OS) |
-| ---------------- | ------------------------- | --------------------------- | ---------------- | --------------------------------- | -------------- |
-| Virtuele Machine | Amazon EC2                | Compute Engine              | Virtual Machines | Compute Instance                  | Compute (Nova) |
+Cloud providers hebben altijd wel een eigen naam voor een technologie. Met AWS wel als winnaar met namen als "Elastic Beanstalk", "Lamda","Corretto"...
+
+Hieronder een klein overzicht van veel gebruikte diensten:
+
+| Beschrijving       | Amazon Web Services (AWS)  | Google Cloud Platform (GCP) | Microsoft Azure         | Oracle Cloud Infrastructure (OCI)   | OpenStack (OS)           |
+| ------------------ | -------------------------- | --------------------------- | ----------------------- | ----------------------------------- | ------------------------ |
+| Virtuele Machine   | Amazon EC2                 | Compute Engine              | Virtual Machines        | Compute Instance                    | Compute (Nova)           |
+| Container          | Amazon ECS                 | Kubernetes Engine           | Container Instances     | Container Engine for Kubernetes     | Containers (Zun)         |
+| Database           | Amazon RDS                 | Cloud SQL                   | SQL Database            | Database Service                    | Databases (Trove)        |
+| Object Storage     | Amazon S3                  | Cloud Storage               | Blob Storage            | Object Storage                      | Object Store (Swift)     |
+| Load Balancer      | Elastic Load Balancing     | Cloud Load Balancing        | Load Balancer           | Load Balancer                       | Load Balancer (Octavia)  |
+| DNS                | Route 53                   | Cloud DNS                   | DNS                     | DNS                                 | DNS (Designate)          |
+| CDN                | CloudFront                 | Cloud CDN                   | CDN                     | CDN                                 |                          |
+| Firewall           | Security Groups            | Firewall Rules              | Network Security Groups | Security Lists                      | Security Group (Neutron) |
+| VPN                | Virtual Private Gateway    | Cloud VPN                   | VPN Gateway             | VPN Gateway                         | VPN (Neutron)            |
+| Block Storage      | Elastic Block Store        | Persistent Disk             | Managed Disks           | Block Volume                        | Volumes (Cinder)         |
+| Functions          | Lambda                     | Cloud Functions             | Functions               | Functions                           |                          |
+| Container Registry | Elastic Container Registry | Container Registry          | Container Registry      | Container Registry                  |                          |
+| MongoDB            | DocumentDB                 | Cloud Firestore             | Cosmos DB               |                                     | Databases (Trove)        |
+| Web app hosting    | Elastic Beanstalk          | App Engine                  | App Service             | Application Container Cloud Service |                          |
 
 ## IAM
 
