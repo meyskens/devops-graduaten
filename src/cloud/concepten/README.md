@@ -55,17 +55,19 @@ Als we spreken over "Web Scale" dan kunnen we Google niet wegdenken. Ook zij heb
 
 Later breide dit uit naar een 100-tal diensten onder de naam "Google Cloud Platform". Google bereikt met hun kennis over het schalen van systemen een marktaandeel van 9% in 2021. Maar kent een goede reputatie voor hun AI en ML diensten, waarvoor vaak voor Google wordt gekozen. Ook zijn ze record houder van [het migraten van de groottste DDoS attack](https://cloud.google.com/blog/products/identity-security/how-google-cloud-blocked-largest-layer-7-ddos-attack-at-46-million-rps) ooit (cursus geschreven 2022-09-15 je gaat zien dat Cloudflare deze titel weer gaat overnemen binnen de maand... Famous last words...).
 
-### Oracle Cloud
+### Oracle Cloud Infrastructure
 
-2016 under the name "Oracle Bare Metal Cloud Services."
+![OCI Logo](./oci.jpg)
 
-Zoom en de TikTok affaire
+Oracle is een vrij nieuwe speler op de cloud markt, in 2016 gestart als "Oracle Bare Metal Cloud Services" maar ondertussen bekend als Oracle Cloud Infrastructure of kortweg OCI. Hier bied oracle enkele IaaS en PaaS diensten aan in 37 datacenters in de wereld.
 
-overname netsuite Inc eerstr cloud software
+Hoewel OCI een vrij kleine speler is investeerd Oracle (traditioneel een databank bedrijf) veel in de Cloud afdeling, zo kochten ze Netsuite (het oudste "cloud" bedrijf) op. Ze konden ook Zoom overtuigen hun diensten te gebruiken alsook TikTok (buiten china, [na een hele politieke affaire](https://www.theverge.com/2022/6/19/23174775/tiktok-oracle-team-up-concerns-data-privacy-remain)).
 
 ### OpenStack (Open Source)
 
 OpenStack begon in 2010 als een project van NASA en de grote server hosting gigant Rackspace. Ondertussen maken 500 bedrijven deels uit van de Open Infrastructure Foundation een non-profit vergelijkbaar met de Linux Foundation. OpenStack is een open source cloud platform met een collectie van 38 diensten die je kan hosten. Je zult dit dus vaak zien terugkomen in geavanceerde on-prem servers of onderzoeksinstellingen.
+
+OpenStack kan vrij "eenvoudig" opgezet worden met behulp van verschillende deployment methodes, zo bijvoorbeeld Ansible. Zo draait er binnen SIN een proof of concept OpenStack omgeving voor deze lessen.
 
 Kleinere cloud providers als [OVH](https://us.ovhcloud.com/public-cloud/compute/) bieden ook OpenStack aan als public cloud!
 
@@ -75,15 +77,47 @@ De fanatieke tech historicus in mij duid graag op een heraling van de jaren 80/9
 
 ### Andere
 
-Valt het op dat bovenaan geen enkel bedrijf met een Europeese roets staat?
+Valt het op dat bovenaan geen enkel bedrijf met een Europeese roets staat? Vrijwel alle grote spelers op de markt zijn Amerikaans, tot fustratie van de Europeese Unie... Er zijn daarom enkele initiatieven om Europeese spelers beter op te kaart te zetten als [eucloud.tech](https://www.eucloud.tech/).
+Een mooie vergelijking is gemaakt door [iagovar](https://iagovar.com/mapas/european-web-hosting-alternatives/) waar uit blijkt dat vele van deze spelers het gigantische aanbod van AWS niet kunnen evenaren jammergenoeg.
 
-https://iagovar.com/mapas/european-web-hosting-alternatives/
-
-https://www.eucloud.tech/
+Er zijn vele kleinere spelers die zich focussen op IaaS, en in mindere vorm PaaS (databases, kubernetes etc) zoals [Scaleway](https://www.scaleway.com/en/), [DigitalOcean](https://www.digitalocean.com/), [Linode](https://www.linode.com/), [Vultr](https://www.vultr.com/), [Hetzner](https://www.hetzner.com/), [UpCloud](https://upcloud.com/), [Exoscale](https://www.exoscale.com/), [CloudSigma](https://www.cloudsigma.com/), [CloudAtCost](https://www.cloudatcost.com/), [Cloudways](https://www.cloudways.com/) en vele anderen. Vele zijn ook prijsbrekers en bieden een goedkoper alternatief voor de grote spelers.
 
 ## Cloud vs On Premise (aka server in de kast)
 
+Waarom zou je hosten in de cloud?
+
+-   Je kan je server op elk moment opschalen of verkleinen, enkel betalen voor wat je gebruikt
+-   Je hebt minder onderhoudswerk
+-   Total Cost of Ownership (TCO) is lager (mooie voor eens in een meeting te zeggen: TCO)
+-   Je kan op verschillende locaties hosten en redundante diensten aanbieden
+-   Vele diensten zijn geautomatiseerd
+
+Nu heb ik je een hele cloud pitch gegeven wil ik je toch even tegenhouden. Cloud is niet altijd goedkoper of beter. Voor vele is het een goede oplossing maar bijvoorbeeld voor research toepassingen met GPU is het vaak goedkoper eigen hardware te kopen. Of use cases waar latency heel belangrijk is of je niet afhankelijk wil zijn van een externe provider of een verbinding. Overheden en bedrijven met zeer gevoelige data zullen ook niet snel overstappen naar de cloud, alhouwel grote providers als AWS eigen cloud datacenters hebben enkel voor hun data.
+
 ## Regions & Availability Zones
+
+Als je inlogt op een cloud provider krijg je al meteen 1 vraag over regions en availability zones. Ze lijken misschien hetzelfde maar zijn dat niet.
+Een region is een groep van datacenters die geografisch dicht bij elkaar liggen. Een region kan bestaan uit 1 of meerdere datacenters. Een region is een logische groep van datacenters die eenzelfde netwerk hebben. Een region kan dus bestaan uit 1 datacenter maar ook uit 100 datacenters die met elkaar verbonden zijn.
+
+Een availability zone is een datacenter binnen een region. Dit geeft een meer fysieke weergave weer. Wil je beschermd zijn tegen bijvoorbeeld een stroompanne? Dan kan je je servers verspreiden over verschillende availability zones binnen 1 region. Je kan alle servers intern laten comminuceren via het interne netwerk van de region maar wel redundant zijn. Heb je heel lage latency nodig (>1ms) dan kan je beter werken in 1 availability zone.
+
+![Regions & Availability Zones](./availability-zones.png)
+
+Deze afbeelding van Microsoft geeft een mooi overzicht van de verschillende zones en regions.
+
+Elke region heeft een code naam, bijvoorbeeld `eu-west-1` voor de eerste region in Europa. De availability zones hebben een letter toegekend, bijvoorbeeld `eu-west-1a` voor de eerste availability zone in de eerste region in Europa.
+
+Deze naamgeving is niet altijd hetzelfde, bijvoorbeeld in Azure is de eerste availability zone `1` en niet `a`.
+
+Hier een klein overzicht van enkele regions bij de grote spelers:
+
+| Locatie     | Amazon Web Services (AWS) | Google Cloud Platform (GCP) | Microsoft Azure                      | Oracle Cloud Infrastructure (OCI) | OpenStack (OS)         |
+| ----------- | ------------------------- | --------------------------- | ------------------------------------ | --------------------------------- | ---------------------- |
+| Frankfurt   | eu-central-1              | europe-west3                | westeurope                           | eu-frankfurt-1                    | _afhankelijk provider_ |
+| London      | eu-west-2                 | europe-west2                | uksouth                              | eu-london-1                       |                        |
+| US East     | us-east-1 (N. Virginia)   | us-east1 (South Carolina)   | eastus                               | us-ashburn-1 (Ashburn)            |                        |
+| Belgium     |                           | europe-west1                | [soon](https://aka.ms/belgiumintent) |                                   | EU-SIN-KOT-1           |
+| Netherlands |                           | europe-west4                |                                      | eu-amsterdam-1                    |                        |
 
 ## Projects
 
@@ -99,7 +133,7 @@ https://www.eucloud.tech/
 
 ## Facturatie
 
-> The modern apps do not run on servers but on YAML and Credit Cards
+> The modern app does not run on servers but on YAML and Credit Cards
 
 ## Dit alles is Public Cloud? Wat is dan Private Cloud?
 
