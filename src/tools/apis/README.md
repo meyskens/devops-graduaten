@@ -567,6 +567,9 @@ We nemen bijvoorbeeld de Python code die Postman voor ons genereert.
 
 Deze code kan je kopieren en gebruiken in je eigen applicatie!
 
+Een ander groot voordeel aan Postman is dat de community al veel API Calls heeft gedeeld. Je kan deze importeren in je workspace en zo snel aan de slag gaan.
+Een voorveeld is [Cisco Devnet](https://www.postman.com/ciscodevnet?tab=collections) die een hele collectie heeft gedeeld van API calls naar hun producten.
+
 ## Oefeningen
 
 ### icanhazdadjoke API
