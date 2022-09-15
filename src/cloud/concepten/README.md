@@ -65,6 +65,8 @@ Hoewel OCI een vrij kleine speler is investeerd Oracle (traditioneel een databan
 
 ### OpenStack (Open Source)
 
+![OpenStack Logo](./openstack.png)
+
 OpenStack begon in 2010 als een project van NASA en de grote server hosting gigant Rackspace. Ondertussen maken 500 bedrijven deels uit van de Open Infrastructure Foundation een non-profit vergelijkbaar met de Linux Foundation. OpenStack is een open source cloud platform met een collectie van 38 diensten die je kan hosten. Je zult dit dus vaak zien terugkomen in geavanceerde on-prem servers of onderzoeksinstellingen.
 
 OpenStack kan vrij "eenvoudig" opgezet worden met behulp van verschillende deployment methodes, zo bijvoorbeeld Ansible. Zo draait er binnen SIN een proof of concept OpenStack omgeving voor deze lessen.
@@ -111,7 +113,7 @@ Deze naamgeving is niet altijd hetzelfde, bijvoorbeeld in Azure is de eerste ava
 
 Hier een klein overzicht van enkele regions bij de grote spelers:
 
-| Locatie     | Amazon Web Services (AWS) | Google Cloud Platform (GCP) | Microsoft Azure                      | Oracle Cloud Infrastructure (OCI) | OpenStack (OS)         |
+| Locatie     | Amazon Web Services (AWS) | Google Cloud Platform (GCP) | Microsoft Azure                      | Oracle Cloud Infrastructure (OCI) | OpenStack              |
 | ----------- | ------------------------- | --------------------------- | ------------------------------------ | --------------------------------- | ---------------------- |
 | Frankfurt   | eu-central-1              | europe-west3                | westeurope                           | eu-frankfurt-1                    | _afhankelijk provider_ |
 | London      | eu-west-2                 | europe-west2                | uksouth                              | eu-london-1                       |                        |
@@ -129,22 +131,25 @@ Cloud providers hebben altijd wel een eigen naam voor een technologie. Met AWS w
 
 Hieronder een klein overzicht van veel gebruikte diensten:
 
-| Beschrijving       | Amazon Web Services (AWS)  | Google Cloud Platform (GCP) | Microsoft Azure         | Oracle Cloud Infrastructure (OCI)   | OpenStack (OS)           |
-| ------------------ | -------------------------- | --------------------------- | ----------------------- | ----------------------------------- | ------------------------ |
-| Virtuele Machine   | Amazon EC2                 | Compute Engine              | Virtual Machines        | Compute Instance                    | Compute (Nova)           |
-| Container          | Amazon ECS                 | Kubernetes Engine           | Container Instances     | Container Engine for Kubernetes     | Containers (Zun)         |
-| Database           | Amazon RDS                 | Cloud SQL                   | SQL Database            | Database Service                    | Databases (Trove)        |
-| Object Storage     | Amazon S3                  | Cloud Storage               | Blob Storage            | Object Storage                      | Object Store (Swift)     |
-| Load Balancer      | Elastic Load Balancing     | Cloud Load Balancing        | Load Balancer           | Load Balancer                       | Load Balancer (Octavia)  |
-| DNS                | Route 53                   | Cloud DNS                   | DNS                     | DNS                                 | DNS (Designate)          |
-| CDN                | CloudFront                 | Cloud CDN                   | CDN                     | CDN                                 |                          |
-| Firewall           | Security Groups            | Firewall Rules              | Network Security Groups | Security Lists                      | Security Group (Neutron) |
-| VPN                | Virtual Private Gateway    | Cloud VPN                   | VPN Gateway             | VPN Gateway                         | VPN (Neutron)            |
-| Block Storage      | Elastic Block Store        | Persistent Disk             | Managed Disks           | Block Volume                        | Volumes (Cinder)         |
-| Functions          | Lambda                     | Cloud Functions             | Functions               | Functions                           |                          |
-| Container Registry | Elastic Container Registry | Container Registry          | Container Registry      | Container Registry                  |                          |
-| MongoDB            | DocumentDB                 | Cloud Firestore             | Cosmos DB               |                                     | Databases (Trove)        |
-| Web app hosting    | Elastic Beanstalk          | App Engine                  | App Service             | Application Container Cloud Service |                          |
+| Beschrijving            | Amazon Web Services (AWS)  | Google Cloud Platform (GCP) | Microsoft Azure          | Oracle Cloud Infrastructure (OCI)   | OpenStack                                            |
+| ----------------------- | -------------------------- | --------------------------- | ------------------------ | ----------------------------------- | ---------------------------------------------------- |
+| Virtuele Machine        | Amazon EC2                 | Compute Engine              | Virtual Machines         | Compute Instance                    | Compute (Nova)                                       |
+| Containers (Kubernetes) | Amazon EKS                 | Kubernetes Engine           | Azure Kubernetes Service | Container Engine for Kubernetes     | Container Orchestration Engine Provisioning (Magnum) |
+| Containers)             | Amazon ECS                 | App Engine Flexible         | Azure Container Apps     |                                     | Containers (Zun)                                     |
+| Database                | Amazon RDS                 | Cloud SQL                   | SQL Database             | Database Service                    | Databases (Trove)                                    |
+| Object Storage          | Amazon S3                  | Cloud Storage               | Blob Storage             | Object Storage                      | Object Store (Swift)                                 |
+| Load Balancer           | Elastic Load Balancing     | Cloud Load Balancing        | Load Balancer            | Load Balancer                       | Load Balancer (Octavia)                              |
+| DNS                     | Route 53                   | Cloud DNS                   | DNS                      | DNS                                 | DNS (Designate)                                      |
+| CDN                     | CloudFront                 | Cloud CDN                   | CDN                      | CDN                                 |                                                      |
+| Firewall                | Security Groups            | Firewall Rules              | Network Security Groups  | Security Lists                      | Security Group (Neutron)                             |
+| VPN                     | Virtual Private Gateway    | Cloud VPN                   | VPN Gateway              | VPN Gateway                         | VPN (Neutron)                                        |
+| Block Storage           | Elastic Block Store (EBS)  | Persistent Disk             | Managed Disks            | Block Volume                        | Volumes (Cinder)                                     |
+| Functions               | Lambda                     | Cloud Functions             | Functions                | Functions                           |                                                      |
+| Container Registry      | Elastic Container Registry | Container Registry          | Container Registry       | Container Registry                  |                                                      |
+| MongoDB                 | DocumentDB                 | Cloud Firestore             | Cosmos DB                |                                     | Databases (Trove)                                    |
+| Web app hosting         | Elastic Beanstalk          | App Engine                  | App Service              | Application Container Cloud Service |                                                      |
+| Images                  | EC2 Image Builder          | Cloud Build                 | Virtual Machine Images   |                                     | Images (Glance)                                      |
+| Billing                 | Cost Explorer              | Cloud Billing               | Cost Management          |                                     | Cloudkitty                                           |
 
 ## IAM
 
