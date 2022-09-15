@@ -80,9 +80,9 @@ module.exports = config({
                 text: "Cloud",
                 icon: "fas fa-cloud",
                 items: [
-                    { text: "Concepten", link: "/cloud/TODO/" },
-                    { text: "Gebruik", link: "/cloud/TODO/" },
-                    { text: "Terraform", link: "/cloud/TODO/" },
+                    { text: "Concepten", link: "/cloud/concepten/" },
+                    { text: "Gebruik", link: "/cloud/gebruik/" },
+                    { text: "Terraform", link: "/cloud/terraform/" },
                 ],
             },
         ],
