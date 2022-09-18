@@ -148,6 +148,7 @@ We bekijken hier een aantal rollen die in de IT worden gebruikt.
 Buiten rollen gaan we ook altijd een aantal "dingen" terug vinden bij SCRUM:
 
 -   User Story:
+
     -   uitleg voor een feature vanuit oogpunt van de "stakeholders"
     -   Bestaat uit:
         -   "As a…" wie is onze gebruiker?
@@ -155,7 +156,6 @@ Buiten rollen gaan we ook altijd een aantal "dingen" terug vinden bij SCRUM:
         -   "so that…" waarom wil ik dat?
     -   Heeft een prioriteitslabel, geeft aan hoe belangrijk de feature is. Meestal is dit een nummer.
     -   Heeft een grootte, geeft aan hoe groot de feature is. Hier zijn verschillende systemen voor, vaak worden T-shirt sizes (xs-xl) gebruikt.
-
 
     ![joke user story](./shitstory.jpg)
     _Inspiratie nodig? [ShitUserStory](https://twitter.com/ShitUserStory) toont grappige user stories van features waar niemand om vroeg_
@@ -179,7 +179,6 @@ Buiten rollen gaan we ook altijd een aantal "dingen" terug vinden bij SCRUM:
     -   Bevat een Defenition of Done
         -   checklist met activiteiten die nodig zijn om de uitwerking van een “user story” als “klaar” te beschouwen vooraf vastgelegd maar kan wijzigen tijdens het project
         -   Niet alleen “programmeren” : testen, documenteren, versie beheer, database, deployment, operations,...
-
 
     ![taak](./task.png)
 
@@ -227,9 +226,8 @@ Hiermee simuleren we een heel SCRUM process op een korte tijd met behulp van Leg
 
 ## Rollen
 
--   Stakeholder - Docent
+-   Stakeholder + Product Owner - Docent
 -   Scrum Master - leidt het team
--   Product Owner - in mindere maten, we geven stories
 -   Development team - iedereen
 
 ## Tools
@@ -245,11 +243,16 @@ Doe verschillende sprints, 1 sprint is ~10 minuten bouwn. Houd de tijd bij!
 
 -   Stap 0: bekijk de user stories
 -   Stap 1: sprint planning
+
     -   Overleg wat je gaat doen
-    -   GVerdeel taken.
+    -   Verdeel taken.
     -   Maak een Definition of Done
+    -   Bepaald wie de gerbuiker is
     -   Geef een prioriteit aan de user stories van 1 (super belangrijk) tot 4 (nice to have)
     -   Geef een groote van de taak Small - XLarge
+
+        ![user story postit](./userstory.jpg)
+
 -   Stap 2: Bouwen! (geen daily scrum)
 -   Stap 3: bekijk het wekt + mini retrospective (wat gaat goed? wat kon beter?)
 -   Stap 4: zie stap 1
@@ -258,31 +261,37 @@ Werk dit af tot je stad af is! Bepaal steeds de grootte van de tickets en de pri
 
 ## User Stories
 
+**Visie: we zijn de eerste bezetters van Mars, er zijn al meerdere vluchten onderweg vol met mensen die op Mars komen wonen. We moeten een stad bouwen die iedereen kan opvangen, levensbehoeften kan voorzien en als laatste ook mensen gelukkig kan maken in hun nieuwe leven. Een hele missie waar we constant moeten bijsturen en verbeteren.**
+
+Elk team werkt individueel aan een habitat maar deze moet wel kunnen samenwerken met de andere habitats.
+
 ### Sprint 1
 
--   Voorzie inwoners
--   Bedenk een naam
--   Bouw een huis
--   Leg een weg aan
+-   Als piloot wil ik een landingsplaats zodat ik veilig kan landen
+-   Als bewoner wil ik een een naam voor mijn nieuwe woonplaats zodat ik me thuis voel als op aarde
+-   Als bewoner wil ik een eigen slaapplaats zodat ik kan slapen/eten/...
+-   Als bewoner wil ik naar andere mensen kunnen reizen zodat ik kan communiceren met andere bewoners
 
 ### Sprint 2
 
--   Voorzie vervoer
--   Plaats een school
--   Voorzie groen
--   Zet een winkel
+-   Als ouder van kinderen wil ik dat ze een leeromgeving hebben zodat ze kunnen leren
+-   Als bezetter van deze habitat wil ik een werkplek zodat iedereen mij kan vinden
+-   Als bewoner wil ik voedsel dat niet uit zakjes komt zodat ik gezond en lekker kan eten
+-   Als bewoner wil ik andere habitats kunnen bezoeken zodat ik mijn oude vrienden kan zien
 
 ### Sprint 3
 
--   Energietekort: zet overal zonnepanelen op de daken
--   Bouw fietspaden
--   Zet een monument om jullie team te eren
--   Zet een zwembad
--   Bouw een goede hoge school (tip: oranje gekleurd werkt best)
+-   Als bewoner wil ik dat ongelijkeid tussen de habitats verdwijnt zodat iedereen gelijk is! (alle gebouwen blauw wit!)
+-   Als bezetter wil ik geerd worden door mijn bewoners, ik heb hun leven gered!
+-   Als bewoner wil ik eel luxe sportcomplex zodat ik geen rondjes rond het huis hoef te lopen
+-   Als bewoner wil ik meer groen zodat deze plek meer op de aarde lijkt
+-   Als 3 schepen toekomstige vluchtelingen willen we een landingsplaats een een leefbare slaapplaats.
+-   Als bewoner wil ik voedsel dat niet uit zakjes komt zodat ik gezond en lekker kan eten
 
 ### Sprint 4
 
--   Bouw een vaccinatiecentrum
--   Plaats spoorwegen
--   Los het fileprobleem op
--   Voorzie een solide democratie
+-   Als bezetter wil ik betere voedsel voorziening zodat het hongertekort verdwijnt en er geen opstanden komen
+-   Als Elon Musk wil ik een sociaal netwerk op Mars om iedereen te verbinden (en Teslas te verkopen)
+-   Als bewoner wil ik beter transport omdat elke dag 2 uur file te veel is
+-   Als bewoners willen we een solide democratie zodat er een einde komt aan de dictatuur
+
