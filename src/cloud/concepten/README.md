@@ -121,9 +121,55 @@ Hier een klein overzicht van enkele regions bij de grote spelers:
 | Belgium     |                           | europe-west1                | [soon](https://aka.ms/belgiumintent) |                                   | EU-SIN-KOT-1           |
 | Netherlands |                           | europe-west4                |                                      | eu-amsterdam-1                    |                        |
 
-## Projects
+## Projects/Tenants
+
+Projecten of Tenants ga je ook in elke cloud provider terugvinden. Dit is een verzameling van cloud resources binnen een bedrijf. Je gaat in kleine bedrijven vaak een of twee terugvinden. Een project is ook een isolatie systeem je kan dus systemen tussen twee projecten (tenzij publiek) niet met elkaar kunnen laten werken.
+
+Je kan dus een project gebruiken om een staging omgeving te maken en een productieomgeving te maken. Je kan dus dezelfde namen en eventueel interne IPs gebruiken waar enkel het project verschillend is. Je gaat waarschijnlijk ook een project zien om zelf in te experimenteren zonder dat je aan productie kan komen. Je kan met je account aan meerdere projecten aan, dus geen nood om verschillende accounts aan te maken.
 
 ## Resources
+
+Resources is de algemene benaming voor wat we in onze cloud omgeving gaan aanmaken. Mogelijkheden houden van de cloud provider af. We bekijken een aantal voorbeelden van types die je overal wel gaat terugvinden.
+
+### Compute (VMs)
+
+Compute resources zijn VMs, zij hebben een CPU, RAM, Netwerk en een Boot Disk. Als we gaan automatiseren gaan we sommige van deze componenten zelf definieren. Cloud VMs zijn vaak managed in dat de cloud provider je zelf op de fysieke servers indeeld (in tegendeel to Proxmox en ESXi). Vaak gebeurd het ook dat je VMs live gemigrated worden bij fysiek onderhoud. Als de cloud zijn werk goed doet merk je hier zelfs niets van!
+
+We komen ook vaak tegen dat een cloud provider je I/O en netwerk aanpast per CPU core, zo hebben duurdere servers sneller netwerk omdat ze meer CPU hebben. Bekijk zeker de specificaties van de VMs die je gaat gebruiken.
+
+(Vaak kan je tegenwoordig ook fysieke servers huren voor heel zware workloads we spreken dan over Bare Metal)
+
+### Image
+
+Een Compute image is de bron van een VM die je gaat aanmaken. Je kan een image maken van een VM die je zelf hebt aangemaakt of je kan een image gebruiken van de cloud provider. Moet je vele servers met dezelfde taak aanmaken dan denk je beter aan om 1 VM te imagen en deze als basis te gevrbruiken voor je andere VMs.
+
+### Block Storage
+
+Block storage kan je zien als een USB schijf, nu ja in de cloud dan. Je kan deze storage aan een VM hangen als extra storage. Deze storage is vaak makkelijk uitbreidbaar en wisselbaar tussen VMs. Je kan ze ook apart laten kopieren als backup. Block storage kan je per GB kopen en je betaalt de prijs voor hoeveel je aanvraagt, koop dus niet meteen 2PB (petabyte) aan storage als je er maar 1GB van nodig hebt.
+
+Block storage komt vaak in 2/3 smaken: traag en goedkoop, snel en duur soms ook nog een extra snelle. Onderliggend is dit vaak SSD vs HDD. Je provider gaat deze snelheid ook vaak aangeven in IOPS (Input/Output Operations Per Second). Hoe hoger dit getal hoe sneller je storage is. De maximum IOPS op een VM is vaak ook afhankelijk van het aantal CPU cores dat je VM heeft.
+
+### Object Storage
+
+Object storage is een soort van NAS. Je kan hier bestanden in opslaan en deze bestanden kunnen ook publiek gemaakt worden. Je kan deze storage eventueel ook gebruiken als backup. Object storage is vaak goedkoop en je enkel betaalt per GB die je gebruikt.
+
+Bestanden opslaan en ophalen gaat via een API. Vele moderne applicaties hebben ook integratie met object storage om hun data meteen daar op te slaan.
+Vele cloud providers gebruiken de Amazon S3 API omdat deze heel populair is.
+
+### Load Balancer & Network
+
+Een van de eerste dingen die je doet in een cloud omgeving is een netwerk aanmaken. Je kan dit zien als een eigen VLAN (maar complexer onderliggend), je hebt een eigen IP space, een eventuele NAT router en een of meerdere publieke IPs. Deze publieke IPs zijn vaak floating IPs die je tussen servers binnen dezelfde region kan afwisselen.
+
+Een load balancer is een service die je kan gebruiken om je netwerk te loadbalanceren. Je kan hiermee dus een publieke IP aanmaken die je kan gebruiken om je servers te bereiken. Daarmee kan je HTTP/HTTPS of zelfs TCP loadbalancen over verschillend interne servers. Dit wordt beheerd door de cloud provider en schaalt automatisch mee met je omgeving.
+
+### Database
+
+Vaak worden er ook managed databases gebruikt in de cloud. Hiermee moet je zelf geen database server onderhouden. Heel vaak werken deze onderliggend met managed VMs die de cloud provider maakt, backupt en upgraded met bestaande software als MySQL, PostgreSQL, MongoDB, etc.
+Sommige gespecialisseerde databases als [Google BigQuery](https://cloud.google.com/bigquery) of [Amazon Redshift](https://aws.amazon.com/redshift/) zijn ook een optie maar gebruiken een eigen API en zijn vaak gedeelde resources door hun schaal.
+
+### De rest
+
+Ik kan verder gaan en verschillende diensten beschrijven... dat is een eindeloze job als je weet dat Azure al 600 opties heeft... Meeste wat je vindt kan je wel krijgen in een cloud omgeving. We houden het in deze cursus bij de basis, voor elke andere zichzelf respecterende cloud dienst kan je wel een certificaat halen als je er alles wil over weten!
 
 ### What's in a name?
 
