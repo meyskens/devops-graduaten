@@ -103,7 +103,7 @@ Content-Type: application/json
       "rain": 0.95,
     },
     {
-      "dt": "2022-01-02T00:00:00+01:00",,
+      "dt": "2022-01-02T00:00:00+01:00",
       "temp": 8.7,
       "feels_like": 7.5,
       "pressure": 1019,

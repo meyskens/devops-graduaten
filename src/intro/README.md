@@ -45,10 +45,10 @@ maken ze deel uit van hetzelfde team met een constante wisselwerking.
 
 Wat het voor ons nog interessanter maakt is de opkomst van nieuwe technologieën.
 De eerste is cloud computing, in 2006 kwam Amazon met een toevoeging van S3 en EC2 aan hun aanbod die tot vandaag een van de meest gebruikte cloud services zijn.  
-Nu onze servers zo snel en flexibel te kopen waren was de tijd van een server een naam te geven en uren mee te spenderen gedaan. Een op;lossing
+Nu onze servers zo snel en flexibel te kopen waren was de tijd van een server een naam te geven en uren mee te spenderen gedaan. Een oplossing
 vonden we in de wereld van de Developers, code! Infrastructure as Code liet ons toe om doormiddel van een basis kennis aan programeren het werk
 van het opzetten, updaten en aanpassen van servers te verbeteren.
-Een volgende revolutie kwam uit een onverwachte hoek: dotCloud wou de cloud nog een stukje makkelijker maken voor developers. Die naam ken je niet,,
+Een volgende revolutie kwam uit een onverwachte hoek: dotCloud wou de cloud nog een stukje makkelijker maken voor developers. Die naam ken je niet,
 want de techologie was beter dan de cloud. Daarom kennen we het nu beter als [Docker](https://www.docker.com/). Containers waren niet nieuw, maar
 hoe de technologie te gebruiken als tool voor developers, operations en de open source community was het wel.
 
@@ -105,7 +105,7 @@ The Second Way: Principles of Feedback staat voor een snelle en constante feedba
 
 -   Problemen oplossen om nieuwe kennis op te bouwen. Dit principe past in de "fail fast" mentaliteit. Het ontwikkelen van een Minimum Viable Product om deze snel uit te kunnen testen. Zo kunnen we snel problemen met een implementatie zo snel mogelijk kunnen vinden en ze vroeg op te lossen.
 
--   Quality Control en testing dichter bij de bron brengen. Dit principe is zeer popilaur DevSecOps-beweging, die zich bezighoudt met het aanpakken van beveiligingsproblemen tijdens de ontwikkelcyclus. We moeten onze software testen tijdens de ontwikkeling en niet enkel op het einde zodat we snel fundamentele problemen kunnen vinden.
+-   Quality Control en testing dichter bij de bron brengen. Dit principe is zeer populair DevSecOps-beweging, die zich bezighoudt met het aanpakken van beveiligingsproblemen tijdens de ontwikkelcyclus. We moeten onze software testen tijdens de ontwikkeling en niet enkel op het einde zodat we snel fundamentele problemen kunnen vinden.
 
 -   Geen "gooi het over de muur" mentaliteit. Zowel developers als operations werken samen aan het oplossen van problemen met de applicaties, we werken aan een gezamelijk doel en niet ieders op een eigen taak.
 
@@ -123,7 +123,7 @@ Het leren voor een ITer houd niet op bij het verlaten van de school. Organisatie
 
 ### "Mature capabilities in technical and management practices"
 
-Dit principe komt uit "Accelerate: The Science of Lean Software and Devops"[^accelerate] presenteren de auterus op basis van hun onderzoek de belangrijkste technische en management praktijken die goed presterende DevOps teams hebben aangenomen en blijven verfijnen.
+Dit principe komt uit "Accelerate: The Science of Lean Software and DevOps"[^accelerate] presenteren de auterus op basis van hun onderzoek de belangrijkste technische en management praktijken die goed presterende DevOps teams hebben aangenomen en blijven verfijnen.
 
 #### Technische Praktijken
 
@@ -135,7 +135,7 @@ Volgens Acceletate zijn dit de belangrijksye methodes die gebruikt worden gebrui
 
 ##### Continuous Delivery
 
-De Accelerate auteurs kozen ervoor om verschillende methodes te combineren onder de paraplu van continue levering (CD). Hoewel CD zelf zijn eigen principe is onder CI/CD, stellenze vast dat dit deel essentieel is voor een goed presterende DevOps team.
+De Accelerate auteurs kozen ervoor om verschillende methodes te combineren onder de paraplu van continue levering (CD). Hoewel CD zelf zijn eigen principe is onder CI/CD, stellen ze vast dat dit deel essentieel is voor een goed presterende DevOps team.
 Ze spreken over:
 
 -   Version Control: op dit vlak gaan we Git bekijken.
@@ -151,7 +151,7 @@ Ze spreken over:
 
 De architectuur van onze setup is belangrijk niet enkel voor het draaien van de servers maar ook de flexibiliteit.
 
--   Het is belngrijk om testen te kunnen uitvoeren in een geisoeede omgeving die onze productie omgeving niet beinvloedt.
+-   Het is belangrijk om testen te kunnen uitvoeren in een geisoleerde omgeving die onze productie omgeving niet beinvloedt.
 -   We moeren verschillende applicaties en services onafhankelijk van elkaar kunnen uitrollen en updaten
 
 In feite worden de hierboven beschreven kenmerken - testbaarheid en inzetbaarheid - bereikt door het implementeren van de volgende twee architecturale technische principes:
@@ -164,7 +164,7 @@ In feite worden de hierboven beschreven kenmerken - testbaarheid en inzetbaarhei
 DevOps teams moeten niet enkel kijken daar het technische aspect maar ook bedrijsprocessen volgen om hun werk te verbeteren.
 
 -   **Customer feedback** Teams moeten met de klant kunnen comminuceren om feedback te krijgen, en dit al zo vroeg mogelijk.
--   **Value stream** Teams moeten verstaan dat continue verbetering ook waarde oplevert voor de klan
+-   **Value stream** Teams moeten verstaan dat continue verbetering ook waarde oplevert voor de klant
 -   **Working in small batches** Kleinere batches zorgen voor snellere oplevering aan klanten, en zetten de feedback loop in actie.
 -   **Team experimentation** Teams werken beter als ze individueel mogen experimenteren met ideeen en theorien zonder toestemming van bovenaf.
 
@@ -187,7 +187,7 @@ Het is gebaseerd op de volgende vijf pijlers:
 -   **Culture** Voordat we de silos van verschillende teams neer kunnen halen moet er een cultuur zijn van gedeelde verantwoordelijkheid zijn, of op zijn minst een groep mensen die zich toelegt op het vestigen van die cultuur, met goedkeuring en steun van het management
 -   **Automation** Door gebruik te maken van CD (zie hierboven) moeten ops teams inzetten op op het automatiseren van alle manuele handelingen.
 -   **Lean** Ontwikkelingsteams maken gebruik van LEAN principes om verspilling te elimineren en de waardestroom te optimaliseren, zoals het minimaliseren van WIP, het zichtbaar maken van werk, en het verminderen van hand-off complexiteit en wachttijden.
--   **Measurement** De organisatie moet willen inzetten op het verzamelen van informatie over prosecssen en deplooyments om hun huidige mogelijkheden te kennen en probleempunten te identificeren.
+-   **Measurement** De organisatie moet willen inzetten op het verzamelen van informatie over prosecssen en deployments om hun huidige mogelijkheden te kennen en probleempunten te identificeren.
 -   **Sharing** Er moet een cultuur wijn van openheid en delen van informatie en kennis tussen teams, om samen naar een gezamelijk doel te kunnen werken.
 
 ## Belang
@@ -242,6 +242,6 @@ Deze bronnen zijn nuttig als je je verder wil verdiepen maar zijn _geen leerstof
 -   [Atlassian (samenwerkings tools) over DevOps](https://www.atlassian.com/devops)
 -   [Sonatype (code analysis) over DevSecOps](https://guides.sonatype.com/foundations/devops/what-is-devops/)
 
-[^accelerate]: Accelerate: The Science of Lean Software and Devops: Building and Scaling High Performing Technology Organizations Paperback - Nicole Forsgren Phd, Jez Humble, Gene Kim - ISBN 978-1942788331
+[^accelerate]: Accelerate: The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations Paperback - Nicole Forsgren Phd, Jez Humble, Gene Kim - ISBN 978-1942788331
 [^sre]: According to the Site Reliability Engineering book, “SRE is what happens when you ask a software engineer to design an operations team.”
 
