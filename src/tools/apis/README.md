@@ -190,17 +190,6 @@ Je herkent al minder snel de datatypes in XML maar kan ze wel herleiden, het is 
 
 Er zijn verschillende soorten APIs. Zowel als we kijken naar de technische kant als ook waar ze gebruikt worden.
 
-Types APIs
- Open API
- Open API, vrij opvraagbaar via HTTP
- Geen authenticatie nodig
- bv een publieke API om het weer op te vragenDit bestaat echt  (Free Weather API - WeatherAPI.com)
- Partner APIs
- APIs die beschikbaar gesteld zijn voor specifieke business partners van een bedrijf om zo data tussen elkaar uit te wisselen. Deze API is niet publiek bereikbaar
- Internal APIs
- Verborgen APIs die tussen componenten van dezelfde applicatie gebruikt worden.
- Bv front end grafische interface die de APIs van zijn backend opvraagt
-
 #### Open APIs
 
 We kijken eerst naar een open API. Een open API is een API die vrij opvraagbaar is via HTTP. Iedereen kan hier data in opvragen. Er is geen authenticatie nodig, er is vaak echter wel een rate limit. Dat is een limiet die je stelt op het aantal requests dat je per tijdseenheid kan doen. Dit is om te voorkomen dat iemand je API overbelast.
