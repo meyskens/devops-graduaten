@@ -116,6 +116,7 @@ module.exports = config({
                 },
             },
         ],
+        "vuepress-plugin-export-pdf-pro",
     ],
 });
 
