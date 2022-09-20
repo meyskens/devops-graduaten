@@ -228,6 +228,10 @@ Deze kunnen bijvoorbeeld deel zijn van een contract voor het gebruiken van speci
 
 Een voorbeeld kan zijn de lessenrooster software die de studenten gegevens uit een bestaand ERP systeem kan halen via een API. Deze API wil je zeker niet beschikbaar stellen voor iedereen of zelfs voor personeel.
 
+::: note
+Vele apps of sites gebruiken APIs die niet per defenitie publiek zijn maar wel gebruikt worden door het publiek. Deze zijn vrij makkelijk te achterhalen door de requests te bekijken die de app of site doet. Hiermee kan je deze reverse engineeren en gebruiken voor eigen doelen, dit is niet strikt illegaal. Het wordt heel vaak gedaan zo heb je [iRail](https://github.com/iRail) die de NMBS site data gebruikt voor een betere route planner en API. Ook kleinere libraries steunen op dit principe: [go-recyle-belgium](https://github.com/meyskens/go-recycle-belgium) of [het weekmenu van TM Geel](https://github.com/WarreKiekens/WeekMenu) of vraag maar eens Maartje om te tonen hoe zij betaald op de campus...
+:::
+
 #### Internal APIs/Verborgen APIs
 
 APIs zijn ook vaak intern, waar je ze zelfs niet verwacht. Ze zijn vaak verborgen voor de gebruiker en niet merkbaar. Als je bijvoorbeeld wil comminuceren tussen twee systeemprocessen op een computser is er spraken van een API. In Windows heb je bijvoorveeld verschillende vormen van [interprocess communication](https://docs.microsoft.com/en-us/windows/win32/ipc/interprocess-communications). Dit is per definitie een API.
