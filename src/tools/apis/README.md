@@ -592,5 +592,9 @@ Beantwoord nu de volgende vragen in Postman of HTTPie:
 -   Zoek alle vrouwelijke characters. Hoeveel zijn dit er?
 -   Zoek alle dead Morty characters
 
-**Dank aan Davy Cavens voor de basis te leggen voor dit hoofdstuk. Dank aan Brent Pulmans en Michiel Verboven voor de inspiratie via het vak API Development**
+### Uitdaging
+
+Ken je Python nog? Top! Je hebt nu een mogelijkheid om dad jokes op te halen. Met [de pirate translations API](https://funtranslations.com/api/pirate) kan je tekst vertalen naar pirate speak. Maak een Python script dat een dad joke ophaalt en deze vertaalt naar pirate speak (of andere leuke vertalingen). (inspired by [LaylaCodesIt](https://www.youtube.com/watch?v=7NIHJuQQ2j0))
+
+**Dank aan Davy Cavens voor de basis te leggen voor dit hoofdstuk. Dank aan Brent Pulmans en Michiel Verboven voor de inspiratie via het vak API Development. Dank aan Bart Portier voor eindeloze dad jokes...**
 
