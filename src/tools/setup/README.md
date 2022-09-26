@@ -106,7 +106,7 @@ en plaatsen onderaan de volgende regel:
 # Start Docker daemon automatically when logging in if not running.
 RUNNING=$(ps aux | grep dockerd | grep -v grep)
 if [ -z "$RUNNING" ]; then
-    sudo conainerd > /dev/null 2>&1 &
+    sudo containerd > /dev/null 2>&1 &
     sudo dockerd > /dev/null 2>&1 &
     disown
 fi
