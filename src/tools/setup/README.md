@@ -70,6 +70,7 @@ Onderaan voegen we de volgende regel toe (vergeet `USERNAME` niet te vervangen!)
 
 ```
 USERNAME ALL=(ALL) NOPASSWD: /usr/bin/dockerd
+USERNAME ALL=(ALL) NOPASSWD: /usr/bin/containerd
 ```
 
 Je mag daarna de file opslagen,
@@ -122,6 +123,31 @@ docker run hello-world
 
 ![Docker Hello World](./docker-hello-world.png)
 
+### Fix Git
+
+We gaan een kleine fix doen om Git werkend te krijgen op het gedeelde Windows bestandssysteem.
+
+Voer het onderstaande uit in de WSL shell:
+
+```bash
+sudo nano /etc/wsl.conf
+```
+
+Voeg de volgende configuratie toe (dit kan een nieuw bestand zijn):
+
+```ini
+[automount]
+options = "metadata"
+```
+
+We voeren nu het volgende commando uit in PowerShell om WSL te herstarten:
+
+```powershell
+wsl --shutdown
+```
+
+Je kan nu terug een WSL shell openen.
+
 ## Visual Studio Code
 
 We hebben ook een goede code editor nodig voor onze scripts en configuratie in te schrijven. In deze cursus gebruiken we [Visual Studio Code](https://code.visualstudio.com/). VSCode is een open source editor onderhouden door Microsoft. Deze is echter **niet** hetzeflde als Visual Studio, ze delen enkel de naam.
@@ -159,3 +185,4 @@ Als DevOps engineer zullen we ook veel werken met de terminal. We kunnen deze oo
 Je hebt nu een split screen met je code editor en je terminal. Je kan nu je code schrijven en deze ook uitvoeren in de terminal! Dit gaat in onze lessen ook de beste manier zijn om te werken.
 
 ![VSCode Terminal](./vscode-terminal.png)
+

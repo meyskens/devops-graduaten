@@ -275,7 +275,7 @@ aangebracht. Je gebruikt daarvoor de commando's\
 
 ```bash
 git config --global user.name "Your Full Name"
-git config --globaluser.email "email"
+git config --global user.email "email"
 ```
 
 ![](./images/media/image17.png)
