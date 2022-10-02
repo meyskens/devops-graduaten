@@ -181,7 +181,7 @@ Hieronder een klein overzicht van veel gebruikte diensten:
 | ----------------------- | -------------------------- | --------------------------- | ------------------------ | ----------------------------------- | ---------------------------------------------------- |
 | Virtuele Machine        | Amazon EC2                 | Compute Engine              | Virtual Machines         | Compute Instance                    | Compute (Nova)                                       |
 | Containers (Kubernetes) | Amazon EKS                 | Kubernetes Engine           | Azure Kubernetes Service | Container Engine for Kubernetes     | Container Orchestration Engine Provisioning (Magnum) |
-| Containers)             | Amazon ECS                 | App Engine Flexible         | Azure Container Apps     |                                     | Containers (Zun)                                     |
+| Containers              | Amazon ECS                 | App Engine Flexible         | Azure Container Apps     |                                     | Containers (Zun)                                     |
 | Database                | Amazon RDS                 | Cloud SQL                   | SQL Database             | Database Service                    | Databases (Trove)                                    |
 | Object Storage          | Amazon S3                  | Cloud Storage               | Blob Storage             | Object Storage                      | Object Store (Swift)                                 |
 | Load Balancer           | Elastic Load Balancing     | Cloud Load Balancing        | Load Balancer            | Load Balancer                       | Load Balancer (Octavia)                              |
@@ -199,17 +199,64 @@ Hieronder een klein overzicht van veel gebruikte diensten:
 
 ## IAM
 
+Een heel belangrijk deel van een cloud omgeving is de IAM (Identity and Access Management). Hiermee kan je gebruikers aanmaken, rechten geven en deze gebruikers toegang geven tot de verschillende diensten. Dit is een heel belangrijk onderdeel van een cloud omgeving omdat je hiermee niet enkel kan bepalen wie wat mag doen maar ook welk systeem wat mag doen.
+
+We spreken over twee grote types van gebruikers: mensen (ons team, de baas, consultants,..) maar ook over systemen (automatisatie, terraform, CI/CD, onze applicaties zelf) die toegang nodig hebben tot de cloud omgeving. Als we het over systemen hebben spreken we over een "service account". Deze service accounts hebben vaak een eigen API key die ze gebruiken om toegang te krijgen tot de cloud omgeving, deze API key hangt niet aan een persoon en kan dus gebruikt worden onafhankelijk van de persoon die de key heeft aangemaakt (denk aan ontslag).
+
+We gaan in IAM een gebruiker (of soms groep) aan een of meerdere rollen koppelen. Deze rollen geven de gebruiker toegang tot bepaalde diensten. Deze rollen kunnen we zelf aanmaken en beheren of bestaande rollen gebruiken die de cloud provider aanbiedt. We gaan heel vaak zien dat er een rol per dienst is.
+Deze rollen zijn ook vaak op verschillende niveaus.
+
+-   **Viewer**: enkel lezen
+-   **Editor**: lezen en schrijven (soms ook zonder delete permissiond)
+-   **Owner**: alles
+
+Rollen zijn toegekend per project aan de gebruikers.
+Het juist instellen van IAM is enorm belangrijk, je mag nooit te veel permissies geven vooral aan systemen want soms wordt deze key gelekt of on-purpose gedeeld in bijvoorbeeld een mobiele applicatie. Wees dus niet als [1859 apps](https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/mobile-supply-chain-aws) die gevonden waren met een AWS key admin in de code...
+
 ## Facturatie
 
 > The modern app does not run on servers but on YAML and Credit Cards
 
+We zouden na alles nog vergeten om over het belangrijkste deel (voor management toch) te spreken: de facturatie.
+Wat maakt cloud zo aantrekkelijk: meeste resources betaal je per uur (niet per maand of jaar als klassieke hosting). Dit stelt je in staat om snel te schalen en te betalen voor wat je gebruikt, maar ook om korte experimentatie te doen. Als je een syseem maar kort nodig hebt is het misschien voordeliger een grotre VM te huren waar een test maar 1 uur duurt dan een kleinere waar een test 3 uur duurt. Deze berekening moet je altijd maken.
+
+Andere resources als bandbreedte of die moeilijk per uur op te splitsen zijn betaal je per GB. Opslag is dan vaak weer GB/uur die je gebruikt.
+Cloud providers bieden meestal een basis gratis aan: bv 100GB bandbreedte of 1 VM met 0.5CPU en 1GB RAM. Dit is vaak voldoende om te experimenteren en te leren, maar maakt soms de kostenberekening moeilijker.
+
+Ben je een grote cloud gebruiker? Dan loont het om met je cloud provider te onderhandelen en een vast aantal resources aan te kopen, als je garandeerd dat je die constant gebruikt kan je een goedkoper tarief krijgen. Dit is vooral interessant voor grote bedrijven die veel resources nodig hebben.
+
+### Neem je rekenmachine erbij
+
+Hoeveel ga je nu bepalen? Zonder rekenmachine ga je er niet komen vrees ik... Daarom hebben cloud providers vaak een calculator waar je kan zeggen wat je wilt en je krijgt wat je gaat betalen als uitkomst, dit is wel niet gegarandeerd want heb je bijvoorbeeld plots meer verkeer betaal je natuurlijk meer. Maar het geeft je wel een idee van wat je kan verwachten, de tip is altijd wat meer budget te voorzien dan je denkt nodig te hebben.
+
+Speel eens met een paar calculators, welke is het voordeligste voor jouw use case?
+
+-   [AWS Pricing Calculator](https://calculator.aws/#/)
+-   [Azure Pricing Calculator](https://azure.microsoft.com/en-us/pricing/calculator/)
+-   [Google Pricing Calculator](https://cloud.google.com/products/calculator/)
+-   [Oracle Pricing Calculator](https://www.oracle.com/cloud/costestimator.html)
+-   [IBM Pricing Calculator](https://cloud.ibm.com/estimator/review)
+-   [OVH (OpenStack) Pricing List (bring own calculator)](https://www.ovhcloud.com/en/public-cloud/prices/)
+
+### Spot instances
+
+Sommige cloud providers als AWS kan je ook in plaats van gegarandeerde (duurdere) prijzen kiezen voor je cloud resources aan te kopen op een "aandelenmarkt" dit noemen ze "spot instances". Hier is de prijs bepaald naar de huidige vraag en aanbod. Zo kan je een maximumprijs opgeven die je wil betalen en als de prijs daaronder komt zal je resource worden aangemaakt, gaat de prijs erboven dan verlies je je resource. Dit kan riscant zijn en is dus enkel aangeraden als je infrastructuur hyper flexibel is, maar zo kan je wel grote datasets tegen spotprijzen verwerken.
+
 ## Dit alles is Public Cloud? Wat is dan Private Cloud?
 
-https://www.rackspace.com/cloud/openstack/private
+We spreken van alle bovenstaande resources dat dit public cloud is. We bedoelen daarmee dat iedereen (zolang je credit card maar goud genoeg is) hier klant kan worden en diensten kan hosten. Je cloud resources staan dus ook fysiek naast andere klanten, wat het vaak voordelig maakt tegenover een heel datacenter te moeten afhuren.
+
+Nu hebben sommige sectoren hier regels voor, zoals de gezondheidszorg of de financiële sector. Deze sectoren hebben vaak zeer gevoelige data en willen niet riskeren dat deze op dezelfde hardware staat in tijden van CPU vurlnabilities als [Spectre en Meltdown...](<https://en.wikipedia.org/wiki/Meltdown_(security_vulnerability)>). Daarom hebben ze vaak een private cloud waar ze hun eigen resources hebben. Dit is vaak een private cloud. Dit is een cloud waar je eigen hardware beheert en beveiligt, maar waar je wel de cloud services van een public cloud provider kan gebruiken. Dit is vaak een stuk duurder dan een public cloud want je moet hele hardware aankopen die gegarandeerd niet 100% gebruikt wordt. Maar het is wel een veiligere oplossing.
+
+Je kan dit zelf gaan hosten in eigen datacenters met open source software OpenStack of proprietary software als [AWS Outposts](https://aws.amazon.com/outposts/). Maar je kan ook een private cloud hosten een klassieke server providers als [RackSpace](https://www.rackspace.com/cloud/openstack/private) of [OVH](https://www.ovhcloud.com/en/hosted-private-cloud/). Vaak beginnen cloud providers ook met apparte datacenters voor deze use cases zoals [AWS GovCloud](https://aws.amazon.com/govcloud-us/) of [Azure Government](https://azure.microsoft.com/en-us/global-infrastructure/government/) (wat wel eens een [conflict geeft met personeel door het hosten van niet al te ethische praktijken](https://www.washingtonpost.com/business/2019/07/12/no-tech-ice-protesters-demand-amazon-cut-ties-with-federal-immigration-enforcement/))
 
 ## The Future: MultiCloud? Edge Cloud?
 
-(trying not to cry about arc...)
+We zitten in een revolutie waar vele bedrijven resouluut kiezen voor cloud te gebruiken. Maar waar ligt de toekomst nu?
 
-https://azure.microsoft.com/en-us/services/azure-arc/#infrastructure
+We zien de opkomst van "Edge Cloud" waarbij je cloud resources dichter bij de gebruiker zet. Dit is vooral interessant voor bedrijven die veel data moeten verwerken en waarbij de gebruiker niet wil wachten op een antwoord. Denk aan een self-driving car die realtime moet weten waar er andere auto's zijn, of een drone die realtime moet weten waar er andere drones zijn. Met de komst van 5G wordt dit een interessante optie waar telecom providers hun eigen cloud resources kunnen aanbieden die dicht bij de zendmasten staan voor snellere communicatie. Vaak gebeurd dit in combinatie met een public cloud die de data verwerkt en de resultaten terugstuurt naar de edge cloud en omgekeerd.
+
+De tweede stroom die we zien is die van "MultiCloud" waarbij bedrijven hun cloud resources verspreiden over verschillende cloud providers. Dit is om verschillende redenen, om dichter bij een bepaalde klant te zitten of om niet van 1 bedrijf afhankelijk te zijn. Of om bepaalde diensten te gebruiken die enkel bij 1 cloud provider beschikbaar zijn.
+We zien hier dat bedrijven als [HashiCorp](https://www.hashicorp.com/) en [VMWare](https://www.vmware.com/) hierop inspelen met hun eigen multi-cloud tools, deze bieden een interface aan die met meerdere kan praten. In het hoofdstuk over Terraform bekijken we zo een aspect.
+Cloud providers zelf laten deze stroom ook niet voor bekeken [Azure Arc](https://azure.microsoft.com/en-us/services/azure-arc/) is een tool van Microsoft die je cloud resources kan beheren vanuit Azure die onderliggend op andere cloud providers of op eigen hardware staan waar Microsoft momenteel enorm in investeerd.
 
