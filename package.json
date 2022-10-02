@@ -7,7 +7,7 @@
     "name": "Maartje Eyskens",
     "email": "maartje.eyskens@thomasmore.be"
   },
-  "repository": "https://github.com/meyskens/devops-graduaten/devops-graduaten",
+  "repository": "https://github.com/meyskens/devops-graduaten",
   "scripts": {
     "dev": "vuepress dev src",
     "build": "vuepress build src",
