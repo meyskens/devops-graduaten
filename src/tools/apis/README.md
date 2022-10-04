@@ -438,12 +438,12 @@ sudo apt update
 sudo apt install httpie
 ```
 
-We hebben nu twee commando's om HTTP requests te versturen: `http` en `https`. De laatste is een alias die `https://` als prefix toevoegt aan de URL.
+We hebben nu twee commando's om HTTP requests te versturen: `http` en `https`. De laatste is een alias die `https://` als prefix toevoegt aan de URL maar zit enkel in de laatste versie (geschreven 2022-10-04).
 
 We testen de tool uit:
 
 ```bash
-https httpie.io/hello
+http https://httpie.io/hello
 ```
 
 ![httpie](./httpie.png)
