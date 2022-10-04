@@ -297,6 +297,67 @@ echo '<h1>Hello Ansible</h1>';
 phpinfo();
 ```
 
+## Ansible voor Cisco IOS
+
+We kunnen Ansible natuurlijk ook voor meer dan enkel voor Linux servers gaan gebruiken. Een mogelijke integratie is de lessen netwerkbeheer met Cisco IOS. De [IOS Collection](https://github.com/ansible-collections/cisco.ios) heeft een uitgebreide lijst van modules voor Cisco apparaten. Ook voor [IOS-XE](https://github.com/maccioni/cisco-ansible/tree/master/IOS-XE) is er een Ansible Collection.
+
+In `requirements.yml` voegen we de volgende toe:
+
+```yaml
+---
+collections:
+    - name: cisco.ios
+```
+
+Dan installeren we de plugin:
+
+```
+ansible-galaxy collection install -r requirements.yml
+```
+
+Alle aparaten waar we op willen werken moeten natuurlijk SSH enabled hebben als ook een IP hebben. We kunnen deze dan ook in een hosts file zetten.
+
+We kunnen hierna deze modules gebruiken om onze router/switch te configureren.
+
+Je kan vele voorbelden vinden in de GitHub repository.
+
+Dit zijn enkele kleine vorbeeldjes:
+
+```yaml
+---
+- name: configure interface settings
+  cisco.ios.ios_config:
+      lines:
+          - description test interface
+          - ip address 192.168.1.1 255.255.255.0
+      parents: interface Ethernet1
+- name: check the running-config against master config
+  cisco.ios.ios_config:
+      diff_against: intended
+      intended_config: "{{ lookup('file', 'master.cfg') }}"
+
+- name: Replaces device configuration of listed l2 interfaces with provided configuration
+  cisco.ios.ios_l2_interfaces:
+      config:
+          - name: GigabitEthernet0/2
+            trunk:
+                allowed_vlans: 20-25,40
+                native_vlan: 20
+                pruning_vlans: 10
+                encapsulation: isl
+      state: replaced
+
+- name: check the startup-config against the running-config
+  cisco.ios.ios_config:
+      diff_against: startup
+      diff_ignore_lines:
+          - ntp clock .*
+
+- name: save running to startup when modified
+  cisco.ios.ios_config:
+      save_when: modified
+```
+
 ## Resources
 
 Ga je in je project Ansible gebruiken? Lees dan zeker deze resources!
