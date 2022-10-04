@@ -64,27 +64,17 @@ Playbooks worden geschreven in YAML.
 
 ## Getting started
 
-We hebben al Ansible geinstalleerd op onze Ubuntu desktop. We gaan enkele acties uitvoeren als demo van Ansible.
-Om tijd te besparen in de les gaan we deze uitvoeren op dezelfde machine als waar we Ansible opdraaien.
+We hebben al Ansible geinstalleerd op onze Ubuntu. We gaan enkele acties uitvoeren als demo van Ansible.
+We gaan snel in een cloud provider een VM aanmaken en deze configureren met Ansible.
 
-Eerst zetten we het passwoord voor `sudo` uit zodat Ansible root kan worden.
-
-```bash
-# passwordless sudo
-sudo /bin/bash -c "echo 'ALL            ALL = (ALL) NOPASSWD: ALL' >>/etc/sudoers"
-```
-
-We zorgen ervoor dat we naar onze eigen VM kunnen SSHen:
+We zorgen ervoor dat we we een SSH key hebben:
 
 ```bash
-sudo apt-get update
-sudo apt-get install -y openssh-server
 ssh-keygen # en volg de stappen
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys # voeg je eigen publieke sleutel toe aan je eigen authorized keys
-ssh localhost
+cat ~/.ssh/id_rsa.pub
 ```
 
-Zie je een shell? Dan zijn we klaar om Ansible te gebruiken.
+Je kan deze key nu ingeven bij het aanmaken van de VM.
 
 ### Project opzetten
 
@@ -94,7 +84,7 @@ Alseerst maken we een file met naam `hosts` (verander de username wel)
 
 ```
 [servers]
-127.0.0.1 ansible_user=maartje
+<IP> ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3
 ```
 
 Nu maken we een file met naam `ansible.cfg`
@@ -110,7 +100,7 @@ Je kan nu zien of Ansible de hosts herkent:
 ```bash
 $ ansible all --list-hosts
   hosts (1):
-    127.0.0.1
+    141.148.244.47
 ```
 
 We pingen (SSH test in dit geval) nu de servers:
@@ -315,3 +305,4 @@ Ga je in je project Ansible gebruiken? Lees dan zeker deze resources!
 -   [Ansible "registers"](https://www.educba.com/ansible-register/) - laat acties alleen toe als iets veranderd is (bv server herstart)
 -   [More complex structures](https://jozo.io/blog/structure-of-ansible-project/)
 -   [Example project](https://github.com/meyskens/ansible-example)
+

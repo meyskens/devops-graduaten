@@ -1,2 +1,2 @@
 [servers]
-127.0.0.1 ansible_user=maartje
+141.148.244.47 ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3
