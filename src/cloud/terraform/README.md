@@ -2,7 +2,7 @@
 
 ![Terraform Logo](./logo.png)
 
-Terraform beschijft zichzelf als "Provision, change, and version resources on any environment". Terraform
+Terraform beschijft zichzelf als "Provision, change, and version resources on any environment". Terraform is een tool die we gaan gebruiken voor het aanmaken van resources in de cloud als Infrastucture as Code. We kunnen met deze files resources aanmaken in 1 of meerdere cloud providers te gelijk. Dit gaat onderliggend de juiste APIs aanspreken
 
 ![Terraform Flow](./flow.png)
 
@@ -31,6 +31,8 @@ sudo apt-get install terraform
 ### Vars
 
 ### Resources
+
+#### Arguments and Attributes
 
 ### Loops
 
