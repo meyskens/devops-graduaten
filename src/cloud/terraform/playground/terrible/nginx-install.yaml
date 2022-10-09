@@ -1,0 +1,13 @@
+- hosts: all # installer dit op all hosts onder "servers:
+  tasks:
+    - name: Install Nginx
+      become: yes
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+    - name: Edit index.html
+      become: yes
+      copy:
+        content: "Hello from Terraform and Ansible"
+        dest: /var/www/html/index.html
