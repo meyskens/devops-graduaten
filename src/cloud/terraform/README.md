@@ -134,11 +134,153 @@ We zien hier dat we onze regio hebben meegegeven als ook welke auth methode te g
 :::
 ::::
 
-### Vars
+### Variablen
+
+Net als in elke programmeertaal gaan we variablen tegenkomen. We kunnen deze gebruiken om dynamische waarden mee te geven aan onze configuratie of veelgebruikte elementen als een regio of een account ID te centraliseren.
+
+```hcl
+variable "aws_region" {
+  type        = string
+  description = "The AWS region to deploy to"
+  default     = "us-east-1"
+}
+
+variable "tenancy_ocid" {
+  type        = string
+  description = "The tenancy OCID for Oracle Cloud"
+  default     = "ocid1.tenancy.oc1..aaaaaaaaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+```
+
+We zien dat variablen gedefinieerd worden met een `variable "name"` block. Dit block bevat:
+
+-   `type` - De type van de variabele, dit kan een string, number, bool, list of map zijn.
+-   `description` - Een beschrijving van de variabele voor de gebruiker.
+-   `default` - Een default waarde voor de variabele.
+
+We kunnen deze variablen gebruiken in onze configuratie door ze te gebruiken met `var.name` of `${var.name}` in een string.
+
+```hcl
+provider "aws" {
+  region = var.aws_region
+}
+
+resource "aws_instance" "example" {
+  name = "example-${var.aws_region}"
+}
+```
+
+We kunnen met `default` de waarde meegeven maar we kunnen deze ook aanpassen via de command line, environment variables of een `.tfvars` bestand.
+
+```bash
+terraform plan -out plan.out  -var="aws_region=eu-west-1"
+```
+
+of in `staging.tfvars`:
+
+```ini
+aws_region = "eu-west-1"
+```
+
+en dan:
+
+```bash
+terraform plan -out plan.out -var-file="staging.tfvars"
+```
+
+(standaard wordt `terraform.tfvars` ingelezen als het bestaat)
+
+of via een environment variable:
+
+```bash
+export TF_VAR_aws_region="eu-west-1"
+terraform plan -out plan.out
+```
+
+:::tip
+We hebben ook [local variables](https://www.terraform.io/language/values/locals) die we intern gebruiken voor snel een waarde mee te geven die de gebruiker niet hoeft aan te passen.
+
+Wanneer we met modules werken of output willen geven gaan we ook [output variablen](https://www.terraform.io/language/values/outputs) tegenkomen.
+:::
 
 ### Data Sources
 
+We gaan ook data nodig hebben die van onze provider gaat komen. Dit zijn vaak reeds bestaande resources, of interne IDs maar ook vaak informatie die we nodig hebben om een resource aan te maken die variabel is, denk bijvoorbeeld aan welke OS image we willen gebruiken.
+
+Data sources mogen dus nooit objecten aanmaken maar roepen wel de API op voor gegevens op te halen.
+
+We herkennen deze door het `data "type" "name"` block:
+
+```hcl
+data "oci_core_images" "ubuntu" {
+  compartment_id           = var.tenancy_ocid
+  operating_system         = "Canonical Ubuntu"
+  operating_system_version = "22.04"
+  shape                    = "VM.Standard.E2.2"
+}
+```
+
+In dit voorbeeld zoeken we de image voor Ubuntu 22.04 die werkt voor een VM.Standard.E2.2 VM. We vinden de output en nodige input op de [provider documentatie voor oci_core_images](https://registry.terraform.io/providers/oracle/oci/latest/docs/data-sources/core_images). We lezen hier dat we een list van images terugkrijgen en dat we de `id` van de eerste image kunnen gebruiken om een VM aan te maken.
+
+```hcl
+resource "oci_core_instance" "server" {
+  [...]
+
+  source_details {
+    source_type = "image"
+    source_id   = data.oci_core_images.ubuntu.images.0.id # element 0 van de lijst van images met property ID
+  }
+}
+```
+
+We kunnen deze net als variablen gaan aanhalen met `data.type.name.property` of `${data.type.name.property}` in een string.
+
 ### Resources
+
+De bovste elementen hebben we nodig voor het opzetten van onze infrastructuur.
+De eigenlijke infrastructuur elementen gaan we in resources gaan definieren. Deze resources kunnen we aanmaken, updaten of verwijderen (de developers die dit lezen roepen nu enorm hard [CRUD](https://www.codecademy.com/article/what-is-crud)).
+
+We herkennen deze door het `resource "type" "name"` block:
+
+```hcl
+resource "oci_core_instance" "app-instance" {
+  count               = 2
+  availability_domain = data.oci_identity_availability_domains.availability_domains.availability_domains.0.name
+  compartment_id      = "ocid1.tenancy.oc1..xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  display_name        = "test-tf-${count.index}"
+  shape               = "VM.Standard.E2.2"
+
+  source_details {
+    source_type = "image"
+    source_id   = data.oci_core_images.ubuntu.images.0.id
+  }
+
+  create_vnic_details {
+    assign_public_ip = true
+    subnet_id        = oci_core_subnet.subnet.id
+  }
+}
+```
+
+Net als diensten in een cloud provider hebben we enorm veel resources beschikbaar, we vinden al deze in de provider documentatie. Bijvoorbeld voor [OCI](https://registry.terraform.io/providers/oracle/oci/latest/docs/resources) of [AWS](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources).
+
+### Loops met `count` en `for_each`
+
+Resources hebben ook altijd een `count` parameter, hiermee kunnen we een resource verschillende keren gaan aanmaken. We kunnen dit gebruiken om bijvoorbeeld een aantal servers aan te maken die gelijk zijn voor loadbalancing.
+In een count loop heb je meestal ook een index parameter `count.index` die je kan gebruiken voor een unieke eigenschap
+
+Recente versies van Terraform hebben ook [`for_each`](https://www.terraform.io/language/meta-arguments/for_each) hiermee kan je een resource aanmaken voor elk element in een lijst. Je kan het met de parameter `each` opvragen.
+
+```hcl
+resource "oci_core_instance" "app-instance" {
+  for_each            = toset(["wp", "db"]) # for_each is een set (key/value) type, met toset() kunnen we een lijst omzetten naar een set
+
+  display_name        = "test-tf-${each.key}"
+  shape               = "VM.Standard.E2.2"
+
+  [...]
+}
+```
 
 #### Arguments and Attributes
 
@@ -148,9 +290,9 @@ Wil je een individuele resource laten verwijderen en terug laten aanmaken? Je ka
 
 #### Null-Resource
 
-### Loops
-
 ### Modules
+
+## Plan Apply Destroy Repeat
 
 ## Change
 
