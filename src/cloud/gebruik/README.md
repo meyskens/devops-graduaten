@@ -218,3 +218,7 @@ openstack --version
 
 ::::
 
+:::warning
+Dit hoofdstuk is beperkt gehouden door tijdsgebrek bij lesvoorbereidingen en geen tijdsvoorziening voor curiculumvernieuwingen. Het is de bedoeling dat dit hoofdstuk verder uitgewerkt wordt over gebruik van de CLI als ook het opzetten van essentiele cloud diensten.
+:::
+
