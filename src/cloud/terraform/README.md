@@ -284,15 +284,45 @@ resource "oci_core_instance" "app-instance" {
 
 #### Arguments and Attributes
 
-:::tip
-Wil je een individuele resource laten verwijderen en terug laten aanmaken? Je kan met `terraform taint` een resource tainten. Dit zorgt ervoor dat Terraform deze resource verwijdert opnieuw aanmaakt bij de volgende apply.
-:::
+In resourced gaan we 2 types data vinden:
+
+-   arguments: dit zijn de properties die we moeten meegeven om een resource aan te maken
+-   attributes: dit zijn de properties die we krijgen van onze provider NA het aanmaak van een resource, denk bijvoorveeld aan een IP adres of een ID
+
+Beide types vinden we gedocumenteerd in de Terraform Provider documentatie.
+
+We kunnen beide types gaan oproepen in andere resources voor informatie te krijgen over een resource:
+
+```hcl
+resource "oci_core_subnet" "subnet" {
+  [...]
+  cidr_block          = "10.0.1.0/24"
+  vcn_id              = oci_core_vcn.vcn.id
+}
+
+resource "oci_core_instance" "server" {
+  [...]
+  create_vnic_details {
+    assign_public_ip = true
+    subnet_id        = oci_core_subnet.subnet.id
+  }
+}
+```
+
+Tegenovergesteld aan `data` of `var` hebben we geen prefix nodig, we gebruiken gewoon `resourcetype.name.property`.
+`.id` in dit voorbeeld is een attribute en zal dus pas worden ingevuld na het aanmaken van de resource, dit gaat dus bepalen dat onze server pas wordt aangemaakt nadat de subnet is aangemaakt!
+
+#### Provisioners
 
 #### Null-Resource
 
 ### Modules
 
 ## Plan Apply Destroy Repeat
+
+:::tip
+Wil je een individuele resource laten verwijderen en terug laten aanmaken? Je kan met `terraform taint` een resource tainten. Dit zorgt ervoor dat Terraform deze resource verwijdert opnieuw aanmaakt bij de volgende apply.
+:::
 
 ## Change
 
