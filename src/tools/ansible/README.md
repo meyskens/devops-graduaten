@@ -315,7 +315,13 @@ sudo nano /etc/ssh/ssh_config
 ```
 
 Unquoten de lijn `Ciphers aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,3des-cbc`
-En voeg onderaan toe: KexAlgorithms +diffie-hellman-group1-sha1
+En voeg onderaan toe:
+
+```
+KexAlgorithms +diffie-hellman-group1-sha1
+HostKeyAlgorithms +ssh-rsa
+PubkeyAcceptedKeyTypes +ssh-rsa
+```
 
 :::
 
