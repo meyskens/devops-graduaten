@@ -2,13 +2,28 @@
 
 ![Terraform Logo](./logo.png)
 
-Terraform beschijft zichzelf als "Provision, change, and version resources on any environment". Terraform is een tool die we gaan gebruiken voor het aanmaken van resources in de cloud als Infrastucture as Code. We kunnen met deze files resources aanmaken in 1 of meerdere cloud providers te gelijk. Dit gaat onderliggend de juiste APIs aanspreken
+Terraform beschijft zichzelf als "Provision, change, and version resources on any environment". Terraform is een tool die we gaan gebruiken voor het aanmaken van resources in de cloud als Infrastucture as Code. We kunnen met deze files resources aanmaken in 1 of meerdere cloud providers te gelijk. Dit gaat onderliggend de juiste APIs aanspreken. Tegelijk gaat Terraform de status van deze resources bijhouden net als hun dependancy onderliggend om doormiddel van een graph systeem te bepalen welke acties er moeten worden uitgevoerd om de gewenste situatie te bereiken.
+
+Wij gaan vooral een flow zien van code schrijven, plannen, applyen en controleren.
 
 ![Terraform Flow](./flow.png)
 
+In de flow staan twee commando's centraal:
+
+-   `plan` is de fase waarin Terraform bekijkt welke aanpassingen nodig zijn en geeft ons een lijst
+    -   dit lijkt onbelangrijk maar we moeten dit steeds goed nakijken dat we niet door een fout resources in productie verwijderen
+-   `apply` is de fase waarin Terraform de aanpassingen uitvoert en de resources aanmaakt of aanpast
+
 ## Registry
 
+Terraform werkt niet alleen. Sinds recent versies heeft Terraform een "Registry" waarin je modules kan vinden die je kan gebruiken. Je kan deze vinden op [registry.terraform.io](https://registry.terraform.io/).
+
+We vinden hier `providers` dit zijn integraties met platformen als AWS, GCP, Azure, OCI, etc. We zien hier ook vaak meer providers voor software als Docker, Kubernetes of Cloudflare.
+Aan de andere kant vinden we ook `modules` voor veel gebruikte compomenten in deze providers. Denk hierbij aan een Kubernetes cluster, of een kant en klare VM setup inclusief netwerk. Een module gaat dus meerdere componenten integreren. Maar daarover verder meer!
+
 ## Installatie
+
+We hebben Terraform nodig op onze laptop, we zetten dit weer op als gewoonlijk. We voegen een APT repo toe:
 
 ```bash
 sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
