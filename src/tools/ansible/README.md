@@ -307,6 +307,18 @@ phpinfo();
 
 We kunnen Ansible natuurlijk ook voor meer dan enkel voor Linux servers gaan gebruiken. Een mogelijke integratie is de lessen netwerkbeheer met Cisco IOS. De [IOS Collection](https://github.com/ansible-collections/cisco.ios) heeft een uitgebreide lijst van modules voor Cisco apparaten. Ook voor [IOS-XE](https://github.com/maccioni/cisco-ansible/tree/master/IOS-XE) is er een Ansible Collection.
 
+::: tip
+Onze les switchen kunnen verouderd zijn en een oude SSH key exchange gebruiken. Dit kan je oplossen door de oude key exhanges in te schakelen:
+
+```bash
+sudo nano /etc/ssh/ssh_config
+```
+
+Unquoten de lijn `Ciphers aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,3des-cbc`
+En voeg onderaan toe: KexAlgorithms +diffie-hellman-group1-sha1
+
+:::
+
 In `requirements.yml` voegen we de volgende toe:
 
 ```yaml
