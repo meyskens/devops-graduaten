@@ -103,6 +103,12 @@ $ ansible all --list-hosts
     141.148.244.47
 ```
 
+**TIP:** in WSL kan een gedeelde map van Windows gezien worden als "world writable" wat in Ansible een security mechanisme triggered je kan hier rond werken door het expliciet toe te laten in een environment variable:
+
+```bash
+export ANSIBLE_CONFIG=$(pwd)/ansible.cfg
+```
+
 We pingen (SSH test in dit geval) nu de servers:
 
 ```
