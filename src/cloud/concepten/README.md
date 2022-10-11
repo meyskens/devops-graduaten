@@ -179,7 +179,7 @@ Hieronder een klein overzicht van veel gebruikte diensten:
 
 | Beschrijving            | Amazon Web Services (AWS)  | Google Cloud Platform (GCP) | Microsoft Azure          | Oracle Cloud Infrastructure (OCI)   | OpenStack                                            |
 | ----------------------- | -------------------------- | --------------------------- | ------------------------ | ----------------------------------- | ---------------------------------------------------- |
-| Virtuele Machine        | Amazon EC2                 | Compute Engine              | Virtual Machines         | Compute Instance                    | Compute (Nova)                                       |
+| Virtuele Machine        | Amazon EC2                 | Compute Engine              | Virtual Machines         | Core Compute Instance               | Compute (Nova)                                       |
 | Containers (Kubernetes) | Amazon EKS                 | Kubernetes Engine           | Azure Kubernetes Service | Container Engine for Kubernetes     | Container Orchestration Engine Provisioning (Magnum) |
 | Containers              | Amazon ECS                 | App Engine Flexible         | Azure Container Apps     |                                     | Containers (Zun)                                     |
 | Database                | Amazon RDS                 | Cloud SQL                   | SQL Database             | Database Service                    | Databases (Trove)                                    |
