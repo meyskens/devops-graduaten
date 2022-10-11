@@ -166,6 +166,22 @@ oci --version
 Nu we een installatie hebben willen we onze credentials toevoegen.
 
 ```bash
+oci session authenticate
+```
+
+Kies hierna voor de optie `eu-amsterdam-1`
+Dit opent een browser waar je je kan aanmelden.
+Daarna vraagt deze tool voor een naam voor het profiel, we kiezen voor `DEFUALT`.
+
+Let op dat deze tokens **1 uur** geldig zijn voor security redenen. Je kan ze verniewen binnen dat uur via:
+
+```bash
+oci session refresh --profile DEFAULT
+```
+
+Je kan het ook manueel voor langere sessies:
+
+```bash
 oci setup config
 ```
 
