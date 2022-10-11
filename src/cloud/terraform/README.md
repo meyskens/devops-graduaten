@@ -37,11 +37,55 @@ sudo apt update
 sudo apt-get install terraform
 ```
 
+Als we nu `terraform version` uitvoeren zien we dat we de laatste versie hebben!
+
 ## Build
+
+Tijd voor een Terraform project op te zetten! We maken hiervoor best een nieuwe map (in een Git Repo, hint hint) aan. We gaan hierin werken om code te schrijven en te testen.
+
+Terraform bestanden hebben de extensie `.tf` en we maken een bestand aan met de naam `main.tf`. In dit bestand gaan we de eerste code schrijven.
+
+We gaan in deze files [HCL](https://github.com/hashicorp/hcl#information-model-and-syntax) of de Hashicorp Configuration Language schrijven, dit is een afgeleide van JSON. Het heeft een unieke structuur van resource defenitiies en sub-configuraties. We komen nog heel wat voorbeelden tegen.
+
+Voorbeeld van HCL:
+
+```hcl
+type "resource name" "name" {
+  key = "value"
+
+  object = {
+    key = "value"
+  }
+
+  list = [
+    "value",
+    "value",
+  ]
+
+  sub_block {
+    key = "value"
+  }
+}
+```
 
 ### `terraform {} block`
 
+Het eerste wat we gaan doen is een `terraform {}` block toevoegen. Dit is een block die we gebruiken om Terraform te configureren. We gaan een aantal dingen hier vermelden, onderandere welke providers en hub versie we gebruiken maar bijvoorbeeld ook welke minimale versie van Terraform nodig is. Later gaan we hier ook aangeven waar onze huidige state file te plaatsen.
+
+```hcl
+terraform {
+  required_version = ">= 1.0.0"
+}
+```
+
+Dit block is altijd verplicht om te hebben per Terraform Project.
+
 ### Providers
+
+We gaan ook altijd een `provider` nodig hebben. Een provider gaat onze link tussen een onderliggende API zoals die van een cloud provider en tussen onze Terraform instantie zijn. We vinden deze op de Terraform registry. We hebben hieronder voorbeelden voor AWS an OCI:
+
+We halen in `required_providers` de versie op die we willen gebruiken. Terraform gaat deze automatisch voor ons downloaden van de registry.
+Hierna stellen we deze in via het `provider` block.
 
 :::: code-group
 ::: code-group-item AWS
@@ -58,16 +102,41 @@ terraform {
 
 
 provider "aws" {
-  region = "us-east-1"
+  region = "us-east-1" # regio voor AWS Academy
 }
 ```
 
-Je hebt ook credentials nodig. Deze gaat Terraform halen vanuit je `~/.aws/credentials` bestand.
+We zien hier dat we de AWS provider onze regio configuratie hebben gegeven die nodig is voor het aanmaken van resources.
+Je hebt ook credentials nodig. Deze gaat Terraform halen vanuit je `~/.aws/credentials` bestand. Je kan deze ook manueel meegeven maar dit is niet altijd even handig.
 
+:::
+::: code-group-item Oracle
+
+```hcl
+terraform {
+  required_providers {
+    oci = {
+      source  = "oracle/oci"
+      version = "4.96.0"
+    }
+  }
+}
+
+provider "oci" {
+  # Configuration options
+  region              = "eu-amsterdam-1"
+  auth                = "SecurityToken" # oci session authenticate
+  config_file_profile = "DEFAULT"
+}
+```
+
+We zien hier dat we onze regio hebben meegegeven als ook welke auth methode te gebruiken, Oracle heeft er verschillende. Wij opteren voor de `SecurityToken` methode. Deze gaat een token genereren en gebruiken om te authenticeren via het `oci session authenticate` commando (zie hoodfstuk gebruik).
 :::
 ::::
 
 ### Vars
+
+### Data Sources
 
 ### Resources
 
