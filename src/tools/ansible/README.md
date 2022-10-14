@@ -248,6 +248,13 @@ De volledige lijst van ingebouwde [kan je op de Ansible site vinden](https://doc
       mode: "0755"
 ```
 
+```yaml
+- name: Delete content & directory
+  file:
+      state: absent
+      path: /home/ubuntu/tempfiles/
+```
+
 ##### Lineinfile
 
 ```yaml
