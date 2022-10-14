@@ -303,6 +303,29 @@ echo '<h1>Hello Ansible</h1>';
 phpinfo();
 ```
 
+Standaard gaat Oracle cloud alle poorten blocken in `iptables`, ook hier kunnen we in plaats van commando's te schrijven een playbook gebruiken:
+
+````yaml
+- name: Allow incoming connections
+  ansible.builtin.iptables:
+    chain: INPUT
+    jump: ACCEPT
+  become: yes
+- name: Allow outgoing connections
+  ansible.builtin.iptables:
+    chain: OUTPUT
+    jump: ACCEPT
+  become: yes
+- name: Allow forwarding of connections
+  ansible.builtin.iptables:
+    chain: FORWARD
+    jump: ACCEPT
+  become: yes
+- name: Iptables flush filter
+  ansible.builtin.iptables:
+    chain: "{{ item }}"
+    flush: yes
+  with_items:  [ 'INPUT', 'FORWARD', 'OUTPUT' ]
 ## Ansible voor Cisco IOS
 
 We kunnen Ansible natuurlijk ook voor meer dan enkel voor Linux servers gaan gebruiken. Een mogelijke integratie is de lessen netwerkbeheer met Cisco IOS. De [IOS Collection](https://github.com/ansible-collections/cisco.ios) heeft een uitgebreide lijst van modules voor Cisco apparaten. Ook voor [IOS-XE](https://github.com/maccioni/cisco-ansible/tree/master/IOS-XE) is er een Ansible Collection.
@@ -312,7 +335,7 @@ Onze les switchen kunnen verouderd zijn en een oude SSH key exchange gebruiken. 
 
 ```bash
 sudo nano /etc/ssh/ssh_config
-```
+````
 
 Unquoten de lijn `Ciphers aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,3des-cbc`
 En voeg onderaan toe:
