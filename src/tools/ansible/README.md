@@ -303,6 +303,29 @@ echo '<h1>Hello Ansible</h1>';
 phpinfo();
 ```
 
+Standaard gaat Oracle cloud alle poorten blocken in `iptables`, ook hier kunnen we in plaats van commando's te schrijven een playbook gebruiken:
+
+```yaml
+- name: Allow incoming connections
+  become: yes
+  iptables:
+      chain: INPUT
+      jump: ACCEPT
+      flush: yes
+- name: Allow outgoing connections
+  iptables:
+      chain: OUTPUT
+      jump: ACCEPT
+      flush: yes
+  become: yes
+- name: Allow forwarding of connections
+  iptables:
+      chain: FORWARD
+      jump: ACCEPT
+      flush: yes
+  become: yes
+```
+
 ## Ansible voor Cisco IOS
 
 We kunnen Ansible natuurlijk ook voor meer dan enkel voor Linux servers gaan gebruiken. Een mogelijke integratie is de lessen netwerkbeheer met Cisco IOS. De [IOS Collection](https://github.com/ansible-collections/cisco.ios) heeft een uitgebreide lijst van modules voor Cisco apparaten. Ook voor [IOS-XE](https://github.com/maccioni/cisco-ansible/tree/master/IOS-XE) is er een Ansible Collection.
