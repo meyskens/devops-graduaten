@@ -22,7 +22,7 @@ Voor Linux servers hebben we `node_exporter`, dit stelt statistieken over de CPU
 We gebruiken in deze setup Docker en Docker Compose. Voor een herhaling van Docker verwijs ik graag naar de [cursus Linux Server](https://linux.maartje.dev/docker/docker/)
 :::
 
-Voor deze setup maken we gebruik van het project [vegasbrianc/prometheus](https://github.com/vegasbrianc/prometheus) op GitHub.
+Voor deze setup maken we gebruik van het project [vegasbrianc/prometheus](https://github.com/meyskens/prometheus) op GitHub (we gebruiken een fork die is aangepast voor de toevoeging van SNMP).
 Dit geeft ons een basis om mee te starten met Grafana, Prometheus.
 
 We clonen het project naar een map:
@@ -33,7 +33,7 @@ cd prometheus
 ```
 
 In dit project vinden we verschillende configuratie bestanden terug.
-het belangrijkste voor ons is `docker-compose.yml`. (`docker-stack` en andere is voor Swarm)
+het belangrijkste voor ons is `docker-compose.yml`.
 
 ### Configuratie
 
@@ -48,30 +48,28 @@ GF_SECURITY_ADMIN_PASSWORD=<something more secure>
 ```
 
 De volgende stap is Prometheus, we bekijken `prometheus.yml`.
-Prometheus doet aan service discorvery over DNS, echter heeft dit wat problemen met Docker Compose.
-We kunnen de targets die Prometheus gaat verzamelen ook manueel opgeven,
-Pas de onderstaande aan:
+Het belangrijkste voor ons hier is de `scrape_configs:` configuratie. Dit bevat waar Prometheus de data van de verschillende systemen gaat halen.
 
-```yaml
-- job_name: "cadvisor"
-
-  # Override the global default and scrape targets from this job every 5 seconds.
-  scrape_interval: 5s
-
-  static_configs:
-      - targets: ["cadvisor:8080"]
-```
+We kijken naar de configuratie van `node_exporter`, deze gaat op servers informatie ophalen over de CPU, RAM, etc.
 
 ```yaml
 - job_name: "node-exporter"
 
   # Override the global default and scrape targets from this job every 5 seconds.
-  scrape_interval: 5s
+  scrape_interval: 15s
+
+  # Auto Discorver using DNS
+  # dns_sd_configs:
+  #   - names:
+  #       - "tasks.node-exporter"
+  #     type: "A"
+  #     port: 9100
 
   static_configs:
-      - targets: ["node-exporter:9100"]
+      - targets: ["node-exporter:8080"]
 ```
 
+We zien hier dat we deze elke 15 minuten ophalen, we kunnen ofwel via DNS servers gaan zoeken en info opvragen maar ook statisch met een lijst in YAML.
 Vanaf dat we meerdere servers hebben, moeten we de targets voor de servers ook opgeven hierbij.
 
 We kunnen ook targets opgeven die geen node_exporters zijn. Zo heeft het team van [SIN](https://sinners.be) op hun temperatuur sensor van het server lokaal ook een Prometheus exporter gezet waardoor we samen met onze server en applicatie statistiek de
@@ -162,6 +160,25 @@ services:
         ports:
             - 9100:9100
         restart: always
+```
+
+Nadat deze online staat kan je ze gewoon bij in de lijst van node_exporters zetten:
+
+```yaml
+- job_name: "node-exporter"
+
+  # Override the global default and scrape targets from this job every 5 seconds.
+  scrape_interval: 15s
+
+  # Auto Discorver using DNS
+  # dns_sd_configs:
+  #   - names:
+  #       - "tasks.node-exporter"
+  #     type: "A"
+  #     port: 9100
+
+  static_configs:
+      - targets: ["node-exporter:8080", "<server2>:9100", "<server3>:9100"]
 ```
 
 ### Components
@@ -276,4 +293,69 @@ We kunnen dashboard panelen bijmaken en bewerken naar eigen smaak. Er zijn versc
 
 Goed weergeven van data is een vak op zichzelf (cursus statistiek nodig?). We gaan er in deze cursus niet verder op in.
 Bij het project zul je waarschijnlijk de kans krijgen je uit te leven!
+
+## SNMP Exporter
+
+Wanneer we naar netwerkapparatuur kijken, zoals switches, routers, firewalls, ... dan zien we dat deze meestal SNMP (v1, v2 of v3) gaan ondersteunen!
+Ook deze informatie kunnen we gaan scrapen met Prometheus. We kunnen dus ook onze externe apparaten gaan integreren. Net als de node-exporter moeten we dit gaan opzetten op een server, deze gaat dan als proxy dienen on SNMP devices te bevragen voor informatie.
+
+SNMP of Simple Network Management Protocol werkt met een numerieke MiB datastructuur, je kan een specifieke ID opvragen en data krijgen alsook deze recursief gaan opvragen. Prometheus daartegen heeft een platte namenstructuur. We moeren deze dus gaan omzetten dit doen we in de configuratie van de SNMP Exporter.
+
+We kunnen 1 of meerdere profielen opgeven voor een specifiek apparaat te querien, je kan met tools deze files genereren of ze ophalen voor specifieke devices.
+In onderstaand voorbeeld bekijken we deze voor een Cisco Switch met IOS:
+
+```yaml
+ciscosw:
+    version: 2
+    auth:
+        community: public
+    walk:
+        - 1.3.6.1.4.1.9.9.13.1.4.1
+        - 1.3.6.1.2.1.1.3
+        - 1.3.6.1.2.1.2.2.1.4
+        - 1.3.6.1.2.1.2
+        - 1.3.6.1.2.1.31.1
+        - 1.3.6.1.2.1.31.1.1.1
+    metrics:
+        - name: ciscoEnvMonFanState
+          oid: 1.3.6.1.4.1.9.9.13.1.4.1.3.1057
+          type: gauge
+
+        - name: sysUpTime
+          oid: 1.3.6.1.2.1.1.3
+          type: gauge
+
+    [...]
+
+```
+
+We zien dus dat we `1.3.6.1.2.1.1.3` gaan vertalen naar de meer gebruiksvriendelijke `sysUpTime`. Deze gaan we dan ook gebruiken in onze Prometheus queries an Grafana dashboards.
+
+In onze `prometheus.yaml` configuratie gaan de de scrape configuratie opzetten:
+
+```yaml
+- job_name: "snmp"
+  static_configs:
+      - targets: ["192.168.1.1"]
+  metrics_path: /snmp
+  params:
+      module: [ciscosw]
+  relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - source_labels: []
+        target_label: __address__
+        replacement: snmp-exporter:9116
+```
+
+We gaan in target de IPs zetten van onze devices die we willen queryen, onder `module` zeggen we welke vertalingsmodule we gaan gebruiken in ons voorbeeld dus `ciscosw`. `target_label: __address__ replacement: snmp-exporter:9116` is speciaal hier, we kunnen onze switch niet direct aanspreken via prometheus, met deze lijn zeggen we eigenlijk dat de `snmp-exporter:9116` API over HTTP moeten aanspreken die hierna dan voor ons de SNMP query gaat uitvoeren en gaat vertalen.
+Als je naar je IP op poort 9116 gaat zal je ook merken dat een simpele website je de queries al laat uitproberen.
+
+### Praktijk
+
+We hebben in onze `docker-compose.yml` file al een SNMP configuratie in commentaar staan, deze gaat gebruikt worden in de lessen Enterprise networking on Cisco apparatuur te gaan uitlezen met behulp van SNMPv2.
+
+![SNMP Exporter Dash](./snmp-dash.png)
 

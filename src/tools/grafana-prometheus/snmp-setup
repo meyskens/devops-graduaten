@@ -1,0 +1,6 @@
+access-list 78 permit 192.168.1.0 0.0.0.255
+access-list 79 permit 192.168.1.10
+snmp-server community ReadString RO 78
+snmp-server community WriteString RW 79
+snmp ifmib ifindex persist
+
