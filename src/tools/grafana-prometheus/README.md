@@ -357,3 +357,5 @@ Als je naar je IP op poort 9116 gaat zal je ook merken dat een simpele website j
 
 We hebben in onze `docker-compose.yml` file al een SNMP configuratie in commentaar staan, deze gaat gebruikt worden in de lessen Enterprise networking on Cisco apparatuur te gaan uitlezen met behulp van SNMPv2.
 
+![SNMP Exporter Dash](./snmp-dash.png)
+
