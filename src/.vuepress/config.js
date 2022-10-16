@@ -57,7 +57,7 @@ module.exports = config({
                     { text: "Agile", link: "/agile/" },
                     { text: "Environments", link: "/concepts/environments/" },
                     { text: "Monitoring", link: "/concepts/monitoring/" },
-                    { text: "Incident Response", link: "/concepts/monitoring/" },
+                    { text: "Incident Response", link: "/concepts/incident-response/" },
                     { text: "Security", link: "/concepts/security/" },
                 ],
             },
