@@ -202,31 +202,136 @@ In dit deel gaan met behulp van onze CI/CD pipeline onze container bouwen en dep
 
 We baseren ons op een kopie van [QuakeJS Docker](https://github.com/meyskens/quakejs-docker/).
 
-Eerst zetten we onze server op.
+Eerst zetten we onze server op met Terraform:
 
-We maken de map `/opt/quake` aan op onze server waar onze self-hosted runner draait.
+```hcl
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.16"
+    }
+  }
+}
 
-```bash
-sudo mkdir -p /opt/quake
-sudo chown -R $USER:$USER /opt/quake
+variable "runner_token" {
+  type        = string
+  description = "The token for the GitHub Actions runner to use"
+  default     = ""
+}
+
+variable "repo_url" {
+  type        = string
+  description = "The URL of the GitHub repo to use"
+  default     = "https://github.com/xxx/xxx"
+}
+
+
+provider "aws" {
+  region = "us-east-1"
+}
+
+resource "aws_key_pair" "deployer" {
+  key_name   = "deployer-key"
+  public_key = file("~/.ssh/id_rsa.pub")
+}
+
+resource "aws_security_group" "main" {
+  egress = [
+    {
+      cidr_blocks      = ["0.0.0.0/0", ]
+      description      = ""
+      from_port        = 0
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "-1"
+      security_groups  = []
+      self             = false
+      to_port          = 0
+    }
+  ]
+  ingress = [
+    {
+      cidr_blocks      = ["0.0.0.0/0", ]
+      description      = ""
+      from_port        = 22
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "tcp"
+      security_groups  = []
+      self             = false
+      to_port          = 22
+    },
+    {
+      cidr_blocks      = ["0.0.0.0/0", ]
+      description      = ""
+      from_port        = 80
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "tcp"
+      security_groups  = []
+      self             = false
+      to_port          = 80
+    },
+    {
+      cidr_blocks      = ["0.0.0.0/0", ]
+      description      = ""
+      from_port        = 27960
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "tcp"
+      security_groups  = []
+      self             = false
+      to_port          = 27960
+    }
+  ]
+}
+
+
+data "aws_ami" "ubuntu" {
+  most_recent = true
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+  }
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+  owners = ["099720109477"] # Canonical
+}
+
+resource "aws_instance" "quake" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = "t2.large"
+
+  key_name = aws_key_pair.deployer.key_name
+
+  associate_public_ip_address = true
+  vpc_security_group_ids      = [aws_security_group.main.id]
+
+  user_data_replace_on_change = true
+
+  user_data = <<-EOF
+    #!/bin/bash
+    # Install Docker
+    wget -O docker.sh https://get.docker.com/
+    bash docker.sh
+    usermod -aG docker ubuntu
+    # Install GH Actions Runner
+    sudo -u ubuntu mkdir /home/ubuntu/actions-runner
+    cd /home/ubuntu/actions-runner
+    sudo -u ubuntu curl -o actions-runner-linux-x64-2.298.2.tar.gz -L https://github.com/actions/runner/releases/download/v2.298.2/actions-runner-linux-x64-2.298.2.tar.gz
+    sudo -u ubuntu tar xzf ./actions-runner-linux-x64-2.298.2.tar.gz
+    rm ./actions-runner-linux-x64-2.298.2.tar.gz
+    sudo -u ubuntu ./config.sh --url ${var.repo_url} --token ${var.runner_token} --name "Github EC2 Runner3" --labels deploy --unattended
+    ./svc.sh install
+    ./svc.sh start
+    EOF
+}
 ```
 
-Hierin plaatsen we een `docker-compose.yaml` file.
-
-> Deze file heeft fouten inzich waardoor de deployment draait maar geen externe poorten heeft, dit om aan te tonen dat onze deploy de nieuwere versie gaat gebruiken.
-
-```yaml
-version: "3.9"
-services:
-    quakejs:
-        image: ghcr.io/meyskens/quakejs-docker:latest
-```
-
-We starten nu alles op:
-
-```bash
-docker compose up -d
-```
+We halen uit onze eigen niet-publieke repo onder Settings -> Actions -> Runners -> New Runner de token uit de commando's. Dit wordt daarna automatisch op onze EC2 server geinstalleerd met een scriptje samen met een install van Docker.
 
 We gaan onze repo kopieren naar een eigen repo, we willen niet onze publieke repo gebruiken voor deze demo:
 
@@ -276,6 +381,9 @@ jobs:
               run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
             - name: Pull the image from the registry
               run: docker pull ghcr.io/meyskens/quake-deploy-test:$GITHUB_SHA
+            - name: Ensure /opt/quake exists
+              run: |
+                  mkdir /opt/quake || true
             - name: Change docker-compose to use this image
               run: |
                   sed -i "s/image:.*/image: ghcr.io\/meyskens\/quake-deploy-test:$GITHUB_SHA/" docker-compose.yaml
@@ -285,6 +393,7 @@ jobs:
               run: |
                   cd /opt/quake
                   docker compose up -d
+                  docker compose restart
 ```
 
 > NOTE: `GITHUB_TOKEN` is een built in secret met een token voor GitHub, deze heeft de rechten van de maker van de commit.
@@ -334,3 +443,4 @@ We zien dat de docker-compose.yaml onze SHA heeft van onze laatste versie! Als o
 -   [GitHub actions documentation](https://docs.github.com/en/actions)
 
 _Dit hoofdstuk is geen makkelijke om een geisoleerde oefening rond te maken. Het is wel een belangrijke stap in het project._
+
