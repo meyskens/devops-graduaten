@@ -162,6 +162,55 @@ services:
         restart: always
 ```
 
+We kunnen dit ook met Ansible gaan configureren:
+
+```yaml
+- hosts: all
+  tasks:
+      - name: Download Docker Installer
+        get_url:
+            url: https://get.docker.com
+            dest: /tmp/docker.sh
+            mode: 0755
+      - name: "Ensure docker is installed"
+        become: yes
+        command:
+            cmd: "bash /tmp/docker.sh"
+            creates: /usr/bin/docker
+      - name: Make directory for node_exporter
+        become: yes
+        file:
+            path: /opt/docker/node-exporter
+            state: directory
+            mode: 0755
+      - name: Add docker-compose.yaml
+        become: yes
+        copy:
+            dest: /opt/docker/node-exporter/docker-compose.yaml
+            content: |
+                version: "3.7"
+                services:
+                    node-exporter:
+                      image: prom/node-exporter
+                      volumes:
+                          - /proc:/host/proc:ro
+                          - /sys:/host/sys:ro
+                          - /:/rootfs:ro
+                      command:
+                          - "--path.procfs=/host/proc"
+                          - "--path.sysfs=/host/sys"
+                          - --collector.filesystem.ignored-mount-points
+                          - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
+                      ports:
+                          - 9100:9100
+                      restart: always
+      - name: "Start node-exporter"
+        become: yes
+        command: "docker compose up -d"
+        args:
+            chdir: /opt/docker/node-exporter
+```
+
 Nadat deze online staat kan je ze gewoon bij in de lijst van node_exporters zetten:
 
 ```yaml
