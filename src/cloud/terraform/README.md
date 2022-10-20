@@ -637,7 +637,7 @@ resource "oci_core_instance" "web" {
 
 Nu we een terraform file hebben kunnen we deze gaan uitvoeren.
 
-**Stap 1: **
+**Stap 1:**
 
 ```bash
 terraform init
@@ -645,7 +645,7 @@ terraform init
 
 Dit commando zorgt ervoor dat Terraform de benodigde providers gaat downloaden en de benodigde plugins gaat installeren.
 
-**Stap 2: **
+**Stap 2:**
 
 ```bash
 terraform plan -out=plan.out
@@ -681,7 +681,7 @@ Plan: 3 to add, 0 to change, 0 to destroy.
 
 Je krijgt een lijst van alle wijzegingen alsook een samenvatting, belangrijk is dat je dit gaat nalezen!
 
-**Stap 3: **
+**Stap 3:**
 
 Met de apply stap gaan we nu de resources echt aanmaken!
 
