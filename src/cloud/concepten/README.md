@@ -166,6 +166,10 @@ Een van de eerste dingen die je doet in een cloud omgeving is een netwerk aanmak
 
 Een load balancer is een service die je kan gebruiken om je netwerk te loadbalanceren. Je kan hiermee dus een publieke IP aanmaken die je kan gebruiken om je servers te bereiken. Daarmee kan je HTTP/HTTPS of zelfs TCP loadbalancen over verschillend interne servers. Dit wordt beheerd door de cloud provider en schaalt automatisch mee met je omgeving.
 
+#### Auto Scaling
+
+Als we kunnen loadbalancen kunnen we ook automatisch gaan schalen. De simpelste vorm is dit door onze cloud providr gaan te laten afhandelen, dit is niet de meest "exacte" manier maar kan wel helpen. [OCI heeft een goede handleiding om dit te doen](https://blogs.oracle.com/cloud-infrastructure/post/setup-autoscaling-and-load-balancer-with-instance-pool-using-terraform). Zij monitoren de VMs en op een bepaalde trigger maken ze een VM van een gedefineerde eigen image bij aan. Er is wel altijd een minimum en maximum aantal VMs nodig.
+
 ### Database
 
 Vaak worden er ook managed databases gebruikt in de cloud. Hiermee moet je zelf geen database server onderhouden. Heel vaak werken deze onderliggend met managed VMs die de cloud provider maakt, backupt en upgraded met bestaande software als MySQL, PostgreSQL, MongoDB, etc.
