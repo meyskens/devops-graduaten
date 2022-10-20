@@ -125,10 +125,14 @@ server {
 
 Open nu een browser en bezoek `localhost` we merken nu dat Nginx mooi alle verkeer tussen 1 en 2 gaat verdelen.
 
+## Cloud
+
+Meeste cloud providers gaan ook een loadbalancer in de cloud aanbieden:
+
+-   [AWS ALB met Terraform](https://registry.terraform.io/modules/infrablocks/application-load-balancer/aws/latest)
+-   [OCI Loadbalancer met Terraform](https://github.com/oracle/terraform-provider-oci/blob/master/examples/always_free/main.tf#L208)
+
 ## References
 
 -   [Cloudflare on reverse proxies](https://www.cloudflare.com/learning/cdn/glossary/reverse-proxy/)
 
-```
-
-```
