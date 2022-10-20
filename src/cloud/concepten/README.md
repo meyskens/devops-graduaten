@@ -156,6 +156,10 @@ Object storage is een soort van NAS. Je kan hier bestanden in opslaan en deze be
 Bestanden opslaan en ophalen gaat via een API. Vele moderne applicaties hebben ook integratie met object storage om hun data meteen daar op te slaan.
 Vele cloud providers gebruiken de Amazon S3 API omdat deze heel populair is.
 
+#### Cold storage
+
+In object storage hebben we verschillende types van opslag. Meestal spreken we van hot storage als we over object storage spreken. We hebben ook zogenaamde cold storage. Cold storage is veel goedkoper in opslag maar kost meer om terug op te halen in bandbreete kosten. Dit is ideaal voor backups die je maar een fractie kosten om op te slagen en je bedrijf enkel grote kosten oplevert als ze nodig zijn. Achterliggend gaat je cloud provider waarschijnlijk besparingen toepassen door de servers fysiek uit te zetten als de data niet gebruikt wordt.
+
 ### Load Balancer & Network
 
 Een van de eerste dingen die je doet in een cloud omgeving is een netwerk aanmaken. Je kan dit zien als een eigen VLAN (maar complexer onderliggend), je hebt een eigen IP space, een eventuele NAT router en een of meerdere publieke IPs. Deze publieke IPs zijn vaak floating IPs die je tussen servers binnen dezelfde region kan afwisselen.
