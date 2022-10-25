@@ -28,7 +28,7 @@ Dit geeft ons een basis om mee te starten met Grafana, Prometheus.
 We clonen het project naar een map:
 
 ```bash
-git clone https://github.com/vegasbrianc/prometheus.git
+git clone https://github.com/meyskens/prometheus.git
 cd prometheus
 ```
 
