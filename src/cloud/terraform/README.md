@@ -21,27 +21,9 @@ Terraform werkt niet alleen. Sinds recent versies heeft Terraform een "Registry"
 We vinden hier `providers` dit zijn integraties met platformen als AWS, GCP, Azure, OCI, etc. We zien hier ook vaak meer providers voor software als Docker, Kubernetes of Cloudflare.
 Aan de andere kant vinden we ook `modules` voor veel gebruikte compomenten in deze providers. Denk hierbij aan een Kubernetes cluster, of een kant en klare VM setup inclusief netwerk. Een module gaat dus meerdere componenten integreren. Maar daarover verder meer!
 
-## Installatie
-
-We hebben Terraform nodig op onze laptop, we zetten dit weer op als gewoonlijk. We voegen een APT repo toe:
-
-```bash
-sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
-wget -O- https://apt.releases.hashicorp.com/gpg | \
-    gpg --dearmor | \
-    sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
-    https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
-    sudo tee /etc/apt/sources.list.d/hashicorp.list
-sudo apt update
-sudo apt-get install terraform
-```
-
-Als we nu `terraform version` uitvoeren zien we dat we de laatste versie hebben!
-
 ## Build
 
-Tijd voor een Terraform project op te zetten! We maken hiervoor best een nieuwe map (in een Git Repo, hint hint) aan. We gaan hierin werken om code te schrijven en te testen.
+Hoe zetten we nu een Terraform project op? We maken hiervoor best een nieuwe map (in een Git Repo, hint hint) aan. We gaan hierin werken om code te schrijven en te testen.
 
 Terraform bestanden hebben de extensie `.tf` en we maken een bestand aan met de naam `main.tf`. In dit bestand gaan we de eerste code schrijven.
 
@@ -396,6 +378,24 @@ module "lambda_function_container_image" {
 ```
 
 Dit voorbeeld zet AWS Lambda op, een serverless compute service die code kan uitvoeren on demand.
+
+## Installatie
+
+We hebben Terraform nodig op onze laptop, we zetten dit weer op als gewoonlijk. We voegen een APT repo toe:
+
+```bash
+sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
+wget -O- https://apt.releases.hashicorp.com/gpg | \
+    gpg --dearmor | \
+    sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
+    https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
+    sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update
+sudo apt-get install terraform
+```
+
+Als we nu `terraform version` uitvoeren zien we dat we de laatste versie hebben!
 
 ## Plan Apply Destroy Repeat
 
