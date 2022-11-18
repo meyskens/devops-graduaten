@@ -796,7 +796,7 @@ Je wordt nu naar een scherm gestuurd waar je een titel en een beschrijving kunt 
 
 ### Code Review
 
-Code review is een proces dat je overal ziet, van kleine startups tot grote ondernemingen. Hoe je dit goed doet is ook een veel besproken onderwerp. Toen we op [Twitter](https://twitter.com/MaartjeME/status/1208048751631327237) vroegen naar code review tips hadden veel programmeurs hier verschillende meningen over.
+Code review is een proces dat je overal ziet, van kleine startups tot grote ondernemingen. Hoe je dit goed doet is ook een veel besproken onderwerp. Toen we op [Twitter](https://web.archive.org/web/20191220191707/https://twitter.com/MaartjeME/status/1208048751631327237) vroegen naar code review tips hadden veel programmeurs hier verschillende meningen over.
 Code review in een notendop is het proces tussen het voorstellen van een codewijziging (in een PR) en het moment dat deze wordt samengevoegd in de master branch, en wordt uitgerold naar productie.
 Dit proces zorgt ervoor dat de code verbetert omdat meer mensen er naar kunnen kijken en wijzigingen kunnen voorstellen. Bugs worden sneller opgemerkt, de code zal er beter en samenhangender uitzien en het kan je inzicht geven in hoe je code nog verder verbeterd kan worden.
 
