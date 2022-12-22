@@ -11,7 +11,11 @@ Voor deze cursus ging ik opzoek naar hoeveel verschillende diensten AWS nu heeft
 Een cloud provider op je CV zetten als kennis is misschien niet het beste idee, alle diensten kennen is bijna onmogelijk. Maar wij bekijken het op hoog niveau.
 
 ![levels volgens Azure](./azure.png)
-Azure bied ons een mooi overzicht wat ons nu wat kan bieden. Hieronder gaan we meer in op details
+Azure bied ons een mooi overzicht wat ons nu wat kan bieden. Hieronder gaan we meer in op details.
+
+We kunnen deze niveaus ook even bekijken met een voorbeeld uit ons een dagelijks leven. [Albert Barron](https://m.oursky.com/saas-paas-and-iaas-explained-in-one-graphic-d56c3e6f4606) maakte de vergelijking met een pizza restaurant.
+
+![pizza as a service](./pizza.png)
 
 ### Infrastructure as a service
 
